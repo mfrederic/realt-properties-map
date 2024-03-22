@@ -1,0 +1,48 @@
+name: Dev
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  checkout_code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+  build_frontend:
+    needs: checkout_code
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 21.x]
+    steps:
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./frontend
+    - name: Build
+      run: npm run build
+      working-directory: ./frontend
+
+  build_backend:
+    needs: checkout_code
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 21.x]
+    steps:
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./backend
+    - name: Build
+      run: npm run build
+      working-directory: ./backend
