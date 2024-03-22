@@ -1,0 +1,8 @@
+{
+  "short_name": "RealT Properties",
+  "name": "Go through RealT properties and figure out the locations and informations about your token properties.",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
