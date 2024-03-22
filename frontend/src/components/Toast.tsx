@@ -24,6 +24,7 @@ export function Toast({
     setTimeout(() => {
       onClose();
     }, timeout);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeout]);
 
   return (

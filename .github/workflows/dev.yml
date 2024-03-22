@@ -5,44 +5,52 @@ on:
     branches: [ main ]
 
 jobs:
-  checkout_code:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-
   build_frontend:
-    needs: checkout_code
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [18.x, 20.x, 21.x]
     steps:
+    - name: Check out code
+      uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
-      run: npm install
-      working-directory: ./frontend
+      run: npm ci
+      working-directory: frontend
     - name: Build
       run: npm run build
-      working-directory: ./frontend
+      working-directory: frontend
+
+  test_frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+    - name: Install dependencies
+      run: npm ci
+      working-directory: frontend
+    - name: Test
+      run: npm run test
+      working-directory: frontend
 
   build_backend:
-    needs: checkout_code
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [18.x, 20.x, 21.x]
     steps:
+    - name: Check out code
+      uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
-      run: npm install
-      working-directory: ./backend
+      run: npm ci
+      working-directory: backend
     - name: Build
       run: npm run build
-      working-directory: ./backend
+      working-directory: backend

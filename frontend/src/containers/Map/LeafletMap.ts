@@ -103,6 +103,7 @@ export function LeafletMap({
         markerClusters.addLayer(marker);
       });
     context.map.addLayer(markerClusters);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [properties, displayAll, displayGnosis, displayRmm, detailedView, displayedWalletsAddresses]);
 
   return null;

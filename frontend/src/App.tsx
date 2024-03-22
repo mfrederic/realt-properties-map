@@ -44,6 +44,7 @@ function App() {
       .finally(() => {
         setLoadingTokens(false);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -62,6 +63,7 @@ function App() {
       .finally(() => {
         setLoadingProperties(false);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

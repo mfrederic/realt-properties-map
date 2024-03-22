@@ -15,6 +15,7 @@ export function MapOptions() {
     if (walletAddresses.length === 0) {
       dispatch(setDisplayAll(true));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function onDisplayRmm(toggle: boolean) {
