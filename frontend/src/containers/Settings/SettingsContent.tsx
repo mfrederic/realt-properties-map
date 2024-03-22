@@ -1,3 +1,4 @@
+import Version from "../../components/Version";
 import { MapOptions } from "./MapOptions";
 import { Wallets } from "./Wallets";
 import InfoIcon from '@mui/icons-material/Info';
@@ -23,7 +24,8 @@ export function SettingsContent({
           storage.
         </p>
       </div>
-      <footer className="justify-self-end text-center text-xs mb-1">
+      <footer className="flex justify-between justify-self-end text-center text-xs mb-1 px-2">
+        <Version />
         <p className="opacity-40">
           Made with ❤️ by <a
             href="https://github.com/mfrederic"
