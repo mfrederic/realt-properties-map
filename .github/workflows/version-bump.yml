@@ -1,0 +1,63 @@
+name: Bump Version
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  frontend-version-bump:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.merged == true
+      && contains(github.event.pull_request.base.repo.full_name, 'frontend')
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Bump version in frontend/package.json
+        id: bump-version-frontend
+        run: |
+          cd frontend
+          if echo "${{ github.event.pull_request.title }}" | grep -q "(major)"; then
+            npm version major
+          elif echo "${{ github.event.pull_request.title }}" | grep -q "(minor)"; then
+            npm version minor
+          else
+            npm version patch
+          fi
+          echo ::set-output name=NEW_VERSION::$(node -p "require('./package.json').version")
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: GitHub Actions
+          author_email: actions@github.com
+          message: "Bump Frontend version to ${{ steps.bump-version-frontend.outputs.NEW_VERSION }}"
+          add: "frontend/package.json"
+
+  backend-version-bump:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.merged == true
+      && contains(github.event.pull_request.base.repo.full_name, 'backend')
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Bump version in backend/package.json
+        id: bump-version-backend
+        run: |
+          cd backend
+          if echo "${{ github.event.pull_request.title }}" | grep -q "(major)"; then
+            npm version major
+          elif echo "${{ github.event.pull_request.title }}" | grep -q "(minor)"; then
+            npm version minor
+          else
+            npm version patch
+          fi
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: GitHub Actions
+          author_email: actions@github.com
+          message: "Bump Backend version to ${{ steps.bump-version-backend.outputs.NEW_VERSION }}"
+          add: "backend/package.json"

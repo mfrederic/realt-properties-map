@@ -1,0 +1,47 @@
+.map {
+  height: 100vh;
+  width: 100vw;
+}
+
+.leaflet-popup {
+  background-color: white;
+  padding: 0;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+  padding: 0 0 1px 0;
+  border-radius: 0;
+}
+
+.leaflet-popup .leaflet-popup-content {
+  min-width: 300px;
+  margin: 0;
+  padding: 0;
+}
+
+.leaflet-marker-icon {
+  background: none;
+  border: none;
+}
+
+.red-icon {
+  fill: red;
+}
+
+.green-icon {
+  fill: green;
+}
+
+.orange-icon {
+  fill: orange;
+}
+
+.owned {
+  stroke-width: 4;
+}
+
+.selected {
+  stroke: #ff0000;
+  stroke-width: 4;
+}

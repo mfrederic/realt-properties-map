@@ -1,0 +1,10 @@
+.vscode
+.DS_STORE
+.env
+tmp
+Dockerfile*
+docker-compose*
+.dockerignore
+*.md
+.git
+.gitignore
