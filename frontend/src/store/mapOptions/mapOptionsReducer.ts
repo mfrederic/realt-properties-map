@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../store";
 import { getItem, setItem } from "../../services/localStorage";
 
 const LOCAL_STORAGE_NAME = 'MAP_OPTIONS';
@@ -52,7 +51,5 @@ export const mapOptionsSlice = createSlice({
 });
 
 export const { setAll, setDisplayAll, setDisplayGnosis, setDisplayRmm, setDetailedView } = mapOptionsSlice.actions;
-
-export const selectMapOptions = (state: RootState) => state.mapOptions;
 
 export default mapOptionsSlice.reducer;

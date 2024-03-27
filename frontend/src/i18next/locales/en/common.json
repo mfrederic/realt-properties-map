@@ -1,0 +1,78 @@
+{
+  "propertyPanel": {
+    "ownedAmount": "Owned Amount",
+    "token": "Token",
+    "tokenAmount": "Token Amount",
+    "yield": "Yield",
+    "weeklyRent": "Weekly Rent",
+    "yearlyRent": "Yearly Rent",
+    "rentedUnit": "Rented Unit",
+    "assetPrice": "Asset Price"
+  },
+  "title": {
+    "viewOnRealtoken": "View on Realtoken Dashboard",
+    "viewOnRealT": "View on RealT Marketplace"
+  },
+  "actions": {
+    "close": "Close",
+    "closePanel": "Close Panel",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
+  "settings": {
+    "language": "Language",
+    "currency": "Currency",
+    "settings": "Settings",
+    "walletSettings": "Wallet Settings",
+    "light": "Light",
+    "dark": "Dark",
+    "usd": "USD ($)",
+    "eur": "Euro (€)",
+    "chf": "Swiss franc (CHF)",
+    "refreshData": "Refresh data",
+    "french": "French",
+    "english": "English"
+  },
+  "wallet": {
+    "wallets": "Wallets",
+    "wallet": "Wallet",
+    "addWallet": "Add Wallet",
+    "invalidAddress": "Invalid wallet address",
+    "deleteDialog": {
+      "title": "You're about to delete a wallet address!",
+      "message": "Are you sure?"
+    }
+  },
+  "mapOptions": {
+    "mapOptions": "Map Options",
+    "displayRmm": "Display RMM",
+    "displayGnosis": "Display Gnosis",
+    "displayAll": "Include not owned"
+  },
+  "notifications": {
+    "pleaseWait": "Please wait...",
+    "tryAgainLater": "Please try again later",
+    "realtokens": {
+      "loadingTitle": "Loading RealTokens",
+      "successLoadingTitle": "RealTokens loaded",
+      "successLoadingMessage": "RealTokens loaded successfully",
+      "errorLoadingTitle": "Error while loading RealTokens"
+    },
+    "wallets": {
+      "loadingTitle": "Loading Wallets",
+      "successLoadingTitle": "Wallets loaded",
+      "successLoadingMessage": "Wallets loaded successfully",
+      "errorLoadingTitle": "Error while loading Wallets"
+    }
+  },
+  "extra": {
+    "disclaimer": "Not an official RealT website",
+    "info": "No information is saved or sent to any server. The application is entirely client-side and the data is stored in your browser's local storage.",
+    "madeBy": "Made with ❤️ by",
+    "baseOn": "Based on the work of",
+    "startTooltip": "Add your wallets to get started",
+    "reportIssue": "Report an issue"
+  }
+}

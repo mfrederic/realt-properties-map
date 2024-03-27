@@ -1,0 +1,78 @@
+{
+  "propertyPanel": {
+    "ownedAmount": "Possédé",
+    "token": "Token",
+    "tokenAmount": "Quantité de tokens",
+    "yield": "Rendement",
+    "weeklyRent": "Loyer hebdomadaire",
+    "yearlyRent": "Loyer annuel",
+    "rentedUnit": "Unité louée",
+    "assetPrice": "Prix de l'actif"
+  },
+  "title": {
+    "viewOnRealtoken": "Voir sur le dashboard RealToken",
+    "viewOnRealT": "Voir sur le marketplace RealT"
+  },
+  "actions": {
+    "close": "Fermer",
+    "closePanel": "Fermer",
+    "add": "Ajouter",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "cancel": "Annuler"
+  },
+  "settings": {
+    "language": "Langue",
+    "currency": "Devise",
+    "settings": "Paramètres",
+    "walletSettings": "Paramètres du portefeuille",
+    "light": "Clair",
+    "dark": "Sombre",
+    "usd": "USD ($)",
+    "eur": "Euro (€)",
+    "chf": "Franc suisse (CHF)",
+    "refreshData": "Rafraîchir les données",
+    "french": "Français",
+    "english": "Anglais"
+  },
+  "wallet": {
+    "wallets": "Portefeuilles",
+    "wallet": "Portefeuille",
+    "addWallet": "Ajouter un portefeuille",
+    "invalidAddress": "Adresse de portefeuille invalide",
+    "deleteDialog": {
+      "title": "Vous êtes sur le point de supprimer un portefeuille !",
+      "message": "Êtes-vous sûr ?"
+    }
+  },
+  "mapOptions": {
+    "mapOptions": "Options de carte",
+    "displayRmm": "Afficher RMM",
+    "displayGnosis": "Afficher Gnosis",
+    "displayAll": "Inclure non possédé"
+  },
+  "notifications": {
+    "pleaseWait": "Veuillez patienter...",
+    "tryAgainLater": "Veuillez réessayer plus tard.",
+    "realtokens": {
+      "loadingTitle": "Chargement des RealTokens",
+      "successLoadingTitle": "RealTokens chargés",
+      "successLoadingMessage": "RealTokens chargés avec succès",
+      "errorLoadingTitle": "Erreur lors du chargement des RealTokens"
+    },
+    "wallets": {
+      "loadingTitle": "Chargement des portefeuilles",
+      "successLoadingTitle": "Portefeuilles chargés",
+      "successLoadingMessage": "Portefeuilles chargés avec succès",
+      "errorLoadingTitle": "Erreur lors du chargement des portefeuilles"
+    }
+  },
+  "extra": {
+    "disclaimer": "Un site RealT non officiel",
+    "info": "Aucune information n'est enregistrée ou envoyé à un serveur. L'application fonctionne entièrement côté client et toutes les données sont stockées localement sur votre appareil.",
+    "madeBy": "Fait avec ❤️ par",
+    "baseOn": "Basé sur le travail de",
+    "startTooltip": "Ajouter vos portefeuilles pour commencer",
+    "reportIssue": "Signaler un problème"
+  }
+}

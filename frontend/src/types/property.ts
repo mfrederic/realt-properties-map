@@ -1,7 +1,7 @@
 import { Maybe } from "./global";
-import { RealtProperty } from "./realtProperty";
+import { RealToken } from "./realtProperty";
 
-export interface Property extends RealtProperty {
+export interface Property extends RealToken {
   icon: string;
   address: string;
   iconColorClass: string;

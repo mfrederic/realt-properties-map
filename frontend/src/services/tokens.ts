@@ -1,16 +1,19 @@
 import { GnosisToken, getGnosisTokens } from "./gnosis";
 import { RmmToken, getRmmTokens } from "./rmm";
 import { Property } from "../types/property";
-import { mapPropertiesList } from "../hooks/useRealT";
-import { RealtProperty } from "../types/realtProperty";
+import { mapPropertiesList } from "./realtokens";
+import { RealToken } from "../types/realtProperty";
+import { Wallet } from "../types/wallet";
 
-export async function getOwnedProperties(
-  realtProperties: Array<RealtProperty>,
-  walletList: Array<string>,
-): Promise<Property[]> {
+export function getOwnedProperties(
+  realtProperties: Array<RealToken>,
+  wallets: Wallet[],
+): Property[] {
+  if (!realtProperties.length || !wallets.length) {
+    return [];
+  }
+
   const realtAssets = mapPropertiesList(realtProperties);
-  const gnosisAssets = await getGnosisTokens(walletList);
-  const rmmAssets = await getRmmTokens(walletList);
 
   function updateRealtAsset(owner: string, tokenAddress: string, amount: number, source: Property['source']) {
     const asset = realtAssets.get(tokenAddress.toLowerCase());
@@ -22,12 +25,13 @@ export async function getOwnedProperties(
     asset.source = source;
   }
 
-  gnosisAssets.forEach((asset) => {
-    updateRealtAsset(asset.wallet, asset.address, asset.amount, 'gnosis');
-  });
-
-  rmmAssets.forEach((asset) => {
-    updateRealtAsset(asset.wallet, asset.address, asset.amount, 'rmm');
+  wallets.forEach((wallet) => {
+    wallet.gnosis.forEach(([address, amount]) => {
+      updateRealtAsset(wallet.address, address, amount, 'gnosis');
+    });
+    wallet.rmm.forEach(([address, amount]) => {
+      updateRealtAsset(wallet.address, address, amount, 'rmm');
+    });
   });
 
   return [...realtAssets.values()];

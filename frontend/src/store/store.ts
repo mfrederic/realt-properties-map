@@ -1,12 +1,18 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import walletReducer from './wallet/walletReducer';
 import mapOptionsReducer from './mapOptions/mapOptionsReducer';
-import propertiesReducer from './properties/propertiesReducer';
+import realTokensReducer from './realtokens/realtokensReducer';
+import settingsReducer from './settings/settingsReducer';
+import markerReducer from './marker/markerReducer';
+import currenciesReducer from './currencies/currenciesReducer';
 
 const rootReducer = combineReducers({
+  settings: settingsReducer,
   wallets: walletReducer,
   mapOptions: mapOptionsReducer,
-  properties: propertiesReducer,
+  realtokens: realTokensReducer,
+  marker: markerReducer,
+  currencies: currenciesReducer,
 });
 
 const store = configureStore({

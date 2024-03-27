@@ -45,7 +45,7 @@ export interface DateTime {
   timezone: string;
 }
 
-export interface RealtProperty {
+export interface RealToken {
   fullName: string;
   shortName: string;
   symbol: string;

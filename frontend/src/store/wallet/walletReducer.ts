@@ -1,88 +1,110 @@
 // walletReducer.ts
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Wallet } from '../../types/wallet';
-import { RootState } from '../store';
+import { AppDispatch, RootState } from '../store';
 import { getItem, setItem } from '../../services/localStorage';
+import { getOwnedTokens } from '../../services/tokens';
+import { getUuid } from '../../utils/crypto';
+import { showError, showLoading, showSuccess } from '../../utils/notifications';
+import { TFunction } from 'i18next';
 
 const LOCAL_STORAGE_NAME = 'WALLETS';
 
 interface WalletState {
-  walletAddresses: string[];
   wallets: Wallet[];
+  isLoading: boolean;
 }
 
 const initialState: WalletState = getItem<WalletState>(LOCAL_STORAGE_NAME, {
-  walletAddresses: [],
   wallets: [],
+  isLoading: false,
 });
+
+export function fetchWallets(t: TFunction<'common', 'notifications'>) {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    const { isLoading } = getState().wallets;
+    const walletAddresses = getState().settings.addresses;
+    if (isLoading) {
+      return;
+    }
+    dispatch(setIsLoading(true));
+    const { close } = showLoading({
+      title: t('wallets.loadingTitle'),
+      message: t('pleaseWait'),
+    });
+    
+    try {
+      const tokens = await getOwnedTokens(walletAddresses);
+      const wallets = walletAddresses.map<Wallet>((w) => ({
+        address: w,
+        uuid: getUuid(),
+        rmm: [],
+        gnosis: [],
+        visible: true,
+      }));
+      tokens.forEach(([rmm, gnosis], address) => {
+        const wallet = wallets.find((w) => w.address.toLowerCase() === address.toLowerCase());
+        if (!wallet) {
+          return;
+        }
+        wallet.rmm = rmm.map((token) => [token.address, token.amount]);
+        wallet.gnosis = gnosis.map((token) => [token.address, token.amount]);
+      });
+      dispatch(setWalletList(wallets));
+      showSuccess({
+        title: t('wallets.successLoadingTitle'),
+        message: t('wallets.successLoadingMessage'),
+      });
+    } catch (error) {
+      console.error(error);
+      showError({
+        title: t('wallets.errorLoadingTitle'),
+        message: t('tryAgainLater'),
+      });
+    } finally {
+      dispatch(setIsLoading(false));
+      close();
+    }
+  }
+}
 
 export const walletsSlice = createSlice({
   name: 'wallets',
   initialState,
   reducers: {
-    setWalletList: (_, action: PayloadAction<Wallet[]>) => {
-      const newState = {
-        walletAddresses: action.payload.map((wallet) => wallet.address),
-        wallets: action.payload,
-      };
-      setItem<WalletState>(LOCAL_STORAGE_NAME, newState);
-      return newState;
+    setIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+      setItem<WalletState>(LOCAL_STORAGE_NAME, state);
+    },
+    setWalletList: (state, action: PayloadAction<Wallet[]>) => {
+      state.wallets = action.payload;
+      state.isLoading = false;
+      setItem<WalletState>(LOCAL_STORAGE_NAME, state);
     },
     addWallet: (state, action: PayloadAction<Wallet>) => {
-      const newState = {
-        walletAddresses: [...state.walletAddresses, action.payload.address],
-        wallets: [...state.wallets, action.payload],
-      };
-      setItem<WalletState>(LOCAL_STORAGE_NAME, newState);
-      return newState;
+      state.wallets.push(action.payload);
+      state.isLoading = false;
+      setItem<WalletState>(LOCAL_STORAGE_NAME, state);
     },
     removeWallet: (state, action: PayloadAction<string>) => {
-      const walletAdress = state.wallets.find((wallet) => wallet.uuid === action.payload)?.address;
-      const newState = {
-        walletAddresses: state.walletAddresses.filter((address) => address !== walletAdress),
-        wallets: state.wallets.filter((wallet) => wallet.uuid !== action.payload),
-      };
-      setItem<WalletState>(LOCAL_STORAGE_NAME, newState);
-      return newState;
+      state.wallets = state.wallets.filter((wallet) => wallet.address !== action.payload);
+      state.isLoading = false;
+      setItem<WalletState>(LOCAL_STORAGE_NAME, state);
     },
     updateWallet: (state, action: PayloadAction<Wallet>) => {
-      const newState = {
-        walletAddresses: state.walletAddresses.map((address) => {
-          if (address === action.payload.address) {
-            return action.payload.address;
-          }
-          return address;
-        }),
-        wallets: state.wallets.map((wallet) => {
-          if (wallet.uuid === action.payload.uuid) {
-            return action.payload;
-          }
-          return wallet;
-        }),
-      };
-      setItem<WalletState>(LOCAL_STORAGE_NAME, newState);
-      return newState;
+      state.wallets = state.wallets.map((wallet) => {
+        if (wallet.uuid === action.payload.uuid) {
+          return action.payload;
+        }
+        return wallet;
+      });
+      state.isLoading = false;
+      setItem<WalletState>(LOCAL_STORAGE_NAME, state);
     },
-    toggleVisibility: (state, action: PayloadAction<{
-      uuid: string;
-      visible: boolean;
-    }>) => {
-      const newState = {
-        walletAddresses: state.walletAddresses,
-        wallets: state.wallets.map((wallet) => {
-          if (wallet.uuid === action.payload.uuid) {
-            return { ...wallet, visible: action.payload.visible };
-          }
-          return wallet;
-        }),
-      };
-      setItem<WalletState>(LOCAL_STORAGE_NAME, newState);
-      return newState;
-    }
   }
 });
 
-export const { setWalletList, addWallet, removeWallet, updateWallet, toggleVisibility } = walletsSlice.actions;
+export const { setIsLoading, setWalletList, addWallet, removeWallet, updateWallet } = walletsSlice.actions;
 
 export const selectWallets = (state: RootState) => state.wallets;
 
