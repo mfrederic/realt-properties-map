@@ -154,7 +154,7 @@ export function MapMarkers({
 
   function getCleanMarkerCluster() {
     return markerClusterGroup({
-      disableClusteringAtZoom: 11,
+      disableClusteringAtZoom: 16,
       showCoverageOnHover: false,
       chunkedLoading: true,
       maxClusterRadius: 100,
