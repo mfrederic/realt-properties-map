@@ -34,7 +34,7 @@ export function SettingsPanelContent({
               title={t('title.viewOnRealT')}
               target="_blank"
               referrerPolicy="no-referrer"
-              href="https://github.com/mfrederic/realt-properties-map/issues/new">
+              href="https://github.com/mfrederic/realt-properties-map/issues/new/choose">
               {t('reportIssue')}
             </Button>
           </Box>
