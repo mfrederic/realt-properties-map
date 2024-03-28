@@ -4,6 +4,7 @@ on:
     branches: [ "main" ]
     paths:
       - frontend/**
+  workflow_dispatch:
 
 jobs:
 
@@ -19,10 +20,19 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_TOKEN }}
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Install jq
+      run: sudo apt-get install jq
+    - name: Read JSON file
+      id: json
+      run: |
+        VALUE=$(jq -r '.version' ./frontend/package.json)
+        echo "::set-output name=value::$VALUE"
     - name: Build and push frontend
       uses: docker/build-push-action@v5
       with:
         push: true
         context: "{{defaultContext}}:frontend"
-        tags: ${{ secrets.REPOSITORY }}:frontend-latest
-        labels: ${{ secrets.REPOSITORY }}:frontend-latest
+        tags: ${{ secrets.REPOSITORY }}:frontend-latest,${{ secrets.REPOSITORY }}:frontend-${{ steps.json.outputs.value }}
+        labels: ${{ secrets.REPOSITORY }}:frontend-latest,${{ secrets.REPOSITORY }}:frontend-${{ steps.json.outputs.value }}
