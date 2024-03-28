@@ -74,6 +74,16 @@ export function PropertyPanelContent({
 
   const entries = [
     {
+      icon: property.icon,
+      ownedOnly: false,
+      entry: {
+        label: 'propertyPanel.propertyType',
+        value: property.propertyTypeName
+          ? t(`propertyType.${property.propertyType}`)
+          : t('propertyType.unknown'),
+      },
+    },
+    {
       ownedOnly: true,
       entry: { label: 'propertyPanel.ownedAmount', value: useCurrencyValue(ownedAmountPrice) },
     },
@@ -113,7 +123,7 @@ export function PropertyPanelContent({
       <Drawer.Header className="!p-0 !mb-4">
         <Grid>
           <Grid.Col span={12}>
-            <Image src={imageLink[0]} alt={fullName}/>
+            <Image src={imageLink[0]} alt={fullName} />
           </Grid.Col>
           <Grid.Col span={12}>
             <Drawer.Title className="!mb-4">
@@ -172,7 +182,7 @@ export function PropertyPanelContent({
         </Grid>
       </Drawer.Header>
       <Drawer.Body className="!p-0 mb-20 sm:mb-0">
-        {entries.map(({ ownedOnly, notOwnedOnly, entry }) => {
+        {entries.map(({ ownedOnly, notOwnedOnly, entry, icon }) => {
           if (
             (ownedOnly && ownedAmount <= 0) ||
             (notOwnedOnly && ownedAmount > 0)
@@ -184,8 +194,14 @@ export function PropertyPanelContent({
               <Grid.Col span={6} className="font-semibold">
                 <h2>{t(entry.label)}</h2>
               </Grid.Col>
-              <Grid.Col span={6} className="text-right">
-                <p>{entry.value}</p>
+              <Grid.Col span={6} className="flex items-center justify-end">
+                <p className="flex items-center">
+                  {
+                    icon &&
+                    <i className="material-icons max-w-[40px] mr-2">{icon}</i>
+                  }
+                  {entry.value}
+                </p>
               </Grid.Col>
               <Divider />
             </Grid>

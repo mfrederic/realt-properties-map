@@ -45,20 +45,25 @@ export function mapPropertiesList(
 
 function setIcon(propertyType: number): string {
   switch (propertyType) {
-    case 1:
-    case 10:
+    case 1: // Single Family
       return 'home';
-    case 2:
-      return 'apartment';
-    case 3:
+    case 2: // Multi Family
+      return 'domain';
+    case 3: // Duplex
       return 'group';
-    case 8:
-      return 'group_add';
-    case 4:
-      return 'umbrella-beach';
-    case 6:
+    case 4: // Condominium
+      return 'beach_access';
+    case 6: // Mixed-Use
       return 'home_work';
-    default:
+    case 8: // Quadplex
+      return 'group_add';
+    case 9: // Commercial
+      return 'storefront';
+    case 10: // SFR Portfolio
+      return 'holiday_village';
+    case 11: // MFR Portfolio
+      return 'domain_add';
+    default: 
       return 'stack';
   }
 }

@@ -1,5 +1,6 @@
 {
   "propertyPanel": {
+    "propertyType": "Type de propriété",
     "ownedAmount": "Possédé",
     "token": "Token",
     "tokenAmount": "Quantité de tokens",
@@ -8,6 +9,18 @@
     "yearlyRent": "Loyer annuel",
     "rentedUnit": "Unité louée",
     "assetPrice": "Prix de l'actif"
+  },
+  "propertyType": {
+    "1": "Individuel",
+    "2": "Appartement",
+    "3": "Duplex",
+    "4": "Condominium",
+    "6": "Usage mixte",
+    "8": "Quadplex",
+    "9": "Commercial",
+    "10": "Portfolio Individuel",
+    "11": "Portfolio Appartement",
+    "unknown": "Inconnu"
   },
   "title": {
     "viewOnRealtoken": "Voir sur le dashboard RealToken",

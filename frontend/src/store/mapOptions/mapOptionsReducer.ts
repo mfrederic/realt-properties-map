@@ -7,14 +7,14 @@ interface MapOptionsState {
   displayAll: boolean;
   displayGnosis: boolean;
   displayRmm: boolean;
-  detailedView: boolean;
+  markerOpacity: number;
 }
 
 const initialState: MapOptionsState = getItem<MapOptionsState>(LOCAL_STORAGE_NAME, {
   displayAll: false,
   displayGnosis: true,
   displayRmm: true,
-  detailedView: true,
+  markerOpacity: 1,
 });
 
 export const mapOptionsSlice = createSlice({
@@ -26,7 +26,7 @@ export const mapOptionsSlice = createSlice({
         displayAll: action.payload.displayAll,
         displayGnosis: action.payload.displayGnosis,
         displayRmm: action.payload.displayRmm,
-        detailedView: action.payload.detailedView,
+        markerOpacity: action.payload.markerOpacity,
       };
       setItem<MapOptionsState>(LOCAL_STORAGE_NAME, newState);
       return newState;
@@ -43,13 +43,16 @@ export const mapOptionsSlice = createSlice({
       state.displayRmm = action.payload;
       setItem<MapOptionsState>(LOCAL_STORAGE_NAME, state);
     },
-    setDetailedView: (state, action: PayloadAction<boolean>) => {
-      state.detailedView = action.payload;
+    setMarkerOpacity: (state, action: PayloadAction<number>) => {
+      if (action.payload < 0.2 || action.payload > 1) {
+        return;
+      }
+      state.markerOpacity = action.payload;
       setItem<MapOptionsState>(LOCAL_STORAGE_NAME, state);
     }
   }
 });
 
-export const { setAll, setDisplayAll, setDisplayGnosis, setDisplayRmm, setDetailedView } = mapOptionsSlice.actions;
+export const { setAll, setDisplayAll, setDisplayGnosis, setDisplayRmm, setMarkerOpacity } = mapOptionsSlice.actions;
 
 export default mapOptionsSlice.reducer;

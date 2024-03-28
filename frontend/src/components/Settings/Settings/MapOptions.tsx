@@ -1,11 +1,12 @@
-import { useAppDispatch, useAppSelector } from "../../../hooks/useInitStore";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import MapIcon from '@mui/icons-material/Map';
+import { useAppDispatch, useAppSelector } from "../../../hooks/useInitStore";
 import { MapOption } from "./MapOption";
 import { setDisplayAll, setDisplayGnosis, setDisplayRmm } from "../../../store/mapOptions/mapOptionsReducer";
-import { useEffect } from "react";
 import { SettingsPanelSection } from "../SettingsPanelSection";
 import { selectWalletAddresses } from "../../../store/settings/settingsSelector";
-import { useTranslation } from "react-i18next";
+import { MapMarkerOpacity } from "./MapMarkerOpacity";
 
 export function MapOptions() {
   const { t } = useTranslation('common', { keyPrefix: 'mapOptions' });
@@ -53,6 +54,7 @@ export function MapOptions() {
         checked={mapOptions.displayAll}
         disabled={walletAddresses.length === 0}
         onChange={(e) => onDisplayAll(e)} />
+      <MapMarkerOpacity />
     </SettingsPanelSection>
   )
 }

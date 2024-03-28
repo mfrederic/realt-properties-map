@@ -1,5 +1,6 @@
 {
   "propertyPanel": {
+    "propertyType": "Property Type",
     "ownedAmount": "Owned Amount",
     "token": "Token",
     "tokenAmount": "Token Amount",
@@ -8,6 +9,18 @@
     "yearlyRent": "Yearly Rent",
     "rentedUnit": "Rented Unit",
     "assetPrice": "Asset Price"
+  },
+  "propertyType": {
+    "1": "Single Family",
+    "2": "Multi Family",
+    "3": "Duplex",
+    "4": "Condominium",
+    "6": "Mixed-Use",
+    "8": "Quadplex",
+    "9": "Commercial",
+    "10": "SFR Portfolio",
+    "11": "MFR Portfolio",
+    "unknown": "Unknown"
   },
   "title": {
     "viewOnRealtoken": "View on Realtoken Dashboard",

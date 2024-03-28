@@ -1,32 +1,35 @@
-import { DivIcon, MarkerClusterGroup, marker, Marker, markerClusterGroup, LeafletMouseEvent } from 'leaflet';
-import 'leaflet.markercluster';
-import { useLeafletContext } from '@react-leaflet/core';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
+import { DivIcon, MarkerClusterGroup, marker, Marker, markerClusterGroup, LeafletMouseEvent } from 'leaflet';
+import { useLeafletContext } from '@react-leaflet/core';
+import 'leaflet.markercluster';
 import { Wallet } from '../../types/wallet';
 import { Property } from '../../types/property';
 import { useAppDispatch, useAppSelector } from '../../hooks/useInitStore';
 import { setSelected } from '../../store/marker/markerReducer';
-import { useTranslation } from 'react-i18next';
-import { TFunction } from 'i18next';
 
 function pinSvg(cssClasses: string) {
   return `<svg width="50" height="50" viewBox="0 0 50 78" class="marker-svg ${cssClasses
     }"><path class="at-176__pin" d="M24,0A24,24,0,0,0,0,24C0,37.25,20,72,24,72S48,37.25,48,24A24,24,0,0,0,24,0Zm0,33a9,9,0,1,1,9-9A9,9,0,0,1,24,33Z"/></svg>`;
 }
 
+// TODO - Map options for opacity
 export function generateIcon(
   property: Property,
+  markerOpacity: number,
 ) {
   const owned = property.ownedAmount > 0;
   return new DivIcon({
     html:
       `<div class="relative marker-icon"
+  style="opacity: ${markerOpacity};"
   data-marker="${property.address}"
   ${owned ? 'data-marker-owned' : ''}
   ${property.source ? `data-marker-${property.source}` : ''}
   ${property.ownerWallets.length ? `data-marker-wallet="${property.ownerWallets.join(' ')}"` : ''}>
   ${pinSvg(`${property.iconColorClass}-icon ${owned ? 'stroke-white owned drop-shadow-lg' : 'opacity-80'}`)}
-  <i class="text-3xl drop-shadow-sm mf-icon material-icons absolute top-0 -left-1">${property.icon}</i>
+  <i class="text-3xl drop-shadow-sm mf-icon material-icons absolute top-0 left-[20%]">${property.icon}</i>
 </div>`,
     iconSize: [50, 50],
     iconAnchor: [25, 50],
@@ -63,9 +66,9 @@ function filterProperties(
     })
 }
 
-function createMarker(property: Property, t: TFunction<"common", undefined>): Marker {
+function createMarker(property: Property, markerOpacity: number, t: TFunction<"common", undefined>): Marker {
   return marker([property.coordinate.lat, property.coordinate.lng], {
-    icon: generateIcon(property),
+    icon: generateIcon(property, markerOpacity),
     alt: property.propertyTypeName,
     title: t('propertyType.' + property.propertyTypeName),
   });
@@ -110,7 +113,7 @@ export function MapMarkers({
     displayAll,
     displayGnosis,
     displayRmm,
-    detailedView,
+    markerOpacity,
   } = useAppSelector((state) => state.mapOptions);
 
   const displayedWalletsAddresses = wallets
@@ -154,14 +157,14 @@ export function MapMarkers({
 
   function getCleanMarkerCluster() {
     return markerClusterGroup({
-      disableClusteringAtZoom: 16,
+      disableClusteringAtZoom: 14,
       showCoverageOnHover: false,
       chunkedLoading: true,
       maxClusterRadius: 100,
       zoomToBoundsOnClick: true,
       spiderfyOnMaxZoom: false,
     });
-  } 
+  }
 
   useEffect(() => {
     clearMap();
@@ -169,7 +172,7 @@ export function MapMarkers({
 
     filterProperties(properties, displayAll, displayGnosis, displayRmm, displayedWalletsAddresses)
       .forEach((property) => {
-        const marker = createMarker(property, t)
+        const marker = createMarker(property, markerOpacity, t)
           .addEventListener('click', (event) => onMarkerClicked(event, property));
         markers.push(marker);
         markerCluster.addLayer(marker);
@@ -177,7 +180,7 @@ export function MapMarkers({
     map.addLayer(markerCluster);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [properties, displayAll, displayGnosis, displayRmm, detailedView, displayedWalletsAddresses]);
+  }, [properties, displayAll, displayGnosis, displayRmm, displayedWalletsAddresses]);
 
   return null;
 }
