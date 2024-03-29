@@ -11,7 +11,7 @@ import { PropertyPanel } from './PropertyPanel';
 import { MapMarkers } from './MapMarkers';
 import { MapEvents } from './MapEvents';
 
-export function RealtMap() {
+export function MapWrapper() {
   const realToken = useAppSelector(selectRealtokensList);
   const wallets = useAppSelector(selectWalletsList);
 
