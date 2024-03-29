@@ -1,15 +1,17 @@
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, Divider, Drawer, Flex, Grid, Image } from "@mantine/core";
+import { Carousel } from "@mantine/carousel";
 import { AffixBtn } from "../Common/AffixBtn";
 import { useAppDispatch, useAppSelector } from "../../hooks/useInitStore";
 import { selectedMarker } from "../../store/marker/markerSelector";
 import { clearSelected } from "../../store/marker/markerReducer";
 import { Property } from "../../types/property";
-import { useEffect } from "react";
 import { useCurrencyValue } from "../../hooks/useCurrencyValue";
-import { useTranslation } from "react-i18next";
 import date from "../../utils/date";
 import { selectedLanguage } from "../../store/settings/settingsSelector";
 import { selectDifferentiateOwned } from "../../store/mapOptions/mapOptionsSelector";
+import { useElementSize } from "@mantine/hooks";
 
 function toFixedStr(value: number, precision: number = 2) {
   return value.toFixed(precision).toLowerCase();
@@ -53,6 +55,7 @@ export function PropertyPanelContent({
   property: Property;
   onClose: () => void;
 }) {
+  const { ref, height } = useElementSize();
   const { t } = useTranslation('common');
   const language = useAppSelector(selectedLanguage);
   const differentiateOwned = useAppSelector(selectDifferentiateOwned);
@@ -144,14 +147,25 @@ export function PropertyPanelContent({
     <>
       <Drawer.Header className="!p-0 !mb-4">
         <Grid>
-          <Grid.Col span={12}>
-            <Image src={imageLink[0]} alt={fullName} />
-          </Grid.Col>
+          {
+            imageLink.length > 0 &&
+            <Grid.Col span={12}>
+              <Carousel height={height ?? 290}>
+                {
+                  imageLink.map((link, index) => (
+                    <Carousel.Slide key={index}>
+                      <Image fit="contain" src={link} alt={fullName} ref={index === 0 ? ref : undefined} />
+                    </Carousel.Slide>
+                  ))
+                }
+              </Carousel>
+            </Grid.Col>
+          }
           <Grid.Col span={12}>
             <Drawer.Title className="!mb-4">
               <Flex align="start" direction="column" className="px-4">
                 <strong>{fullName}</strong>
-                { neighborhood && <small>{neighborhood}</small>}
+                {neighborhood && <small>{neighborhood}</small>}
               </Flex>
             </Drawer.Title>
             <Drawer.Title>
