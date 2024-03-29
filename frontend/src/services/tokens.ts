@@ -9,7 +9,7 @@ export function getOwnedProperties(
   realtProperties: Array<RealToken>,
   wallets: Wallet[],
 ): Property[] {
-  if (!realtProperties.length || !wallets.length) {
+  if (!realtProperties.length) {
     return [];
   }
 
