@@ -183,7 +183,7 @@ export function MapMarkers({
     map.addLayer(markerCluster);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [properties, displayAll, displayGnosis, displayRmm, differentiateOwned]);
+  }, [properties, displayAll, displayGnosis, displayRmm, differentiateOwned, markerOpacity]);
 
   return null;
 }
