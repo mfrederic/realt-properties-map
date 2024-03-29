@@ -11,10 +11,10 @@ interface MapOptionsState {
 }
 
 const initialState: MapOptionsState = getItem<MapOptionsState>(LOCAL_STORAGE_NAME, {
-  displayAll: false,
+  displayAll: true,
   displayGnosis: true,
   displayRmm: true,
-  markerOpacity: 1,
+  markerOpacity: .8,
 });
 
 export const mapOptionsSlice = createSlice({
