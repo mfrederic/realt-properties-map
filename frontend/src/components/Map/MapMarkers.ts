@@ -9,6 +9,13 @@ import { Property } from '../../types/property';
 import { useAppDispatch, useAppSelector } from '../../hooks/useInitStore';
 import { setSelected } from '../../store/marker/markerReducer';
 
+export const OWNED_SELECTOR = '[data-marker-owned]';
+export const CSSCLASSES = {
+  owned: 'stroke-white owned drop-shadow-lg',
+  notOwned: 'opacity-80',
+}
+
+
 function pinSvg(cssClasses: string) {
   return `<svg width="50" height="50" viewBox="0 0 50 78" class="marker-svg ${cssClasses
     }"><path class="at-176__pin" d="M24,0A24,24,0,0,0,0,24C0,37.25,20,72,24,72S48,37.25,48,24A24,24,0,0,0,24,0Zm0,33a9,9,0,1,1,9-9A9,9,0,0,1,24,33Z"/></svg>`;
@@ -17,9 +24,11 @@ function pinSvg(cssClasses: string) {
 // TODO - Map options for opacity
 export function generateIcon(
   property: Property,
+  differentiateOwned: boolean,
   markerOpacity: number,
 ) {
   const owned = property.ownedAmount > 0;
+  const ownedClass = differentiateOwned && owned ? CSSCLASSES.owned : CSSCLASSES.notOwned;
   return new DivIcon({
     html:
       `<div class="relative marker-icon"
@@ -28,7 +37,7 @@ export function generateIcon(
   ${owned ? 'data-marker-owned' : ''}
   ${property.source ? `data-marker-${property.source}` : ''}
   ${property.ownerWallets.length ? `data-marker-wallet="${property.ownerWallets.join(' ')}"` : ''}>
-  ${pinSvg(`${property.iconColorClass}-icon ${owned ? 'stroke-white owned drop-shadow-lg' : 'opacity-80'}`)}
+  ${pinSvg(`${property.iconColorClass}-icon ${ownedClass}`)}
   <i class="text-3xl drop-shadow-sm mf-icon material-icons absolute top-0 left-[20%]">${property.icon}</i>
 </div>`,
     iconSize: [50, 50],
@@ -58,9 +67,14 @@ function filterProperties(
     })
 }
 
-function createMarker(property: Property, markerOpacity: number, t: TFunction<"common", undefined>): Marker {
+function createMarker(
+  property: Property,
+  markerOpacity: number,
+  differentiateOwned: boolean,
+  t: TFunction<"common", undefined>,
+): Marker {
   return marker([property.coordinate.lat, property.coordinate.lng], {
-    icon: generateIcon(property, markerOpacity),
+    icon: generateIcon(property, differentiateOwned, markerOpacity),
     alt: property.propertyTypeName,
     title: t('propertyType.' + property.propertyTypeName),
   });
@@ -105,6 +119,7 @@ export function MapMarkers({
     displayAll,
     displayGnosis,
     displayRmm,
+    differentiateOwned,
     markerOpacity,
   } = useAppSelector((state) => state.mapOptions);
 
@@ -160,7 +175,7 @@ export function MapMarkers({
 
     filterProperties(properties, displayAll, displayGnosis, displayRmm)
       .forEach((property) => {
-        const marker = createMarker(property, markerOpacity, t)
+        const marker = createMarker(property, markerOpacity, differentiateOwned, t)
           .addEventListener('click', (event) => onMarkerClicked(event, property));
         markers.push(marker);
         markerCluster.addLayer(marker);
@@ -168,7 +183,7 @@ export function MapMarkers({
     map.addLayer(markerCluster);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [properties, displayAll, displayGnosis, displayRmm]);
+  }, [properties, displayAll, displayGnosis, displayRmm, differentiateOwned]);
 
   return null;
 }

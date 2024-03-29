@@ -7,6 +7,7 @@ interface MapOptionsState {
   displayAll: boolean;
   displayGnosis: boolean;
   displayRmm: boolean;
+  differentiateOwned: boolean;
   markerOpacity: number;
 }
 
@@ -14,6 +15,7 @@ const initialState: MapOptionsState = getItem<MapOptionsState>(LOCAL_STORAGE_NAM
   displayAll: true,
   displayGnosis: true,
   displayRmm: true,
+  differentiateOwned: true,
   markerOpacity: .8,
 });
 
@@ -26,6 +28,7 @@ export const mapOptionsSlice = createSlice({
         displayAll: action.payload.displayAll,
         displayGnosis: action.payload.displayGnosis,
         displayRmm: action.payload.displayRmm,
+        differentiateOwned: action.payload.differentiateOwned,
         markerOpacity: action.payload.markerOpacity,
       };
       setItem<MapOptionsState>(LOCAL_STORAGE_NAME, newState);
@@ -43,6 +46,10 @@ export const mapOptionsSlice = createSlice({
       state.displayRmm = action.payload;
       setItem<MapOptionsState>(LOCAL_STORAGE_NAME, state);
     },
+    setDifferentiateOwned: (state, action: PayloadAction<boolean>) => {
+      state.differentiateOwned = action.payload;
+      setItem<MapOptionsState>(LOCAL_STORAGE_NAME, state);
+    },
     setMarkerOpacity: (state, action: PayloadAction<number>) => {
       if (action.payload < 0.2 || action.payload > 1) {
         return;
@@ -53,6 +60,6 @@ export const mapOptionsSlice = createSlice({
   }
 });
 
-export const { setAll, setDisplayAll, setDisplayGnosis, setDisplayRmm, setMarkerOpacity } = mapOptionsSlice.actions;
+export const { setAll, setDisplayAll, setDisplayGnosis, setDisplayRmm, setDifferentiateOwned, setMarkerOpacity } = mapOptionsSlice.actions;
 
 export default mapOptionsSlice.reducer;

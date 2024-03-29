@@ -62,7 +62,8 @@
     "mapOptions": "Map Options",
     "displayRmm": "Display RMM",
     "displayGnosis": "Display Gnosis",
-    "displayAll": "Include not owned"
+    "displayAll": "Include not owned",
+    "differentiateOwned": "Differentiate owned markers"
   },
   "notifications": {
     "pleaseWait": "Please wait...",

@@ -62,7 +62,8 @@
     "mapOptions": "Options de carte",
     "displayRmm": "Afficher RMM",
     "displayGnosis": "Afficher Gnosis",
-    "displayAll": "Inclure non possédé"
+    "displayAll": "Inclure non possédé",
+    "differentiateOwned": "Différencier les marqueurs possédés"
   },
   "notifications": {
     "pleaseWait": "Veuillez patienter...",
