@@ -1,4 +1,4 @@
-import { Button, Divider, Drawer, Grid, Image } from "@mantine/core";
+import { Button, Divider, Drawer, Flex, Grid, Image } from "@mantine/core";
 import { AffixBtn } from "../Common/AffixBtn";
 import { useAppDispatch, useAppSelector } from "../../hooks/useInitStore";
 import { selectedMarker } from "../../store/marker/markerSelector";
@@ -7,6 +7,9 @@ import { Property } from "../../types/property";
 import { useEffect } from "react";
 import { useCurrencyValue } from "../../hooks/useCurrencyValue";
 import { useTranslation } from "react-i18next";
+import date from "../../utils/date";
+import { selectedLanguage } from "../../store/settings/settingsSelector";
+import { selectDifferentiateOwned } from "../../store/mapOptions/mapOptionsSelector";
 
 function toFixedStr(value: number, precision: number = 2) {
   return value.toFixed(precision).toLowerCase();
@@ -51,6 +54,8 @@ export function PropertyPanelContent({
   onClose: () => void;
 }) {
   const { t } = useTranslation('common');
+  const language = useAppSelector(selectedLanguage);
+  const differentiateOwned = useAppSelector(selectDifferentiateOwned);
 
   const {
     fullName,
@@ -65,10 +70,15 @@ export function PropertyPanelContent({
     annualPercentageYield,
     marketplaceLink,
     totalInvestment,
+    rentStartDate,
+    rentalType,
+    initialLaunchDate,
+    neighborhood,
   } = property;
 
-  const yearlyRent = netRentYearPerToken * ownedAmount;
-  const dailyRent = netRentDayPerToken * ownedAmount;
+  const consolidatedOwnedAmount = ownedAmount === 0 ? 1 : ownedAmount;
+  const yearlyRent = netRentYearPerToken * consolidatedOwnedAmount;
+  const dailyRent = netRentDayPerToken * consolidatedOwnedAmount;
   const ownedAmountPrice = ownedAmount * tokenPrice;
   const rentedUnitsPercent = rentedUnits * 100 / totalUnits;
 
@@ -97,20 +107,32 @@ export function PropertyPanelContent({
       entry: { label: 'propertyPanel.tokenAmount', value: totalTokens },
     },
     {
-      ownedOnly: true,
+      ownedOnly: false,
       entry: { label: 'propertyPanel.yield', value: `${toFixedStr(annualPercentageYield)}%` },
     },
     {
-      ownedOnly: true,
+      ownedOnly: false,
       entry: { label: 'propertyPanel.weeklyRent', value: useCurrencyValue(dailyRent * 7) },
     },
     {
-      ownedOnly: true,
+      ownedOnly: false,
       entry: { label: 'propertyPanel.yearlyRent', value: useCurrencyValue(yearlyRent) },
     },
     {
       ownedOnly: false,
       entry: { label: 'propertyPanel.rentedUnit', value: `${rentedUnits} / ${totalUnits} (${toFixedStr(rentedUnitsPercent)}%)` },
+    },
+    {
+      ownedOnly: false,
+      entry: { label: 'propertyPanel.initialLaunchDate', value: date.utc(initialLaunchDate.date).locale(language).format('LL') },
+    },
+    {
+      ownedOnly: false,
+      entry: { label: 'propertyPanel.rentStart', value: date.utc(rentStartDate.date).locale(language).format('LL') },
+    },
+    {
+      ownedOnly: false,
+      entry: { label: 'propertyPanel.rentalType', value: t(`rentalType.${rentalType}`) },
     },
     {
       ownedOnly: false,
@@ -127,7 +149,10 @@ export function PropertyPanelContent({
           </Grid.Col>
           <Grid.Col span={12}>
             <Drawer.Title className="!mb-4">
-              <strong className="px-4">{fullName}</strong>
+              <Flex align="start" direction="column" className="px-4">
+                <strong>{fullName}</strong>
+                { neighborhood && <small>{neighborhood}</small>}
+              </Flex>
             </Drawer.Title>
             <Drawer.Title>
               <Grid className="px-4">
@@ -182,9 +207,18 @@ export function PropertyPanelContent({
         </Grid>
       </Drawer.Header>
       <Drawer.Body className="!p-0 mb-20 sm:mb-0">
+        {
+          (ownedAmount === 0 || !differentiateOwned) &&
+          <Grid className="px-4 py-2 bg-gray-500 text-white">
+            <Grid.Col span={12} className="font-semibold">
+              <h2>{t('propertyPanel.notOwned')}</h2>
+            </Grid.Col>
+          </Grid>
+        }
         {entries.map(({ ownedOnly, notOwnedOnly, entry, icon }) => {
           if (
             (ownedOnly && ownedAmount <= 0) ||
+            (ownedOnly && !differentiateOwned) ||
             (notOwnedOnly && ownedAmount > 0)
           ) {
             return null;

@@ -8,7 +8,15 @@
     "weeklyRent": "Loyer hebdomadaire",
     "yearlyRent": "Loyer annuel",
     "rentedUnit": "Unité louée",
-    "assetPrice": "Prix de l'actif"
+    "initialLaunchDate": "Date de lancement",
+    "rentStart": "Début de la location",
+    "rentalType": "Type de location",
+    "assetPrice": "Prix de l'actif",
+    "notOwned": "Non possédé"
+  },
+  "rentalType": {
+    "short_term": "Court terme",
+    "long_term": "Long terme"
   },
   "propertyType": {
     "1": "Individuel",
