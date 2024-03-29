@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux';
 import store from './store/store';
-import { RealtMap } from './components/Map/MapWrapper';
+import { MapWrapper } from './components/Map/MapWrapper';
 import { AppActions } from './components/Settings/AppActions';
 import { MantineProviders } from './providers/MantineProvider';
 import { HotkeysProvider } from './providers/HotkeysProvider';
@@ -13,7 +13,7 @@ function App() {
       <InitStoreProvider>
         <MantineProviders>
           <HotkeysProvider>
-            <RealtMap />
+            <MapWrapper />
             <AppActions />
           </HotkeysProvider>
         </MantineProviders>

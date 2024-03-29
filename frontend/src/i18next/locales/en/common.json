@@ -8,7 +8,15 @@
     "weeklyRent": "Weekly Rent",
     "yearlyRent": "Yearly Rent",
     "rentedUnit": "Rented Unit",
-    "assetPrice": "Asset Price"
+    "initialLaunchDate": "Initial Launch Date",
+    "rentStart": "Rent Start",
+    "rentalType": "Rental Type",
+    "assetPrice": "Asset Price",
+    "notOwned": "Not owned"
+  },
+  "rentalType": {
+    "short_term": "Short term",
+    "long_term": "Long term"
   },
   "propertyType": {
     "1": "Single Family",
@@ -62,7 +70,8 @@
     "mapOptions": "Map Options",
     "displayRmm": "Display RMM",
     "displayGnosis": "Display Gnosis",
-    "displayAll": "Include not owned"
+    "displayAll": "Include not owned",
+    "differentiateOwned": "Differentiate owned markers"
   },
   "notifications": {
     "pleaseWait": "Please wait...",

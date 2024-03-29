@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import MapIcon from '@mui/icons-material/Map';
 import { useAppDispatch, useAppSelector } from "../../../hooks/useInitStore";
 import { MapOption } from "./MapOption";
-import { setDisplayAll, setDisplayGnosis, setDisplayRmm } from "../../../store/mapOptions/mapOptionsReducer";
+import { setDifferentiateOwned, setDisplayAll, setDisplayGnosis, setDisplayRmm } from "../../../store/mapOptions/mapOptionsReducer";
 import { SettingsPanelSection } from "../SettingsPanelSection";
 import { selectWalletAddresses } from "../../../store/settings/settingsSelector";
 import { MapMarkerOpacity } from "./MapMarkerOpacity";
@@ -34,6 +34,10 @@ export function MapOptions() {
     dispatch(setDisplayAll(toggle));
   }
 
+  function onDifferentiateOwned(toggle: boolean) {
+    dispatch(setDifferentiateOwned(toggle));
+  }
+
   return (
     <SettingsPanelSection icon={<MapIcon className="inline-block mr-2" />} label={t('mapOptions')}>
       <MapOption
@@ -54,6 +58,12 @@ export function MapOptions() {
         checked={mapOptions.displayAll}
         disabled={walletAddresses.length === 0}
         onChange={(e) => onDisplayAll(e)} />
+      <MapOption
+        id="differentiateOwned"
+        label={t('differentiateOwned')}
+        checked={mapOptions.differentiateOwned}
+        disabled={walletAddresses.length === 0}
+        onChange={(e) => onDifferentiateOwned(e)} />
       <MapMarkerOpacity />
     </SettingsPanelSection>
   )
