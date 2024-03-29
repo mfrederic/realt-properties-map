@@ -41,7 +41,6 @@ function filterProperties(
   displayAll: boolean,
   displayGnosis: boolean,
   displayRmm: boolean,
-  displayedWalletsAddresses: string[],
 ) {
   return properties
     .filter((property) => {
@@ -53,13 +52,6 @@ function filterProperties(
         toInclude = false;
       }
       if (!displayRmm && property.source === 'rmm') {
-        toInclude = false;
-      }
-      if (
-        displayedWalletsAddresses.length > 0
-        && property.ownerWallets.length > 0
-        && !property.ownerWallets.some((address) => displayedWalletsAddresses.includes(address.toLowerCase()))
-      ) {
         toInclude = false;
       }
       return toInclude;
@@ -116,10 +108,6 @@ export function MapMarkers({
     markerOpacity,
   } = useAppSelector((state) => state.mapOptions);
 
-  const displayedWalletsAddresses = wallets
-    .filter((wallet) => wallet.visible)
-    .map((wallet) => wallet.address.toLowerCase());
-
   function onMarkerClicked(event: LeafletMouseEvent, property: Property) {
     const currentZoom = map.getZoom();
     map.setView({
@@ -170,7 +158,7 @@ export function MapMarkers({
     clearMap();
     markerCluster = getCleanMarkerCluster();
 
-    filterProperties(properties, displayAll, displayGnosis, displayRmm, displayedWalletsAddresses)
+    filterProperties(properties, displayAll, displayGnosis, displayRmm)
       .forEach((property) => {
         const marker = createMarker(property, markerOpacity, t)
           .addEventListener('click', (event) => onMarkerClicked(event, property));
@@ -180,7 +168,7 @@ export function MapMarkers({
     map.addLayer(markerCluster);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [properties, displayAll, displayGnosis, displayRmm, displayedWalletsAddresses]);
+  }, [properties, displayAll, displayGnosis, displayRmm]);
 
   return null;
 }
