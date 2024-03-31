@@ -22,6 +22,7 @@ export function QueryProvider({
 }: {
   children: React.ReactNode
 }) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let [_, setSearchParams] = useSearchParams();
   const center = useAppSelector(selectedLatLng);
   const zoom = useAppSelector(selectedZoom);
