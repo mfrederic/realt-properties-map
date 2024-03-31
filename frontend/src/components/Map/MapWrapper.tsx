@@ -7,7 +7,7 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import { useEffect, useState } from 'react';
 import { Property } from '../../types/property';
-import { PropertyPanel } from './PropertyPanel';
+import { PropertyPanel } from '../PropertyPanel/PropertyPanel';
 import { MapMarkers } from './MapMarkers';
 import { MapEvents } from './MapEvents';
 import { selectedLatLng, selectedZoom } from '../../store/urlQuery/urlQuery.selector';
