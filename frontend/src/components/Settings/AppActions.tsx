@@ -4,11 +4,18 @@ import { AppActionsButton } from './AppActionsButton';
 import { StartTooltip } from './StartTooltip';
 import { AffixBtn } from '../Common/AffixBtn';
 import { MapOptionsPanel } from './Settings/SettingsPanel';
+import { WalletsPanel } from './Wallets/WalletsPanel';
 import WalletIcon from '@mui/icons-material/Wallet';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { WalletsPanel } from './Wallets/WalletsPanel';
+import LinkIcon from '@mui/icons-material/Link';
+import CheckIcon from '@mui/icons-material/Check';
+import { useCopyUrl } from '../../hooks/useCopyUrl';
+import { useTranslation } from 'react-i18next';
 
 export function AppActions() {
+  const { t } = useTranslation('common');
+  const { copied, onCopyUrl } = useCopyUrl();
+
   const [walletsOpened, {
     open: openWallets,
     close: closeWallets,
@@ -37,6 +44,13 @@ export function AppActions() {
         !mapOptionsOpened && !walletsOpened &&
         <AffixBtn>
           <Flex align="end" className="ml-2 sm:ml-0">
+            <AppActionsButton opened={false} open={onCopyUrl} label={t('actions.copyUrl')} color={copied ? 'teal' : ''}>
+              {
+                !copied
+                  ? <LinkIcon fontSize="large" />
+                  : <CheckIcon fontSize="large" />
+              }
+            </AppActionsButton>
             <StartTooltip />
             <AppActionsButton opened={false} open={onOpenWallets} label="Wallets panel">
               <WalletIcon fontSize="large" />

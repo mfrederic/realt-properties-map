@@ -5,6 +5,7 @@ import realTokensReducer from './realtokens/realtokensReducer';
 import settingsReducer from './settings/settingsReducer';
 import markerReducer from './marker/markerReducer';
 import currenciesReducer from './currencies/currenciesReducer';
+import urlQueryReducer from './urlQuery/urlQuery.reducer';
 
 const rootReducer = combineReducers({
   settings: settingsReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   realtokens: realTokensReducer,
   marker: markerReducer,
   currencies: currenciesReducer,
+  urlQuery: urlQueryReducer,
 });
 
 const store = configureStore({

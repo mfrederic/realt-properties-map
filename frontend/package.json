@@ -1,6 +1,6 @@
 {
   "name": "realt-properties-map-frontend",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "license": "Apache-2.0",
   "scripts": {
     "start": "PORT=3010 react-scripts start",
@@ -57,6 +57,7 @@
     "react-leaflet": "^4.2.1",
     "react-leaflet-cluster": "^2.1.0",
     "react-redux": "^9.1.0",
+    "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"

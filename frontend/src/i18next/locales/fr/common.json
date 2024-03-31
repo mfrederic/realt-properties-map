@@ -40,7 +40,8 @@
     "add": "Ajouter",
     "edit": "Modifier",
     "delete": "Supprimer",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "copyUrl": "Copier URL"
   },
   "settings": {
     "language": "Langue",
