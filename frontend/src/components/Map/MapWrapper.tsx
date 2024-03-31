@@ -10,10 +10,13 @@ import { Property } from '../../types/property';
 import { PropertyPanel } from './PropertyPanel';
 import { MapMarkers } from './MapMarkers';
 import { MapEvents } from './MapEvents';
+import { selectedLatLng, selectedZoom } from '../../store/urlQuery/urlQuery.selector';
 
 export function MapWrapper() {
   const realToken = useAppSelector(selectRealtokensList);
   const wallets = useAppSelector(selectWalletsList);
+  const center = useAppSelector(selectedLatLng);
+  const zoom = useAppSelector(selectedZoom);
 
   const [properties, setProperties] = useState<Property[]>([]);
 
@@ -25,12 +28,11 @@ export function MapWrapper() {
     <>
       <MapContainer
         className="map"
-        center={[32, -83]}
-        zoom={4}
-      >
+        center={center}
+        zoom={zoom}>
         <TileLayer url={`https://tile.openstreetmap.org/{z}/{x}/{y}.png`}/>
         <MarkerClusterGroup>
-          <MapMarkers properties={properties} wallets={wallets} />
+          <MapMarkers properties={properties} />
           <MapEvents />
         </MarkerClusterGroup>
       </MapContainer>

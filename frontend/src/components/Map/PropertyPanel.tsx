@@ -12,6 +12,7 @@ import date from "../../utils/date";
 import { selectedLanguage } from "../../store/settings/settingsSelector";
 import { selectDifferentiateOwned } from "../../store/mapOptions/mapOptionsSelector";
 import { useElementSize } from "@mantine/hooks";
+import { setSelectedProperty } from "../../store/urlQuery/urlQuery.reducer";
 
 function toFixedStr(value: number, precision: number = 2) {
   return value.toFixed(precision).toLowerCase();
@@ -31,6 +32,7 @@ export function PropertyPanel() {
   }, [property]);
 
   function onClose() {
+    dispatch(setSelectedProperty(null));
     dispatch(clearSelected());
   }
 

@@ -6,17 +6,20 @@ import { MantineProviders } from './providers/MantineProvider';
 import { HotkeysProvider } from './providers/HotkeysProvider';
 import InitStoreProvider from './providers/InitStoreProvider';
 import './i18next/i18next';
+import { QueryProvider } from './providers/QueryProvider';
 
 function App() {
   return (
     <Provider store={store}>
       <InitStoreProvider>
-        <MantineProviders>
-          <HotkeysProvider>
-            <MapWrapper />
-            <AppActions />
-          </HotkeysProvider>
-        </MantineProviders>
+        <QueryProvider>
+          <MantineProviders>
+            <HotkeysProvider>
+              <MapWrapper />
+              <AppActions />
+            </HotkeysProvider>
+          </MantineProviders>
+        </QueryProvider>
       </InitStoreProvider>
     </Provider>
   );
