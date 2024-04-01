@@ -1,13 +1,14 @@
+import { useTranslation } from "react-i18next";
 import { Drawer, Grid, Space } from "@mantine/core";
 import SettingsIcon from '@mui/icons-material/Settings';
 import { SettingsPanelContent } from "../SettingsPanelContent";
-import { MapOptions } from "./MapOptions";
+import { MapOptions } from "./MapOptions/MapOptions";
 import { ColorSchemeOption } from "./ColorSchemeOption";
 import { RefreshDataButton } from "./RefreshDataBtn";
 import { SettingsPanelHeader } from "../SettingsPanelHeader";
 import { CurrencySelect } from "./CurrencySelect";
 import { LanguageSelect } from "./LanguageSelect";
-import { useTranslation } from "react-i18next";
+import { GeneralOptions } from "./GeneralOptions/GeneralOptions";
 
 export function MapOptionsPanel({
   opened,
@@ -44,6 +45,9 @@ export function MapOptionsPanel({
               </Grid.Col>
               <Grid.Col span={12}>
                 <MapOptions />
+              </Grid.Col>
+              <Grid.Col span={12}>
+                <GeneralOptions />
               </Grid.Col>
               <Grid.Col span={12}>
                 <Space h="xl" />

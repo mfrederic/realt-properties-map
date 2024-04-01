@@ -1,8 +1,8 @@
 import { Grid, Slider } from "@mantine/core";
 import OpacityIcon from '@mui/icons-material/Opacity';
-import { useAppDispatch, useAppSelector } from "../../../hooks/useInitStore";
-import { setMarkerOpacity } from "../../../store/mapOptions/mapOptionsReducer";
-import { selectMarkerOpacity } from "../../../store/mapOptions/mapOptionsSelector";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/useInitStore";
+import { setMarkerOpacity } from "../../../../store/mapOptions/mapOptionsReducer";
+import { selectMarkerOpacity } from "../../../../store/mapOptions/mapOptionsSelector";
 import { useTranslation } from "react-i18next";
 
 export function MapMarkerOpacity() {

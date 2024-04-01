@@ -59,7 +59,11 @@
     "french": "French",
     "english": "English",
     "markersOpacity": "Markers Opacity",
-    "mapMarkersOpacity": "Map Markers Opacity"
+    "mapMarkersOpacity": "Map Markers Opacity",
+    "generalOptions": {
+      "title": "General Options",
+      "displayStartTooltip": "Display start tooltip"
+    }
   },
   "wallet": {
     "wallets": "Wallets",
