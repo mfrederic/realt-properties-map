@@ -52,10 +52,10 @@ export function AppActions() {
               }
             </AppActionsButton>
             <StartTooltip />
-            <AppActionsButton opened={false} open={onOpenWallets} label="Wallets panel">
+            <AppActionsButton opened={false} open={onOpenWallets} label={t('actions.openWalletsPanel')}>
               <WalletIcon fontSize="large" />
             </AppActionsButton>
-            <AppActionsButton opened={false} open={onOpenMapOptions} label="Map Options panel">
+            <AppActionsButton opened={false} open={onOpenMapOptions} label={t('actions.openSettingsPanel')}>
               <SettingsIcon fontSize="large" />
             </AppActionsButton>
           </Flex>

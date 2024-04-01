@@ -41,7 +41,9 @@
     "edit": "Edit",
     "delete": "Delete",
     "cancel": "Cancel",
-    "copyUrl": "Copy URL"
+    "copyUrl": "Copy URL",
+    "openWalletsPanel": "Open Wallets Panel",
+    "openSettingsPanel": "Open Settings Panel"
   },
   "settings": {
     "language": "Language",
@@ -55,7 +57,9 @@
     "chf": "Swiss franc (CHF)",
     "refreshData": "Refresh data",
     "french": "French",
-    "english": "English"
+    "english": "English",
+    "markersOpacity": "Markers Opacity",
+    "mapMarkersOpacity": "Map Markers Opacity"
   },
   "wallet": {
     "wallets": "Wallets",
