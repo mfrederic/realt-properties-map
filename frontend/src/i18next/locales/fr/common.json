@@ -59,7 +59,11 @@
     "french": "Français",
     "english": "Anglais",
     "markersOpacity": "Opacité des marqueurs",
-    "mapMarkersOpacity": "Opacité des marqueurs sur la carte"
+    "mapMarkersOpacity": "Opacité des marqueurs sur la carte",
+    "generalOptions": {
+      "title": "Options Générales",
+      "displayStartTooltip": "Afficher l'info-bulle de démarrage"
+    }
   },
   "wallet": {
     "wallets": "Portefeuilles",

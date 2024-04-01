@@ -5,3 +5,5 @@ export const selectWalletAddresses = (state: RootState) => state.settings.addres
 export const selectedCurrency = (state: RootState) => state.settings.currency;
 
 export const selectedLanguage = (state: RootState) => state.settings.language;
+
+export const selectedStartTooltip = (state: RootState) => state.settings.showStartTooltip;

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import MapIcon from '@mui/icons-material/Map';
-import { useAppDispatch, useAppSelector } from "../../../hooks/useInitStore";
-import { MapOption } from "./MapOption";
-import { setDifferentiateOwned, setDisplayAll, setDisplayGnosis, setDisplayRmm } from "../../../store/mapOptions/mapOptionsReducer";
-import { SettingsPanelSection } from "../SettingsPanelSection";
-import { selectWalletAddresses } from "../../../store/settings/settingsSelector";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/useInitStore";
+import { Option } from "../Option";
+import { setDifferentiateOwned, setDisplayAll, setDisplayGnosis, setDisplayRmm } from "../../../../store/mapOptions/mapOptionsReducer";
+import { SettingsPanelSection } from "../../SettingsPanelSection";
+import { selectWalletAddresses } from "../../../../store/settings/settingsSelector";
 import { MapMarkerOpacity } from "./MapMarkerOpacity";
 
 export function MapOptions() {
@@ -40,25 +40,25 @@ export function MapOptions() {
 
   return (
     <SettingsPanelSection icon={<MapIcon className="inline-block mr-2" />} label={t('mapOptions')}>
-      <MapOption
+      <Option
         id="rmm"
         label={t('displayRmm')}
         checked={mapOptions.displayRmm}
         disabled={walletAddresses.length === 0}
         onChange={(e) => onDisplayRmm(e)} />
-      <MapOption
+      <Option
         id="gnosis"
         label={t('displayGnosis')}
         checked={mapOptions.displayGnosis}
         disabled={walletAddresses.length === 0}
         onChange={(e) => onDisplayGnosis(e)} />
-      <MapOption
+      <Option
         id="all"
         label={t('displayAll')}
         checked={mapOptions.displayAll}
         disabled={walletAddresses.length === 0}
         onChange={(e) => onDisplayAll(e)} />
-      <MapOption
+      <Option
         id="differentiateOwned"
         label={t('differentiateOwned')}
         checked={mapOptions.differentiateOwned}

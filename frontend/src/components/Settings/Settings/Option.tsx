@@ -1,6 +1,6 @@
 import { Checkbox, Grid, Tooltip } from "@mantine/core";
 
-export function MapOption({
+export function Option({
   id,
   label,
   checked,

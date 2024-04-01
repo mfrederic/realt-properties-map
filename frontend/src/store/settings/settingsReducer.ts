@@ -9,12 +9,14 @@ export interface SettingsState {
   addresses: string[];
   currency: Currency;
   language: Language;
+  showStartTooltip: boolean;
 }
 
 const initialState: SettingsState = getItem<SettingsState>(LOCAL_STORAGE_NAME, {
   addresses: [],
   currency: Currency.USD,
   language: Language.EN,
+  showStartTooltip: true,
 });
 
 export const settingsSlice = createSlice({
@@ -50,6 +52,10 @@ export const settingsSlice = createSlice({
     setLanguage: (state, action: PayloadAction<Language>) => {
       state.language = action.payload;
       setItem<SettingsState>(LOCAL_STORAGE_NAME, state);
+    },
+    setStartTooltip: (state, action: PayloadAction<boolean>) => {
+      state.showStartTooltip = action.payload;
+      setItem<SettingsState>(LOCAL_STORAGE_NAME, state);
     }
   }
 });
@@ -61,6 +67,7 @@ export const {
   removeAddress,
   setCurrency,
   setLanguage,
+  setStartTooltip,
 } = settingsSlice.actions;
 
 export default settingsSlice.reducer;
