@@ -6,6 +6,7 @@ export function StartTooltip() {
   const { t } = useTranslation('common', { keyPrefix: 'extra' });
   const wallets = useAppSelector(selectWalletAddresses);
   
+  // TODO: Only display if option is enabled
   return (
     wallets && wallets.length <= 0 ? (
       <div className="text-black bg-white p-4 rounded-lg min-h-14 text-center drop-shadow-md mr-6">
