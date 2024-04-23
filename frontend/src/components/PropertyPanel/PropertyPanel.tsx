@@ -45,7 +45,7 @@ export function PropertyPanel() {
             <Drawer.Title>
               <PropertyPanelActions
                 marketplaceLink={property.marketplaceLink}
-                address={property.address}
+                address={property.caseSensitiveAddress}
                 onClose={onClose} />
             </Drawer.Title>
           </Grid.Col>

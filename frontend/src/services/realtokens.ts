@@ -32,6 +32,7 @@ export function mapPropertiesList(
       accu.set(property.gnosisContract.toLowerCase(), {
         ...property,
         address: property.gnosisContract.toLowerCase(),
+        caseSensitiveAddress: property.gnosisContract,
         isOld: property.fullName.startsWith('OLD-'),
         icon: setIcon(property.propertyType),
         iconColorClass: setIconColor(property.rentedUnits, property.totalUnits),
