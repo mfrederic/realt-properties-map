@@ -125,6 +125,7 @@ export function MapMarkers({
     displayRmm,
     differentiateOwned,
     markerOpacity,
+    markerClustering,
   } = useAppSelector((state) => state.mapOptions);
   const selectedUrlParam = useAppSelector(selectedProperty);
 
@@ -166,9 +167,9 @@ export function MapMarkers({
     map.removeEventListener('moveend');
   }
 
-  function getCleanMarkerCluster() {
+  function getCleanMarkerCluster(clustering: number = 14) {
     return markerClusterGroup({
-      disableClusteringAtZoom: 14,
+      disableClusteringAtZoom: clustering,
       showCoverageOnHover: false,
       chunkedLoading: true,
       maxClusterRadius: 100,
@@ -179,7 +180,7 @@ export function MapMarkers({
 
   useEffect(() => {
     clearMap();
-    markerCluster = getCleanMarkerCluster();
+    markerCluster = getCleanMarkerCluster(markerClustering);
 
     filterProperties(properties, displayAll, displayGnosis, displayRmm, selectedUrlParam)
       .forEach((property) => {
@@ -213,7 +214,7 @@ export function MapMarkers({
       clearMap();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [properties, displayAll, displayGnosis, displayRmm, differentiateOwned, markerOpacity]);
+  }, [properties, displayAll, displayGnosis, displayRmm, differentiateOwned, markerOpacity, markerClustering]);
 
   return null;
 }

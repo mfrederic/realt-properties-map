@@ -59,7 +59,9 @@
     "french": "French",
     "english": "English",
     "markersOpacity": "Markers Opacity",
+    "markersClustering": "Markers Clustering",
     "mapMarkersOpacity": "Map Markers Opacity",
+    "mapClustersOpacity": "Map Clusters Opacity",
     "generalOptions": {
       "title": "General Options",
       "displayStartTooltip": "Display start tooltip"
@@ -104,6 +106,7 @@
     "madeBy": "Made with ❤️ by",
     "baseOn": "Based on the work of",
     "startTooltip": "Add your wallets to get started",
-    "reportIssue": "Report an issue"
+    "reportIssue": "Report an issue",
+    "default": "Default"
   }
 }
