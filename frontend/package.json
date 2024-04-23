@@ -41,6 +41,7 @@
     "@mantine/modals": "^7.7.0",
     "@mantine/notifications": "^7.7.0",
     "@mui/icons-material": "^5.15.14",
+    "@realtoken/realt-commons": "^1.4.9",
     "@reduxjs/toolkit": "^2.2.2",
     "axios": "^1.6.8",
     "axios-cache-interceptor": "^1.5.1",
@@ -48,12 +49,12 @@
     "embla-carousel-react": "^8.0.0",
     "ethers": "^6.11.1",
     "graphql": "^16.8.1",
-    "i18next": "^23.10.1",
+    "i18next": "^22.4.13",
     "leaflet": "^1.9.4",
     "multicoin-address-validator": "^0.5.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^14.1.0",
+    "react-i18next": "^12.3.1",
     "react-leaflet": "^4.2.1",
     "react-leaflet-cluster": "^2.1.0",
     "react-redux": "^9.1.0",
@@ -88,6 +89,7 @@
     "postcss-preset-mantine": "^1.13.0",
     "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.2.5",
-    "redux-mock-store": "^1.5.4"
+    "redux-mock-store": "^1.5.4",
+    "semantic-release": "^23.0.6"
   }
 }
