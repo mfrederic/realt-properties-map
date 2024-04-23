@@ -59,7 +59,9 @@
     "french": "Français",
     "english": "Anglais",
     "markersOpacity": "Opacité des marqueurs",
+    "markersClustering": "Regroupement des marqueurs",
     "mapMarkersOpacity": "Opacité des marqueurs sur la carte",
+    "mapMarkersClustering": "Regroupement des marqueurs sur la carte",
     "generalOptions": {
       "title": "Options Générales",
       "displayStartTooltip": "Afficher l'info-bulle de démarrage"
@@ -104,6 +106,7 @@
     "madeBy": "Fait avec ❤️ par",
     "baseOn": "Basé sur le travail de",
     "startTooltip": "Ajouter vos portefeuilles pour commencer",
-    "reportIssue": "Signaler un problème"
+    "reportIssue": "Signaler un problème",
+    "default": "Défaut"
   }
 }

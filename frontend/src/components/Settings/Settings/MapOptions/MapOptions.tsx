@@ -7,6 +7,7 @@ import { setDifferentiateOwned, setDisplayAll, setDisplayGnosis, setDisplayRmm }
 import { SettingsPanelSection } from "../../SettingsPanelSection";
 import { selectWalletAddresses } from "../../../../store/settings/settingsSelector";
 import { MapMarkerOpacity } from "./MapMarkerOpacity";
+import { MapMarkerClustering } from "./MapMarkerClustering";
 
 export function MapOptions() {
   const { t } = useTranslation('common', { keyPrefix: 'mapOptions' });
@@ -65,6 +66,7 @@ export function MapOptions() {
         disabled={walletAddresses.length === 0}
         onChange={(e) => onDifferentiateOwned(e)} />
       <MapMarkerOpacity />
+      <MapMarkerClustering />
     </SettingsPanelSection>
   )
 }
