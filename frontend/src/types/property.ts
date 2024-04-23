@@ -4,6 +4,7 @@ import { RealToken } from "./realtProperty";
 export interface Property extends RealToken {
   icon: string;
   address: string;
+  caseSensitiveAddress: string;
   iconColorClass: string;
   ownedAmount: number;
   ownerWallets: string[];
