@@ -36,3 +36,17 @@ jobs:
         context: "{{defaultContext}}:frontend"
         tags: ${{ secrets.REPOSITORY }}:frontend-latest,${{ secrets.REPOSITORY }}:frontend-${{ steps.json.outputs.value }}
         labels: ${{ secrets.REPOSITORY }}:frontend-latest,${{ secrets.REPOSITORY }}:frontend-${{ steps.json.outputs.value }}
+
+  deploy-frontend:
+    needs: build-frontend
+    runs-on: ubuntu-latest
+    steps:
+    - name: Execute commands over SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          docker pull ${{ secrets.REPOSITORY }}:frontend-latest
+          docker service update ${{ secrets.REPOSITORY }}_frontend --force

@@ -36,3 +36,17 @@ jobs:
         context: "{{defaultContext}}:backend"
         tags: ${{ secrets.REPOSITORY }}:backend-latest,${{ secrets.REPOSITORY }}:backend-${{ steps.json.outputs.value }}
         labels: ${{ secrets.REPOSITORY }}:backend-latest,${{ secrets.REPOSITORY }}:backend-${{ steps.json.outputs.value }}
+
+  deploy-backend:
+    needs: build-backend
+    runs-on: ubuntu-latest
+    steps:
+    - name: Execute commands over SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          docker pull ${{ secrets.REPOSITORY }}:backend-latest
+          docker service update ${{ secrets.REPOSITORY }}_backend --force
