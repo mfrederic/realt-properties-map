@@ -4,8 +4,8 @@ import { NextFunction, Request, Response } from "express";
 
 const PropertiesCacheKey = 'properties'
 
-// TTL is in seconds
-const cachedTime = 60 * 60 * 12 // 24 hours
+// TTL is in seconds, 1 hour
+const cachedTime = 60 * 60
 
 export async function get(req: Request, res: Response, next: NextFunction): Promise<Response<any, Record<string, any>>> {
   try {
