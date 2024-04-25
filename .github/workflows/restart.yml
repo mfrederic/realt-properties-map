@@ -1,0 +1,29 @@
+name: Restart service
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        description: 'Service to restart: frontend, backend, or both'
+        required: true
+        default: 'both'
+        validation:
+          pattern: '^(frontend|backend|both)$'
+
+jobs:
+  restart:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Execute commands over SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        debug: true
+        script: |
+          if [ "${{ github.event.inputs.service }}" = "frontend" ] || [ "${{ github.event.inputs.service }}" = "both" ]; then
+            docker service update ${{ secrets.REPOSITORY }}_frontend --force
+          fi
+          if [ "${{ github.event.inputs.service }}" = "backend" ] || [ "${{ github.event.inputs.service }}" = "both" ]; then
+            docker service update ${{ secrets.REPOSITORY }}_backend --force
+          fi

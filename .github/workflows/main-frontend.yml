@@ -49,4 +49,17 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           docker pull ${{ secrets.REPOSITORY }}:frontend-latest
+  
+  restart-frontend:
+    needs: deploy-frontend
+    runs-on: ubuntu-latest
+    steps:
+    - name: Execute commands over SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        debug: true
+        script: |
           docker service update ${{ secrets.REPOSITORY }}_frontend --force
