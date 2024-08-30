@@ -1,9 +1,10 @@
 import { GnosisToken, getGnosisTokens } from "./gnosis";
-import { RmmToken, getRmmTokens } from "./rmm";
+import { RmmToken } from "./rmm";
 import { Property } from "../types/property";
 import { mapPropertiesList } from "./realtokens";
 import { RealToken } from "../types/realtProperty";
 import { Wallet } from "../types/wallet";
+import { getEthTokens } from "./eth";
 
 export function getOwnedProperties(
   realtProperties: Array<RealToken>,
@@ -38,22 +39,25 @@ export function getOwnedProperties(
 }
 
 export async function getOwnedTokens(wallets: string[]) {
-  const [rmm, gnosis] = await Promise.all([
-    getRmmTokens(wallets),
+  const [gnosis, eth] = await Promise.all([
+    // getRmmTokens(wallets),
     getGnosisTokens(wallets),
+    getEthTokens(wallets),
   ]);
 
-  return [...rmm, ...gnosis].reduce((acc, token) => {
+  return [...gnosis, ...eth].reduce((acc, token) => {
     const wallet = acc.get(token.wallet.toLowerCase());
     if (wallet) {
-      if ('rmm' in token) {
+      /* if ('rmm' in token) {
         wallet[0].push(token);
       } else {
         wallet[1].push(token);
-      }
+      } */
+      wallet[1].push(token);
     } else {
       acc.set(token.wallet.toLowerCase(), [
-        'rmm' in token ? [token] : [],
+        // 'rmm' in token ? [token] : [],
+        [],
         'gnosis' in token ? [token] : [],
       ]);
     }

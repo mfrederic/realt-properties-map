@@ -1,6 +1,6 @@
 import { RealTokenGQL } from "./graphql/gnosis.graphql";
 import { RealTokenQuery, RealTokenQueryVariables } from "../gql/gnosis/graphql";
-import { GnosisClient } from "./apollo.client";
+import { EthClient } from "./apollo.client";
 
 export interface GnosisToken {
   wallet: string;
@@ -9,21 +9,21 @@ export interface GnosisToken {
   gnosis: 'gnosis';
 }
 
-export async function getGnosisTokens(walletAddressList: string[]): Promise<GnosisToken[]> {
+export async function getEthTokens(walletAddressList: string[]): Promise<GnosisToken[]> {
   if (walletAddressList.length === 0) {
     return [];
   }
 
   // check if offline
   if (!navigator.onLine) {
-    const data = await GnosisClient.readQuery<RealTokenQuery>({
+    const data = await EthClient.readQuery<RealTokenQuery>({
       query: RealTokenGQL,
       variables: { addressList: walletAddressList }
     });
     return data ? mapData(data) : [];
   }
   
-  const response = await GnosisClient.query<RealTokenQuery, RealTokenQueryVariables>({
+  const response = await EthClient.query<RealTokenQuery, RealTokenQueryVariables>({
     query: RealTokenGQL,
     variables: { addressList: walletAddressList }
   });
