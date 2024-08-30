@@ -5,6 +5,7 @@ import { selectedLanguage } from "../../../store/settings/settingsSelector";
 import { setLanguage } from "../../../store/settings/settingsReducer";
 import { useTranslation } from "react-i18next";
 import { Language } from "../../../types/language";
+import { analyticsEvent } from "../../../services/analytics";
 
 export function LanguageSelect() {
   const { i18n, t } = useTranslation('common', { keyPrefix: 'settings' });
@@ -15,6 +16,11 @@ export function LanguageSelect() {
     if (i18n.language === lang) {
       return;
     }
+    analyticsEvent({
+      category: 'Settings',
+      action: 'Set Language',
+      label: lang,
+    });
     dispatch(setLanguage(lang));
     i18n.changeLanguage(lang);
   }

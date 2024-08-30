@@ -8,6 +8,7 @@ import { SettingsPanelSection } from "../../SettingsPanelSection";
 import { selectWalletAddresses } from "../../../../store/settings/settingsSelector";
 import { MapMarkerOpacity } from "./MapMarkerOpacity";
 import { MapMarkerClustering } from "./MapMarkerClustering";
+import { analyticsEvent } from "../../../../services/analytics";
 
 export function MapOptions() {
   const { t } = useTranslation('common', { keyPrefix: 'mapOptions' });
@@ -24,18 +25,38 @@ export function MapOptions() {
   }, []);
 
   function onDisplayRmm(toggle: boolean) {
+    analyticsEvent({
+      category: 'Settings',
+      action: 'Display RMM',
+      label: toggle ? 'On' : 'Off',
+    });
     dispatch(setDisplayRmm(toggle));
   }
 
   function onDisplayGnosis(toggle: boolean) {
+    analyticsEvent({
+      category: 'Settings',
+      action: 'Display Gnosis',
+      label: toggle ? 'On' : 'Off',
+    });
     dispatch(setDisplayGnosis(toggle));
   }
 
   function onDisplayAll(toggle: boolean) {
+    analyticsEvent({
+      category: 'Settings',
+      action: 'Display All',
+      label: toggle ? 'On' : 'Off',
+    });
     dispatch(setDisplayAll(toggle));
   }
 
   function onDifferentiateOwned(toggle: boolean) {
+    analyticsEvent({
+      category: 'Settings',
+      action: 'Differentiate Owned',
+      label: toggle ? 'On' : 'Off',
+    });
     dispatch(setDifferentiateOwned(toggle));
   }
 

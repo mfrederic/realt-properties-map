@@ -5,6 +5,7 @@ import { Currency } from "../../../types/currency";
 import { selectedCurrency } from "../../../store/settings/settingsSelector";
 import { setCurrency } from "../../../store/settings/settingsReducer";
 import { useTranslation } from "react-i18next";
+import { analyticsEvent } from "../../../services/analytics";
 
 export function CurrencySelect() {
   const { t } = useTranslation('common', { keyPrefix: 'settings' });
@@ -12,6 +13,11 @@ export function CurrencySelect() {
   const userCurrency = useAppSelector(selectedCurrency);
 
   function setUserCurrency(currency: Currency) {
+    analyticsEvent({
+      category: 'Settings',
+      action: 'Set Currency',
+      label: currency,
+    });
     dispatch(setCurrency(currency));
   }
 

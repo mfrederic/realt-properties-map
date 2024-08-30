@@ -9,6 +9,7 @@ declare global {
       REACT_APP_REALT_THEGRAPH_GNOSIS: string;
       REACT_APP_REALT_THEGRAPH_RMM: string;
       REACT_APP_REALT_THEGRAPH_ETH: string;
+      REACT_APP_GA_TRACKING_ID: string;
     }
   }
 }
@@ -28,6 +29,7 @@ if (process.env.NODE_ENV === 'production') {
       'REACT_APP_REALT_THEGRAPH_API_KEY',
       'REACT_APP_REALT_THEGRAPH_GNOSIS',
       'REACT_APP_REALT_THEGRAPH_RMM',
+      'REACT_APP_REALT_THEGRAPH_ETH',
     ];
     if (mandatoryKeys.some((key) => Env[key] === undefined)) {
       throw new Error('Missing mandatory environment variables');

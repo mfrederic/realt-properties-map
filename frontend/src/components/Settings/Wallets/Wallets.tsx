@@ -9,6 +9,7 @@ import { Maybe } from "../../../types/global";
 import { selectWalletAddresses } from "../../../store/settings/settingsSelector";
 import { addAddress, removeAddress, updateAddress } from "../../../store/settings/settingsReducer";
 import { Wallet, validateWallet } from "./Wallet";
+import { analyticsEvent } from "../../../services/analytics";
 
 export function Wallets() {
   const { t } = useTranslation('common');
@@ -17,6 +18,10 @@ export function Wallets() {
   const [deleteState, setDeleteState] = useState<Maybe<string>>(null);
 
   function onSave(address: string, oldAddress?: string) {
+    analyticsEvent({
+      category: 'Wallets',
+      action: 'Save Wallet',
+    });
     if (!validateWallet(address)) {
       return;
     }
@@ -41,6 +46,10 @@ export function Wallets() {
     if (!address) {
       return;
     }
+    analyticsEvent({
+      category: 'Wallets',
+      action: 'Delete Wallet',
+    });
     setDeleteState(null);
     dispatch(removeAddress(address));
     if (wallets.length === 1) {

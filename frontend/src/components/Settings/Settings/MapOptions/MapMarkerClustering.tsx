@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../../hooks/useInitStore";
 import { setMarkerClustering } from "../../../../store/mapOptions/mapOptionsReducer";
 import { selectMarkerClustering } from "../../../../store/mapOptions/mapOptionsSelector";
 import { useTranslation } from "react-i18next";
+import { analyticsEvent } from "../../../../services/analytics";
 
 export function MapMarkerClustering() {
   const { t } = useTranslation('common');
@@ -11,6 +12,11 @@ export function MapMarkerClustering() {
   const markerClustering = useAppSelector(selectMarkerClustering);
 
   function onClusteringChange(value: number) {
+    analyticsEvent({
+      category: 'Settings',
+      action: 'Set Marker Clustering',
+      value,
+    });
     dispatch(setMarkerClustering(value));
   }
 

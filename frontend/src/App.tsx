@@ -8,6 +8,9 @@ import { MantineProviders } from './providers/MantineProvider';
 import { HotkeysProvider } from './providers/HotkeysProvider';
 import InitStoreProvider from './providers/InitStoreProvider';
 import { QueryProvider } from './providers/QueryProvider';
+import { initAnalytics } from './services/analytics';
+
+initAnalytics();
 
 function App() {
   return (

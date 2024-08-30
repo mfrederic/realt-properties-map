@@ -10,6 +10,7 @@ import { setSelected } from '../../store/marker/markerReducer';
 import { setLatLng, setSelectedProperty, setZoom } from '../../store/urlQuery/urlQuery.reducer';
 import { selectedProperty } from '../../store/urlQuery/urlQuery.selector';
 import { Maybe } from '../../types/global';
+import { analyticsEvent } from '../../services/analytics';
 
 export const OWNED_SELECTOR = '[data-marker-owned]';
 export const CSSCLASSES = {
@@ -130,6 +131,11 @@ export function MapMarkers({
   const selectedUrlParam = useAppSelector(selectedProperty);
 
   function onMarkerClicked(event: LeafletMouseEvent, property: Property) {
+    analyticsEvent({
+      action: 'marker_clicked',
+      category: 'map',
+      label: property.address,
+    })
     const currentZoom = map.getZoom();
     map.setView({
       lat: event.latlng.lat,

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../../hooks/useInitStore";
 import { setMarkerOpacity } from "../../../../store/mapOptions/mapOptionsReducer";
 import { selectMarkerOpacity } from "../../../../store/mapOptions/mapOptionsSelector";
 import { useTranslation } from "react-i18next";
+import { analyticsEvent } from "../../../../services/analytics";
 
 export function MapMarkerOpacity() {
   const { t } = useTranslation('common');
@@ -11,6 +12,11 @@ export function MapMarkerOpacity() {
   const markerOpacity = useAppSelector(selectMarkerOpacity);
 
   function onOpacityChange(value: number) {
+    analyticsEvent({
+      category: 'Settings',
+      action: 'Set Marker Opacity',
+      value,
+    });
     dispatch(setMarkerOpacity(value));
   }
 
