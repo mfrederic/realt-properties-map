@@ -61,4 +61,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          docker service update ${{ secrets.REPOSITORY }}_backend --force
+          docker service update ${{ secrets.BASE_SERVICE_NAME }}_backend --force

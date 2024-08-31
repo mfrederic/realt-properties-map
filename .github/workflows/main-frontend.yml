@@ -62,4 +62,4 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         debug: true
         script: |
-          docker service update ${{ secrets.REPOSITORY }}_frontend --force
+          docker service update ${{ secrets.BASE_SERVICE_NAME }}_frontend --force
