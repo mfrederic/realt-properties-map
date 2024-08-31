@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import MapIcon from '@mui/icons-material/Map';
+import EngineeringIcon from '@mui/icons-material/Engineering';
 import { useAppDispatch, useAppSelector } from "../../../../hooks/useInitStore";
 import { Option } from "../Option";
 import { setDifferentiateOwned, setDisplayAll, setDisplayGnosis, setDisplayRmm } from "../../../../store/mapOptions/mapOptionsReducer";
@@ -9,10 +10,13 @@ import { selectWalletAddresses } from "../../../../store/settings/settingsSelect
 import { MapMarkerOpacity } from "./MapMarkerOpacity";
 import { MapMarkerClustering } from "./MapMarkerClustering";
 import { analyticsEvent } from "../../../../services/analytics";
+import { CheckboxProps } from "@mantine/core";
 
 export function MapOptions() {
   const { t } = useTranslation('common', { keyPrefix: 'mapOptions' });
   const dispatch = useAppDispatch();
+
+  const rmmDisabled = true;
 
   const mapOptions = useAppSelector((state) => state.mapOptions);
   const walletAddresses = useAppSelector(selectWalletAddresses);
@@ -25,6 +29,9 @@ export function MapOptions() {
   }, []);
 
   function onDisplayRmm(toggle: boolean) {
+    if (rmmDisabled) {
+      return;
+    }
     analyticsEvent({
       category: 'Settings',
       action: 'Display RMM',
@@ -60,13 +67,16 @@ export function MapOptions() {
     dispatch(setDifferentiateOwned(toggle));
   }
 
+  const ExpectedFeature: CheckboxProps['icon'] = ({ ...props }) => <EngineeringIcon {...props} />;
+
   return (
     <SettingsPanelSection icon={<MapIcon className="inline-block mr-2" />} label={t('mapOptions')}>
       <Option
         id="rmm"
         label={t('displayRmm')}
-        checked={mapOptions.displayRmm}
-        disabled={walletAddresses.length === 0}
+        icon={ExpectedFeature}
+        checked={mapOptions.displayRmm || rmmDisabled}
+        disabled={walletAddresses.length === 0 || rmmDisabled}
         onChange={(e) => onDisplayRmm(e)} />
       <Option
         id="gnosis"

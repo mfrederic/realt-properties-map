@@ -1,15 +1,17 @@
-import { Checkbox, Grid, Tooltip } from "@mantine/core";
+import { Checkbox, CheckboxProps, Grid, Tooltip } from "@mantine/core";
 
 export function Option({
   id,
   label,
   checked,
+  icon,
   disabled = false,
   onChange,
 }: {
   id: string,
   label: string,
   checked: boolean,
+  icon?: CheckboxProps['icon'],
   disabled?: boolean,
   onChange: (event: boolean) => void,
 }) {
@@ -23,6 +25,7 @@ export function Option({
             checked={checked}
             disabled={disabled}
             onChange={() => onChange(!checked)}
+            icon={icon}
             id={id}
             name={id}
           />
