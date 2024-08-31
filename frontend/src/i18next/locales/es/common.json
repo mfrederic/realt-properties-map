@@ -1,0 +1,113 @@
+{
+  "propertyPanel": {
+    "propertyType": "Tipo de propiedad",
+    "ownedAmount": "Cantidad poseída",
+    "token": "Token",
+    "tokenAmount": "Cantidad de tokens",
+    "yield": "Rendimiento",
+    "weeklyRent": "Renta semanal",
+    "yearlyRent": "Renta anual",
+    "rentedUnit": "Unidad alquilada",
+    "initialLaunchDate": "Fecha de lanzamiento inicial",
+    "rentStart": "Inicio de la renta",
+    "rentalType": "Tipo de alquiler",
+    "assetPrice": "Precio del activo",
+    "notOwned": "No poseído"
+  },
+  "rentalType": {
+    "short_term": "Corto plazo",
+    "long_term": "Largo plazo"
+  },
+  "propertyType": {
+    "1": "Unifamiliar",
+    "2": "Multifamiliar",
+    "3": "Dúplex",
+    "4": "Condominio",
+    "6": "Uso mixto",
+    "8": "Cuádruplex",
+    "9": "Comercial",
+    "10": "Portafolio SFR",
+    "11": "Portafolio MFR",
+    "unknown": "Desconocido"
+  },
+  "title": {
+    "viewOnRealtoken": "Ver en el panel de Realtoken",
+    "viewOnRealT": "Ver en el mercado de RealT"
+  },
+  "actions": {
+    "close": "Cerrar",
+    "closePanel": "Cerrar panel",
+    "add": "Añadir",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "cancel": "Cancelar",
+    "copyUrl": "Copiar URL",
+    "openWalletsPanel": "Abrir panel de carteras",
+    "openSettingsPanel": "Abrir panel de configuración"
+  },
+  "settings": {
+    "language": "Idioma",
+    "currency": "Moneda",
+    "settings": "Configuraciones",
+    "walletSettings": "Configuración de carteras",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "usd": "USD ($)",
+    "eur": "Euro (€)",
+    "chf": "Franco suizo (CHF)",
+    "refreshData": "Actualizar datos",
+    "french": "Francés",
+    "english": "Inglés",
+    "spanish": "Español",
+    "markersOpacity": "Opacidad de marcadores",
+    "markersClustering": "Agrupación de marcadores",
+    "mapMarkersOpacity": "Opacidad de marcadores en el mapa",
+    "mapClustersOpacity": "Opacidad de agrupaciones en el mapa",
+    "generalOptions": {
+      "title": "Opciones generales",
+      "displayStartTooltip": "Mostrar consejo inicial"
+    }
+  },
+  "wallet": {
+    "wallets": "Carteras",
+    "wallet": "Cartera",
+    "addWallet": "Añadir cartera",
+    "invalidAddress": "Dirección de cartera inválida",
+    "deleteDialog": {
+      "title": "¡Estás a punto de eliminar una dirección de cartera!",
+      "message": "¿Estás seguro?"
+    }
+  },
+  "mapOptions": {
+    "mapOptions": "Opciones de mapa",
+    "displayRmm": "Mostrar RMM",
+    "displayGnosis": "Mostrar Gnosis/ETH",
+    "displayAll": "Incluir no poseídos",
+    "differentiateOwned": "Diferenciar marcadores poseídos"
+  },
+  "notifications": {
+    "pleaseWait": "Por favor espera...",
+    "tryAgainLater": "Por favor inténtalo más tarde",
+    "realtokens": {
+      "loadingTitle": "Cargando RealTokens",
+      "successLoadingTitle": "RealTokens cargados",
+      "successLoadingMessage": "RealTokens cargados con éxito",
+      "errorLoadingTitle": "Error al cargar RealTokens"
+    },
+    "wallets": {
+      "loadingTitle": "Cargando carteras",
+      "successLoadingTitle": "Carteras cargadas",
+      "successLoadingMessage": "Carteras cargadas con éxito",
+      "errorLoadingTitle": "Error al cargar carteras"
+    }
+  },
+  "extra": {
+    "disclaimer": "No es un sitio web oficial de RealT",
+    "info": "No se guarda ni envía información a ningún servidor. La aplicación es completamente del lado del cliente y los datos se almacenan en el almacenamiento local de tu navegador.",
+    "madeBy": "Hecho con ❤️ por",
+    "baseOn": "Basado en el trabajo de",
+    "startTooltip": "Añade tus carteras para comenzar",
+    "reportIssue": "Reportar un problema",
+    "default": "Por defecto"
+  }
+}

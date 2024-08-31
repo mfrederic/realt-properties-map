@@ -36,6 +36,7 @@ export function LanguageSelect() {
       data={[
         { value: Language.EN, label: t('english') },
         { value: Language.FR, label: t('french') },
+        { value: Language.ES, label: t('spanish') },
       ]}
       leftSection={
         <LanguageIcon />

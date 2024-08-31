@@ -58,6 +58,7 @@
     "refreshData": "Rafraîchir les données",
     "french": "Français",
     "english": "Anglais",
+    "spanish": "Espagnol",
     "markersOpacity": "Opacité des marqueurs",
     "markersClustering": "Regroupement des marqueurs",
     "mapMarkersOpacity": "Opacité des marqueurs sur la carte",
@@ -80,7 +81,7 @@
   "mapOptions": {
     "mapOptions": "Options de carte",
     "displayRmm": "Afficher RMM",
-    "displayGnosis": "Afficher Gnosis",
+    "displayGnosis": "Afficher Gnosis/ETH",
     "displayAll": "Inclure non possédé",
     "differentiateOwned": "Différencier les marqueurs possédés"
   },
