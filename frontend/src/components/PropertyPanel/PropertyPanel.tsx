@@ -29,9 +29,9 @@ export function PropertyPanel() {
   return (
     <>
       {
-        property &&
-        <Drawer.Root opened={true} onClose={onClose} position="left">
-          <Drawer.Content>
+  property &&
+  <Drawer.Root opened={true} onClose={onClose} position="left">
+    <Drawer.Content>
       <Drawer.Header className="!p-0 !mb-4">
         <Grid>
           <PropertyCarousel imageLink={property.imageLink} fullName={property.fullName} />
@@ -57,8 +57,8 @@ export function PropertyPanel() {
       <Drawer.Body className="!p-0 mb-20 sm:mb-0">
         <PropertyPanelContent property={property} />
       </Drawer.Body>
-          </Drawer.Content>
-        </Drawer.Root>
+    </Drawer.Content>
+  </Drawer.Root>
       }
     </>
   )

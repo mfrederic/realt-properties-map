@@ -9,8 +9,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks/useInitStore';
 import { setSelected } from '../../store/marker/markerReducer';
 import { setLatLng, setSelectedProperty, setZoom } from '../../store/urlQuery/urlQuery.reducer';
 import { selectedProperty } from '../../store/urlQuery/urlQuery.selector';
+import { selectedMarker } from '../../store/marker/markerSelector';
 import { Maybe } from '../../types/global';
 import { analyticsEvent } from '../../services/analytics';
+import { filterProperties } from '../../utils/properties';
 
 export const OWNED_SELECTOR = '[data-marker-owned]';
 export const CSSCLASSES = {
@@ -45,32 +47,6 @@ export function generateIcon(
     iconSize: [50, 50],
     iconAnchor: [25, 50],
   });
-}
-
-function filterProperties(
-  properties: Property[],
-  displayAll: boolean,
-  displayGnosis: boolean,
-  displayRmm: boolean,
-  selected: string | null,
-) {
-  return properties
-    .filter((property) => {
-      if (selected && property.address === selected) {
-        return true;
-      }
-      let toInclude = !property.isOld && property.productType !== 'equity_token';
-      if (!displayAll && property.ownedAmount <= 0) {
-        toInclude = false;
-      }
-      if (!displayGnosis && property.source === 'gnosis') {
-        toInclude = false;
-      }
-      if (!displayRmm && property.source === 'rmm') {
-        toInclude = false;
-      }
-      return toInclude;
-    })
 }
 
 function createMarker(
@@ -111,7 +87,7 @@ const zoomMapOffsets = {
 };
 
 let markerCluster: MarkerClusterGroup;
-let markers: Array<Marker> = [];
+let markers: Map<string, Marker> = new Map();
 export function MapMarkers({
   properties,
 }: {
@@ -129,24 +105,9 @@ export function MapMarkers({
     markerClustering,
   } = useAppSelector((state) => state.mapOptions);
   const selectedUrlParam = useAppSelector(selectedProperty);
+  const property = useAppSelector(selectedMarker);
 
   function onMarkerClicked(event: LeafletMouseEvent, property: Property) {
-    analyticsEvent({
-      action: 'marker_clicked',
-      category: 'map',
-      label: property.address,
-    })
-    const currentZoom = map.getZoom();
-    map.setView({
-      lat: event.latlng.lat,
-      lng: event.latlng.lng - zoomMapOffsets[currentZoom as keyof typeof zoomMapOffsets],
-    });
-    document
-      .querySelectorAll('.marker-svg.selected')
-      .forEach((el) => el.classList.remove('selected'));
-    event.sourceTarget._icon
-      .querySelector('svg')?.classList
-      .add('selected');
     dispatch(setSelected({
       property,
       latlng: {
@@ -157,6 +118,29 @@ export function MapMarkers({
     dispatch(setSelectedProperty(property.address));
   }
 
+  useEffect(() => {
+    if (!property) {
+      return;
+    }
+    analyticsEvent({
+      action: 'marker_clicked',
+      category: 'map',
+      label: property.address,
+    })
+    const currentZoom = map.getZoom();
+    map.setView({
+      lat: property.coordinate.lat,
+      lng: property.coordinate.lng - zoomMapOffsets[currentZoom as keyof typeof zoomMapOffsets],
+    });
+    markers.get(property.address)
+      ?.getElement()
+      ?.querySelector('svg')?.classList
+      .add('selected');
+    document
+      .querySelectorAll('.marker-svg.selected')
+      .forEach((el) => el.classList.remove('selected'));
+  }, [property]);
+
   function clearMap() {
     if (!markerCluster) {
       return;
@@ -164,7 +148,7 @@ export function MapMarkers({
     markers.forEach((marker) => {
       marker.clearAllEventListeners();
     });
-    markers = [];
+    markers.clear();
 
     markerCluster.clearAllEventListeners();
     markerCluster.clearLayers();
@@ -192,7 +176,7 @@ export function MapMarkers({
       .forEach((property) => {
         const marker = createMarker(property, markerOpacity, differentiateOwned, selectedUrlParam, t)
           .addEventListener('click', (event) => onMarkerClicked(event, property));
-        markers.push(marker);
+        markers.set(property.address, marker);
         markerCluster.addLayer(marker);
       });
     map.addLayer(markerCluster);

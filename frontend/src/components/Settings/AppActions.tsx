@@ -11,6 +11,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import CheckIcon from '@mui/icons-material/Check';
 import { useCopyUrl } from '../../hooks/useCopyUrl';
 import { useTranslation } from 'react-i18next';
+import { SearchBar } from './SearchBar';
 
 export function AppActions() {
   const { t } = useTranslation('common');
@@ -44,6 +45,7 @@ export function AppActions() {
         !mapOptionsOpened && !walletsOpened &&
         <AffixBtn>
           <Flex align="end" className="ml-2 sm:ml-0">
+            <SearchBar />
             <AppActionsButton opened={false} open={onCopyUrl} label={t('actions.copyUrl')} color={copied ? 'teal' : ''}>
               {
                 !copied
