@@ -64,6 +64,8 @@ function setIcon(propertyType: number): string {
       return 'holiday_village';
     case 11: // MFR Portfolio
       return 'domain_add';
+    case 12: // Loan
+      return 'bungalow';
     default: 
       return 'stack';
   }

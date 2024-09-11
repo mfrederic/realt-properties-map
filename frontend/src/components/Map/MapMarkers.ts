@@ -58,8 +58,8 @@ function createMarker(
 ): Marker {
   return marker([property.coordinate.lat, property.coordinate.lng], {
     icon: generateIcon(property, differentiateOwned, markerOpacity, selected === property.address),
-    alt: property.propertyTypeName,
-    title: t('propertyType.' + property.propertyTypeName),
+    alt: t('propertyType.' + property.propertyType),
+    title: t('propertyType.' + property.propertyType),
   });
 }
 

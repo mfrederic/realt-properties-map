@@ -47,9 +47,7 @@ export function PropertyPanelContent({
       ownedOnly: false,
       entry: {
         label: 'propertyPanel.propertyType',
-        value: property.propertyTypeName
-          ? t(`propertyType.${property.propertyType}`)
-          : t('propertyType.unknown'),
+        value: t(`propertyType.${property.propertyType}`),
       },
     },
     {

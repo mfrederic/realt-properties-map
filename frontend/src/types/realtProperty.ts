@@ -82,7 +82,7 @@ export interface RealToken {
   marketplaceLink: string;
   imageLink: Array<string>;
   propertyType: number;
-  propertyTypeName: string;
+  propertyTypeName?: string;
   squareFeet: number;
   lotSize: number;
   bedroomBath: string;
