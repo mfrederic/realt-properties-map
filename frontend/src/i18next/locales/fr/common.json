@@ -16,7 +16,8 @@
   },
   "rentalType": {
     "short_term": "Court terme",
-    "long_term": "Long terme"
+    "long_term": "Long terme",
+    "pre_construction": "Pré-construction"
   },
   "propertyType": {
     "1": "Individuel",

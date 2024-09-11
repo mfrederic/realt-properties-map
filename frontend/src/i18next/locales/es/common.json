@@ -16,7 +16,8 @@
   },
   "rentalType": {
     "short_term": "Corto plazo",
-    "long_term": "Largo plazo"
+    "long_term": "Largo plazo",
+    "pre_construction": "Pre-construcción"
   },
   "propertyType": {
     "1": "Unifamiliar",

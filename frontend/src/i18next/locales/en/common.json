@@ -16,7 +16,8 @@
   },
   "rentalType": {
     "short_term": "Short term",
-    "long_term": "Long term"
+    "long_term": "Long term",
+    "pre_construction": "Pre-construction"
   },
   "propertyType": {
     "1": "Single Family",
