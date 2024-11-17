@@ -14,19 +14,20 @@ export async function getRmmTokens(walletAddressList: string[]): Promise<RmmToke
     return [];
   }
   
-  const result = await RmmClient.query<RmmQuery, RmmQueryVariables>({
+  const { data, errors } = await RmmClient.query<RmmQuery, RmmQueryVariables>({
     query: RmmGQL,
     variables: {
       addressList: walletAddressList
-    }
+    },
+    fetchPolicy: 'cache-first',
   });
 
-  if (result.errors || result.error) {
+  if (errors) {
     console.error("Error retrieving RMM v3 balance");
     return [];
   }
 
-  return result.data.users
+  return data.users
     .flatMap((address) =>
       address.balances.map<RmmToken>((item) => ({
         ...item.token,

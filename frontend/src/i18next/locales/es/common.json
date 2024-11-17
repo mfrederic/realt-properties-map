@@ -58,6 +58,8 @@
     "eur": "Euro (€)",
     "chf": "Franco suizo (CHF)",
     "refreshData": "Actualizar datos",
+    "refreshDataTooltip": "Limpia el caché y recarga la página",
+    "cachedFrom": "Cache desde",
     "french": "Francés",
     "english": "Inglés",
     "spanish": "Español",

@@ -23,17 +23,19 @@ export async function getGnosisTokens(walletAddressList: string[]): Promise<Gnos
     return data ? mapData(data) : [];
   }
   
-  const response = await GnosisClient.query<RealTokenQuery, RealTokenQueryVariables>({
+
+  const { data, errors } = await GnosisClient.query<RealTokenQuery, RealTokenQueryVariables>({
     query: RealTokenGQL,
-    variables: { addressList: walletAddressList }
+    variables: { addressList: walletAddressList },
+    fetchPolicy: 'cache-first',
   });
 
-  if (response.errors || response.error) {
+  if (errors) {
     console.error("Error retrieving Gnosis balance");
     return [];
   }
 
-  return mapData(response.data);
+  return mapData(data);
 }
 
 function mapData(data: RealTokenQuery): GnosisToken[] {

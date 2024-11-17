@@ -1,6 +1,6 @@
 {
   "name": "realt-properties-map-frontend",
-  "version": "1.5.6",
+  "version": "1.5.7",
   "license": "Apache-2.0",
   "scripts": {
     "start": "PORT=3010 react-scripts start",
@@ -43,6 +43,7 @@
     "@mui/icons-material": "^6.0.2",
     "@realtoken/realt-commons": "^1.4.14",
     "@reduxjs/toolkit": "^2.2.7",
+    "apollo3-cache-persist": "^0.15.0",
     "axios": "^1.7.7",
     "axios-cache-interceptor": "^1.5.3",
     "dayjs": "^1.11.13",
