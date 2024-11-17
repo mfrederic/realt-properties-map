@@ -61,13 +61,21 @@ const cache = new InMemoryCache({
 const persistor = new CachePersistor({
   cache,
   storage: new LocalStorageWrapper(window.localStorage),
-  debug: true,
+  debug: Env.NODE_ENV === 'development',
   trigger: 'write',
   maxSize: 1048576,
 });
 
-export function getLastCacheClear() {
-  return localStorage.getItem('lastCacheClear') ? parseInt(localStorage.getItem('lastCacheClear')!) : null;
+export function getLastCacheClear(nullable = true) {
+  return localStorage.getItem('lastCacheClear')
+    ? parseInt(localStorage.getItem('lastCacheClear')!)
+    : nullable
+      ? null
+      : Date.now();
+}
+
+function setLastCacheClear() {
+  localStorage.setItem('lastCacheClear', Date.now().toString());
 }
 
 async function initializeCache() {
@@ -75,19 +83,23 @@ async function initializeCache() {
   const now = Date.now();
   
   if (lastClearTime && now - lastClearTime > CACHE_TTL) {
-    purgeCache();
-  } else {
-    await persistor.restore();
+    return purgeCache();
   }
+
+  if (!lastClearTime) {
+    setLastCacheClear();
+  }
+  return persistor.restore();
 }
 await initializeCache();
 
 export async function purgeCache() {
   if (!persistor) {
+    console.error('Persistor not initialized');
     return;
   }
   await persistor.purge();
-  localStorage.setItem('lastCacheClear', Date.now().toString());
+  setLastCacheClear();
 }
 
 export const RmmClient = new ApolloClient({

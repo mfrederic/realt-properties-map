@@ -6,7 +6,7 @@ import dayjs from "../../../utils/date";
 
 export function RefreshDataButton() {
   const { t } = useTranslation('common', { keyPrefix: 'settings' });
-  const cachedFrom = dayjs(getLastCacheClear()).format('DD/MM/YYYY HH:mm:ss');
+  const cachedFrom = dayjs(getLastCacheClear(false)).format('DD/MM/YYYY HH:mm:ss');
 
   async function refresh() {
     await purgeCache();
