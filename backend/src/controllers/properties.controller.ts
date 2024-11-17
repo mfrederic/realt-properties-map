@@ -16,7 +16,7 @@ export async function get(req: Request, res: Response, next: NextFunction): Prom
       return res.json(cached)
     }
 
-    const { data: properties } = await axios.get('https://dashboard.realtoken.community/api/properties')
+    const { data: properties } = await axios.get(`${process.env.REALT_COMMUNITY_URL}/api/properties`)
     cacheService.set(PropertiesCacheKey, properties, cachedTime)
     return res.json(properties)
   } catch (err) {

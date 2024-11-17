@@ -3,6 +3,7 @@ import { Button, Grid } from "@mantine/core";
 import { AffixBtn } from "../Common/AffixBtn";
 import { useCopyUrl } from "../../hooks/useCopyUrl";
 import { useViewportSize } from "@mantine/hooks";
+import Env from "../../utils/env";
 
 export function PropertyPanelActions({
   marketplaceLink,
@@ -45,7 +46,7 @@ export function PropertyPanelActions({
           title={t('title.viewOnRealtoken')}
           target="_blank"
           referrerPolicy="no-referrer"
-          href={"https://dashboard.realt.community/asset/" + address}>
+          href={`${Env.REACT_APP_REALT_COMMUNITY_URL}/asset/${address}`}>
           Dashboard
         </Button>
       </Grid.Col>
