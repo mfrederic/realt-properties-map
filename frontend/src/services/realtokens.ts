@@ -8,17 +8,13 @@ export async function getRealTokens(): Promise<{
   realtokens: Array<RealToken>,
 }> {
   const http = httpRequester();
-  try {
-    const response = await http.get<Array<RealToken>>(`${Env.REACT_APP_REALT_PROPERTIES_BACKEND_URL}properties`);
-    return {
-      realtokens: response.data,
-    };
-  } catch (error) {
-    return {
-      error: true,
-      realtokens: [],
-    };
+  const response = await http.get<Array<RealToken>>(`${Env.REACT_APP_REALT_PROPERTIES_BACKEND_URL}properties`);
+  if (!Array.isArray(response.data)) {
+    throw new Error('Invalid response');
   }
+  return {
+    realtokens: response.data,
+  };
 }
 
 export function mapPropertiesList(

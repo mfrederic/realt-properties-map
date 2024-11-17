@@ -28,13 +28,14 @@ export function fetchRealtokens(t: TFunction<'common', 'notifications'>) {
     })
 
     try {
-      const data = await getRealTokens();
-      dispatch(setRealtokens(data.realtokens));
+      const { realtokens } = await getRealTokens();
+      dispatch(setRealtokens(realtokens));
       showSuccess({
         title: t('realtokens.successLoadingTitle'),
         message: t('realtokens.successLoadingMessage'),
       });
     } catch (error) {
+      dispatch(setRealtokens([]));
       showError({
         title: t('realtokens.errorLoadingTitle'),
         message: t('tryAgainLater'),
