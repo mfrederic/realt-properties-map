@@ -70,6 +70,10 @@
     "generalOptions": {
       "title": "Options Générales",
       "displayStartTooltip": "Afficher l'info-bulle de démarrage"
+    },
+    "googleMaps": {
+      "title": "Google Maps",
+      "viewOnGoogleMaps": "Voir sur Google Maps"
     }
   },
   "wallet": {

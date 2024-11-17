@@ -1,17 +1,21 @@
 import { useTranslation } from "react-i18next";
-import { Button, Grid } from "@mantine/core";
+import Env from "../../utils/env";
+import { ActionIcon, Button, Grid } from "@mantine/core";
+import GoogleIcon from '@mui/icons-material/Google';
 import { AffixBtn } from "../Common/AffixBtn";
 import { useCopyUrl } from "../../hooks/useCopyUrl";
 import { useViewportSize } from "@mantine/hooks";
-import Env from "../../utils/env";
+import { Property } from "../../types/property";
 
 export function PropertyPanelActions({
   marketplaceLink,
   address,
+  coordinates,
   onClose,
 }: {
   marketplaceLink: string;
   address: string;
+  coordinates: Property['coordinates'];
   onClose: () => void;
 }) {
   const { width } = useViewportSize();
@@ -22,7 +26,7 @@ export function PropertyPanelActions({
     <Grid className="px-4">
       <Grid.Col span={{
         base: 6,
-        md: 4,
+        md: 6,
       }}>
         <Button
           variant="default"
@@ -37,7 +41,7 @@ export function PropertyPanelActions({
       </Grid.Col>
       <Grid.Col span={{
         base: 6,
-        md: 4,
+        md: 6,
       }}>
         <Button
           variant="default"
@@ -51,8 +55,24 @@ export function PropertyPanelActions({
         </Button>
       </Grid.Col>
       <Grid.Col span={{
+        base: 6,
+        md: 6,
+      }}>
+        <Button
+          variant="default"
+          fullWidth
+          component="a"
+          title={t('settings.googleMaps.viewOnGoogleMaps')}
+          target="_blank"
+          referrerPolicy="no-referrer"
+          href={`https://maps.google.com/?q=${coordinates.lat},${coordinates.lng}`}
+          leftSection={<GoogleIcon fontSize="medium" />}>
+          {t('settings.googleMaps.title')}
+        </Button>
+      </Grid.Col>
+      <Grid.Col span={{
         base: 0,
-        md: 4,
+        md: 6,
       }}>
         <AffixBtn
           defaultToPlain

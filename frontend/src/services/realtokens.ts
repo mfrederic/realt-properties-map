@@ -35,6 +35,7 @@ export function mapPropertiesList(
         ownedAmount: 0,
         source: null,
         ownerWallets: [],
+        coordinates: property.coordinate,
       });
       return accu;
     }, new Map<string, Property>());

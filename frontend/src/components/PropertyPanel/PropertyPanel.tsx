@@ -46,6 +46,7 @@ export function PropertyPanel() {
               <PropertyPanelActions
                 marketplaceLink={property.marketplaceLink}
                 address={property.caseSensitiveAddress}
+                coordinates={property.coordinates}
                 onClose={onClose} />
             </Drawer.Title>
           </Grid.Col>

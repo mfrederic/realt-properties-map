@@ -70,6 +70,10 @@
     "generalOptions": {
       "title": "General Options",
       "displayStartTooltip": "Display start tooltip"
+    },
+    "googleMaps": {
+      "title": "Google Maps",
+      "viewOnGoogleMaps": "View on Google Maps"
     }
   },
   "wallet": {

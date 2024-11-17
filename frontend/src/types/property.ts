@@ -1,5 +1,5 @@
 import { Maybe } from "./global";
-import { RealToken } from "./realtProperty";
+import { Coordinates, RealToken } from "./realtProperty";
 
 export interface Property extends RealToken {
   icon: string;
@@ -10,4 +10,5 @@ export interface Property extends RealToken {
   ownerWallets: string[];
   source: Maybe<'gnosis' | 'rmm'>;
   isOld: boolean;
+  coordinates: Coordinates;
 }
