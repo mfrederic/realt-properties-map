@@ -4,7 +4,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { validate } from 'multicoin-address-validator';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
-import { Button, Grid, TextInput } from "@mantine/core";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { ActionIcon, Button, Grid, TextInput } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 
 export function validateWallets(
@@ -40,8 +42,17 @@ export function Wallet({
   const { t } = useTranslation('common');
   const [id, setId] = useState(`wallet-${getUuid()}`);
   const [valid, setValid] = useState(validateWallet(address));
+  const [visible, setVisible] = useState(!exists);
   const [wallet, setWallet] = useState(address);
+  const [hiddenWallet, setHiddenWallet] = useState(hideWalletAddress(address));
   const originalWallet = address;
+
+  function hideWalletAddress(wallet: string) {
+    if (!wallet || wallet.length < 8) {
+      return wallet || '';
+    }
+    return `${wallet.slice(0, 4)}...${wallet.slice(-4)}`;
+  }
 
   function validate(address: string): boolean {
     if (validateWallet(address)) {
@@ -54,6 +65,7 @@ export function Wallet({
 
   function onChange(address: string) {
     setWallet(address);
+    setHiddenWallet(hideWalletAddress(address));
     validate(address);
   }
 
@@ -66,6 +78,7 @@ export function Wallet({
     if (!exists) {
       setValid(true);
       setWallet('');
+      setHiddenWallet('');
       setId(`wallet-${getUuid()}`);
     }
   }
@@ -83,9 +96,19 @@ export function Wallet({
           leftSection="xDai"
           leftSectionWidth={40}
           placeholder="0x"
-          error={!valid ? t('wallet.invalidAddress') : false}
+          error={!valid && wallet.length > 0 ? t('wallet.invalidAddress') : false}
           onChange={(e) => onChange(e.currentTarget.value)}
-          value={wallet} />
+          value={visible ? wallet : hiddenWallet}
+          rightSection={
+            exists && (
+              <ActionIcon
+                variant="subtle"
+                onClick={() => setVisible(!visible)}>
+                {visible ? <VisibilityOffIcon fontSize="small" /> : <VisibilityIcon fontSize="small" />}
+              </ActionIcon>
+            )
+          }
+        />
       </Grid.Col>
       <Grid.Col span={12}>
         <div className="flex gap-0.5 self-end">
