@@ -45,7 +45,8 @@
     "cancel": "Annuler",
     "copyUrl": "Copier URL",
     "openWalletsPanel": "Ouvrir la configuration des portefeuilles",
-    "openSettingsPanel": "Ouvrir les paramètres"
+    "openSettingsPanel": "Ouvrir les paramètres",
+    "openHelpPanel": "Aider RPM"
   },
   "settings": {
     "language": "Langue",
@@ -75,6 +76,14 @@
       "title": "Google Maps",
       "viewOnGoogleMaps": "Voir sur Google Maps"
     }
+  },
+  "help": {
+    "title": "Aider RPM",
+    "description": "RealT Property Map (RPM) est un outil pour vous aider à trouver et gérer vos propriétés RealT. Il vous permet d'ajouter des portefeuilles et de voir ses propriétés sur la carte.",
+    "github": "RPM est une outil de code open source, n'hésitez pas à contribuer au code sur ",
+    "telegram": "Si vous avez des questions ou des suggestions, n'hésitez pas à me contacter sur ",
+    "support1": "Si vous aimeriez soutenir le développement de RPM, vous pouvez faire un don au projet à l'adresse suivante ",
+    "support2": "Cela me permettra de maintenir le projet et d'ajouter de nouvelles fonctionnalités."
   },
   "wallet": {
     "wallets": "Portefeuilles",
