@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import InfoIcon from '@mui/icons-material/Info';
 import Version from "../Common/Version";
 import { Box, Button, Flex, Text } from "@mantine/core";
+import MadeBy from "../Common/MadeBy";
 
 export function SettingsPanelContent({
   className,
@@ -40,17 +41,7 @@ export function SettingsPanelContent({
           </Box>
           <Flex>
             <Version />
-            <Text className="opacity-40" size="sm">
-              {t('madeBy')} <a
-                href="https://github.com/mfrederic"
-                target="_blank"
-                rel="noreferrer">@mfrederic</a>.&nbsp;
-              {t('baseOn')}:
-              <a
-                href="https://github.com/homelabkas"
-                target="_blank"
-                rel="noreferrer">@homelabkas</a>.
-            </Text>
+            <MadeBy extra />
           </Flex>
         </Flex>
       </footer>
