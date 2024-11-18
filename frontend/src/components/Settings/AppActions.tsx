@@ -15,11 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { SearchBar } from './SearchBar';
 import HelpPanel from './Help/HelpPanel';
 
-export function AppActions({
-  display,
-}: {
-  display: boolean;
-}) {
+export function AppActions() {
   const { t } = useTranslation('common');
   const { copied, onCopyUrl } = useCopyUrl();
 
@@ -55,38 +51,33 @@ export function AppActions({
 
   return (
     <>
+      <WalletsPanel opened={walletsOpened} close={closeWallets} />
+      <MapOptionsPanel opened={mapOptionsOpened} close={closeMapOptions} />
+      <HelpPanel opened={helpOpened} close={closeHelp} />
       {
-        display &&
-        <>
-          <WalletsPanel opened={walletsOpened} close={closeWallets} />
-          <MapOptionsPanel opened={mapOptionsOpened} close={closeMapOptions} />
-          <HelpPanel opened={helpOpened} close={closeHelp} />
-          {
-          !mapOptionsOpened && !walletsOpened && !helpOpened &&
-            <AffixBtn>
-              <Flex align="end" className="ml-2 sm:ml-0">
-                <SearchBar />
-                <AppActionsButton opened={false} open={onCopyUrl} label={t('actions.copyUrl')} color={copied ? 'teal' : ''}>
-                  {
-                    !copied
-                      ? <LinkIcon fontSize="large" />
-                      : <CheckIcon fontSize="large" />
-                  }
-                </AppActionsButton>
-                <StartTooltip />
-                <AppActionsButton opened={false} open={onOpenWallets} label={t('actions.openWalletsPanel')}>
-                  <WalletIcon fontSize="large" />
-                </AppActionsButton>
-                <AppActionsButton opened={false} open={onOpenMapOptions} label={t('actions.openSettingsPanel')}>
-                  <SettingsIcon fontSize="large" />
-                </AppActionsButton>
-                <AppActionsButton opened={false} open={onOpenHelp} label={t('actions.openHelpPanel')} color="lime">
-                  <RecommendIcon fontSize="large" />
-                </AppActionsButton>
-              </Flex>
-            </AffixBtn>
-          }
-        </>
+      !mapOptionsOpened && !walletsOpened && !helpOpened &&
+        <AffixBtn>
+          <Flex align="end" className="ml-2 sm:ml-0">
+            <SearchBar />
+            <AppActionsButton opened={false} open={onCopyUrl} label={t('actions.copyUrl')} color={copied ? 'teal' : ''}>
+              {
+                !copied
+                  ? <LinkIcon fontSize="large" />
+                  : <CheckIcon fontSize="large" />
+              }
+            </AppActionsButton>
+            <StartTooltip />
+            <AppActionsButton opened={false} open={onOpenWallets} label={t('actions.openWalletsPanel')}>
+              <WalletIcon fontSize="large" />
+            </AppActionsButton>
+            <AppActionsButton opened={false} open={onOpenMapOptions} label={t('actions.openSettingsPanel')}>
+              <SettingsIcon fontSize="large" />
+            </AppActionsButton>
+            <AppActionsButton opened={false} open={onOpenHelp} label={t('actions.openHelpPanel')} color="lime">
+              <RecommendIcon fontSize="large" />
+            </AppActionsButton>
+          </Flex>
+        </AffixBtn>
       }
     </>
   )

@@ -10,11 +10,14 @@ dotEnv.config();
 
 const app = express();
 
-const CORS_ORIGIN = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [];
+const CORS_ORIGIN = (process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(',')
+  : []).map(url => new URL(url).hostname);
+
 app.use(cors({
   origin: function(origin, callback){
     if(!origin) return callback(null, true);
-    if(CORS_ORIGIN.indexOf(origin) === -1){
+    if(CORS_ORIGIN.indexOf(new URL(origin).hostname) === -1){
       var msg = 'The CORS policy for this site does not ' +
                 'allow access from the specified Origin.';
       return callback(new Error(msg), false);

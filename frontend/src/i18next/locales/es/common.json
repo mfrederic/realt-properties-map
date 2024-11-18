@@ -75,6 +75,14 @@
     "googleMaps": {
       "title": "Google Maps",
       "viewOnGoogleMaps": "Ver en Google Maps"
+    },
+    "x": {
+      "title": "X (Twitter)",
+      "share": "Compartir en X"
+    },
+    "threads": {
+      "title": "Threads",
+      "share": "Compartir en Threads"
     }
   },
   "help": {

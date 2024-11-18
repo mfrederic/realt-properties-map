@@ -25,7 +25,7 @@ function App() {
               <HotkeysProvider>
                 <SplashScreen onVisibleChange={setDisplay} />
                 <MapWrapper />
-                <AppActions display={!display} />
+                {!display && <AppActions />}
               </HotkeysProvider>
             </MantineProviders>
           </QueryProvider>
