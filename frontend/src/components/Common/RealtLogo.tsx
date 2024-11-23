@@ -1,4 +1,4 @@
-import Env from "../../utils/env";
+import logo from "../../../public/RealT_Logo.png";
 
 export function RealtLogo({
   className,
@@ -6,6 +6,6 @@ export function RealtLogo({
   className?: string;
 }) {
   return (
-    <img className={className} src={Env.PUBLIC_URL + "/RealT_Logo.png"} alt="RealT" />
+    <img className={className} src={logo} alt="RealT" />
   )
 }
