@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
 import { DivIcon, MarkerClusterGroup, marker, Marker, markerClusterGroup, LeafletMouseEvent, LeafletEvent } from 'leaflet';
@@ -13,6 +13,7 @@ import { selectedMarker } from '../../store/marker/markerSelector';
 import { Maybe } from '../../types/global';
 import { analyticsEvent } from '../../services/analytics';
 import { filterProperties } from '../../utils/properties';
+import { debounce } from '../../utils/debounce';
 
 export const OWNED_SELECTOR = '[data-marker-owned]';
 export const CSSCLASSES = {
@@ -46,20 +47,6 @@ export function generateIcon(
 </div>`,
     iconSize: [50, 50],
     iconAnchor: [25, 50],
-  });
-}
-
-function createMarker(
-  property: Property,
-  markerOpacity: number,
-  differentiateOwned: boolean,
-  selected: Maybe<string>,
-  t: TFunction<"common", undefined>,
-): Marker {
-  return marker([property.coordinate.lat, property.coordinate.lng], {
-    icon: generateIcon(property, differentiateOwned, markerOpacity, selected === property.address),
-    alt: t('propertyType.' + property.propertyType),
-    title: t('propertyType.' + property.propertyType),
   });
 }
 
@@ -107,7 +94,42 @@ export function MapMarkers({
   const selectedUrlParam = useAppSelector(selectedProperty);
   const property = useAppSelector(selectedMarker);
 
-  function onMarkerClicked(event: LeafletMouseEvent, property: Property) {
+  const memoizedGenerateIcon = useMemo(() => {
+    return (property: Property, differentiateOwned: boolean, markerOpacity: number, selected: boolean) => {
+      const owned = property.ownedAmount > 0;
+      const ownedClass = differentiateOwned && owned ? CSSCLASSES.owned : CSSCLASSES.notOwned;
+      return new DivIcon({
+        html:
+          `<div class="relative marker-icon"
+    style="opacity: ${markerOpacity};"
+    data-marker="${property.address}"
+    ${owned ? 'data-marker-owned' : ''}
+    ${property.source ? `data-marker-${property.source}` : ''}
+    ${property.ownerWallets.length ? `data-marker-wallet="${property.ownerWallets.join(' ')}"` : ''}>
+    ${pinSvg(`${property.iconColorClass}-icon ${ownedClass + (selected ? ' selected' : '')}`)}
+    <i class="text-3xl drop-shadow-sm mf-icon material-icons absolute top-0 left-[20%]">${property.icon}</i>
+  </div>`,
+        iconSize: [50, 50],
+        iconAnchor: [25, 50],
+      });
+    };
+  }, []);
+  
+  const memoizedCreateMarker = useCallback((
+    property: Property,
+    markerOpacity: number,
+    differentiateOwned: boolean,
+    selected: Maybe<string>,
+    t: TFunction<"common", undefined>,
+  ) => {
+    return marker([property.coordinate.lat, property.coordinate.lng], {
+      icon: memoizedGenerateIcon(property, differentiateOwned, markerOpacity, selected === property.address),
+      alt: t('propertyType.' + property.propertyType),
+      title: t('propertyType.' + property.propertyType),
+    });
+  }, []);
+
+  const onMarkerClicked = useCallback((event: LeafletMouseEvent, property: Property) => {
     dispatch(setSelected({
       property,
       latlng: {
@@ -116,42 +138,59 @@ export function MapMarkers({
       },
     }));
     dispatch(setSelectedProperty(property.address));
-  }
+  }, [dispatch]);
 
   useEffect(() => {
     if (!property) {
       return;
     }
-    analyticsEvent({
-      action: 'marker_clicked',
-      category: 'map',
-      label: property.address,
-    })
+
+    queueMicrotask(() => {
+      analyticsEvent({
+        action: 'marker_clicked',
+        category: 'map',
+        label: property.address,
+      });
+    });
+
+    requestAnimationFrame(() => {
+      document
+        .querySelectorAll('.marker-svg.selected')
+        .forEach((el) => el.classList.remove('selected'));
+      const markerElement = markers.get(property.address)?.getElement();
+      if (markerElement) {
+        const svg = markerElement.querySelector('svg');
+        if (svg) svg.classList.add('selected');
+      }
+    });
+
     const currentZoom = map.getZoom();
-    map.setView({
+    map.flyTo({
       lat: property.coordinate.lat,
       lng: property.coordinate.lng - zoomMapOffsets[currentZoom as keyof typeof zoomMapOffsets],
+    }, currentZoom,{
+      duration: 0.5,
+      easeLinearity: 0.25,
     });
-    markers.get(property.address)
-      ?.getElement()
-      ?.querySelector('svg')?.classList
-      .add('selected');
-    document
-      .querySelectorAll('.marker-svg.selected')
-      .forEach((el) => el.classList.remove('selected'));
   }, [property]);
 
   function clearMap() {
-    if (!markerCluster) {
+    if (!markerCluster || markers.size === 0) {
       return;
     }
-    markers.forEach((marker) => {
-      marker.clearAllEventListeners();
-    });
-    markers.clear();
+    
+    const batchSize = 100;
+    const markerArray = Array.from(markers.values());
+    
+    for (let i = 0; i < markerArray.length; i += batchSize) {
+      const batch = markerArray.slice(i, i + batchSize);
+      batch.forEach(marker => {
+        marker.clearAllEventListeners();
+        markerCluster.removeLayer(marker);
+      });
+    }
 
-    markerCluster.clearAllEventListeners();
-    markerCluster.clearLayers();
+    markers.clear();
     map.removeLayer(markerCluster);
     map.removeEventListener('zoom');
     map.removeEventListener('moveend');
@@ -165,27 +204,53 @@ export function MapMarkers({
       maxClusterRadius: 100,
       zoomToBoundsOnClick: true,
       spiderfyOnMaxZoom: false,
+      removeOutsideVisibleBounds: true,
+      animate: false,
+      chunkInterval: 100,
+      chunkDelay: 50,
+      singleMarkerMode: false,
     });
   }
+
+  const debouncedZoomHandler = debounce((event: LeafletEvent) => {
+    dispatch(setZoom(event.target.getZoom()));
+  }, 300);
+
+  const debouncedMoveHandler = debounce((event: LeafletEvent) => {
+    dispatch(setLatLng([event.target.getCenter().lat, event.target.getCenter().lng]));
+  }, 300);
 
   useEffect(() => {
     clearMap();
     markerCluster = getCleanMarkerCluster(markerClustering);
 
-    filterProperties(properties, displayAll, displayGnosis, displayRmm, selectedUrlParam)
-      .forEach((property) => {
-        const marker = createMarker(property, markerOpacity, differentiateOwned, selectedUrlParam, t)
+    const filteredProperties = filterProperties(properties, displayAll, displayGnosis, displayRmm, selectedUrlParam);
+    const chunkSize = 100;
+    let currentIndex = 0;
+
+    function processNextChunk() {
+      const chunk = filteredProperties.slice(currentIndex, currentIndex + chunkSize);
+      
+      if (chunk.length === 0) {
+        map.addLayer(markerCluster);
+        return;
+      }
+
+      chunk.forEach((property) => {
+        const marker = memoizedCreateMarker(property, markerOpacity, differentiateOwned, selectedUrlParam, t)
           .addEventListener('click', (event) => onMarkerClicked(event, property));
         markers.set(property.address, marker);
         markerCluster.addLayer(marker);
       });
-    map.addLayer(markerCluster);
-    map.addEventListener('zoom', (event: LeafletEvent) => {
-      dispatch(setZoom(event.target.getZoom()));
-    });
-    map.addEventListener('moveend', (event: LeafletEvent) => {
-      dispatch(setLatLng([event.target.getCenter().lat, event.target.getCenter().lng]));
-    });
+
+      currentIndex += chunkSize;
+      requestAnimationFrame(processNextChunk);
+    }
+
+    processNextChunk();
+    
+    map.addEventListener('zoom', debouncedZoomHandler);
+    map.addEventListener('moveend', debouncedMoveHandler);
 
     if (selectedUrlParam) {
       const selectedProperty = properties.find((property) => property.address === selectedUrlParam);
@@ -202,6 +267,8 @@ export function MapMarkers({
 
     return () => {
       clearMap();
+      debouncedZoomHandler.cancel();
+      debouncedMoveHandler.cancel();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [properties, displayAll, displayGnosis, displayRmm, differentiateOwned, markerOpacity, markerClustering]);

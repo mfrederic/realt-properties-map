@@ -19,7 +19,10 @@ export function MapEvents() {
       return;
     }
     if (!latLng && previousLatLng) {
-      map.setView(previousLatLng, map.getZoom());
+      map.flyTo(previousLatLng, map.getZoom(), {
+        duration: 0.5,
+        easeLinearity: 0.25,
+      });
       previousLatLng = undefined;
     }
   }, [latLng, map]);
