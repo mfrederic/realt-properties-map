@@ -1,6 +1,6 @@
 import { RealToken, RmmQuery, RmmQueryVariables } from "../gql/rmm/graphql";
 import { RmmGQL } from "./graphql/rmm.graphql";
-import { RmmClient } from "./apollo.client";
+import { useApolloClient } from "./apollo.client";
 
 export interface RmmToken extends Pick<RealToken, 'address' | 'name' | 'decimals'> {
   wallet: string;
@@ -14,7 +14,7 @@ export async function getRmmTokens(walletAddressList: string[]): Promise<RmmToke
     return [];
   }
   
-  const { data, errors } = await RmmClient.query<RmmQuery, RmmQueryVariables>({
+  const { data, errors } = await (await useApolloClient()).RmmClient.query<RmmQuery, RmmQueryVariables>({
     query: RmmGQL,
     variables: {
       addressList: walletAddressList

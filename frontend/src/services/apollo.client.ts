@@ -1,11 +1,11 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache, NormalizedCacheObject } from "@apollo/client";
 import Env from "../utils/env";
 import { LocalStorageWrapper, CachePersistor } from 'apollo3-cache-persist';
 
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
 function getUrl(url: string): string {
-  return `${Env.REACT_APP_REALT_THEGRAPH_URL}${Env.REACT_APP_REALT_THEGRAPH_API_KEY}/${url}`;
+  return `${Env.VITE_REALT_THEGRAPH_URL}${Env.VITE_REALT_THEGRAPH_API_KEY}/${url}`;
 }
 
 const cache = new InMemoryCache({
@@ -91,7 +91,6 @@ async function initializeCache() {
   }
   return persistor.restore();
 }
-await initializeCache();
 
 export async function purgeCache() {
   if (!persistor) {
@@ -102,17 +101,36 @@ export async function purgeCache() {
   setLastCacheClear();
 }
 
-export const RmmClient = new ApolloClient({
-  uri: getUrl(Env.REACT_APP_REALT_THEGRAPH_RMM),
-  cache,
-});
+let RmmClient: ApolloClient<NormalizedCacheObject>;
+let GnosisClient: ApolloClient<NormalizedCacheObject>;
+let EthClient: ApolloClient<NormalizedCacheObject>;
 
-export const GnosisClient = new ApolloClient({
-  uri: getUrl(Env.REACT_APP_REALT_THEGRAPH_GNOSIS),
-  cache,
-});
+let initialized = false;
+export async function useApolloClient() {
+  if (!initialized) {
+    await initializeCache();
 
-export const EthClient = new ApolloClient({
-  uri: getUrl(Env.REACT_APP_REALT_THEGRAPH_ETH),
-  cache,
-});
+    RmmClient = new ApolloClient({
+      uri: getUrl(Env.VITE_REALT_THEGRAPH_RMM),
+      cache,
+    });
+  
+    GnosisClient = new ApolloClient({
+      uri: getUrl(Env.VITE_REALT_THEGRAPH_GNOSIS),
+      cache,
+    });
+  
+    EthClient = new ApolloClient({
+      uri: getUrl(Env.VITE_REALT_THEGRAPH_ETH),
+      cache,
+    });
+
+    initialized = true;
+  }
+
+  return {
+    RmmClient,
+    GnosisClient,
+    EthClient,
+  }
+}

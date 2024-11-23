@@ -6,7 +6,7 @@ export function initAnalytics() {
   if (INITIATED) {
     return;
   }
-  const trackingId = Env.REACT_APP_GA_TRACKING_ID || '';
+  const trackingId = Env.VITE_GA_TRACKING_ID || '';
   ReactGa.initialize(trackingId);
   INITIATED = true;
 }

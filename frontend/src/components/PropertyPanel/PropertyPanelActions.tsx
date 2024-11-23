@@ -58,7 +58,7 @@ export function PropertyPanelActions({
           title={t('title.viewOnRealtoken')}
           target="_blank"
           referrerPolicy="no-referrer"
-          href={`${Env.REACT_APP_REALT_COMMUNITY_URL}/asset/${address}`}>
+          href={`${Env.VITE_REALT_COMMUNITY_URL}/asset/${address}`}>
           Dashboard
         </Button>
       </Grid.Col>

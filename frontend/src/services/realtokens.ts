@@ -8,7 +8,7 @@ export async function getRealTokens(): Promise<{
   realtokens: Array<RealToken>,
 }> {
   const http = httpRequester();
-  const response = await http.get<Array<RealToken>>(`${Env.REACT_APP_REALT_PROPERTIES_BACKEND_URL}properties`);
+  const response = await http.get<Array<RealToken>>(`${Env.VITE_REALT_PROPERTIES_BACKEND_URL}properties`);
   if (!Array.isArray(response.data)) {
     throw new Error('Invalid response');
   }
