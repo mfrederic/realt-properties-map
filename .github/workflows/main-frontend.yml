@@ -7,8 +7,26 @@ on:
   workflow_dispatch:
 
 jobs:
+  check-commit:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - id: check
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          if echo "$COMMIT_MSG" | grep -qiE '^(ci|chore|docs|style|test)'; then
+            echo "should_run=false" >> $GITHUB_OUTPUT
+          else
+            echo "should_run=true" >> $GITHUB_OUTPUT
+          fi
 
   build-frontend:
+    needs: check-commit
+    if: needs.check-commit.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     steps:
     - name: Set up QEMU
@@ -38,7 +56,8 @@ jobs:
         labels: ${{ secrets.REPOSITORY }}:frontend-latest,${{ secrets.REPOSITORY }}:frontend-${{ steps.json.outputs.value }}
 
   deploy-frontend:
-    needs: build-frontend
+    needs: [check-commit, build-frontend]
+    if: needs.check-commit.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     steps:
     - name: Execute commands over SSH
@@ -51,7 +70,8 @@ jobs:
           docker pull ${{ secrets.REPOSITORY }}:frontend-latest
   
   restart-frontend:
-    needs: deploy-frontend
+    needs: [check-commit, deploy-frontend]
+    if: needs.check-commit.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     steps:
     - name: Execute commands over SSH
