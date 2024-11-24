@@ -7,59 +7,24 @@ on:
   workflow_dispatch:
 
 jobs:
-
-  build-frontend:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v3
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_TOKEN }}
-    - name: Checkout repository
-      uses: actions/checkout@v3
-    - name: Install jq
-      run: sudo apt-get install jq
-    - name: Read JSON file
-      id: json
-      run: |
-        VALUE=$(jq -r '.version' ./frontend/package.json)
-        echo "::set-output name=value::$VALUE"
-    - name: Build and push frontend
-      uses: docker/build-push-action@v5
-      with:
-        push: true
-        context: "{{defaultContext}}:frontend"
-        tags: ${{ secrets.REPOSITORY }}:frontend-latest,${{ secrets.REPOSITORY }}:frontend-${{ steps.json.outputs.value }}
-        labels: ${{ secrets.REPOSITORY }}:frontend-latest,${{ secrets.REPOSITORY }}:frontend-${{ steps.json.outputs.value }}
-
   deploy-frontend:
-    needs: build-frontend
-    runs-on: ubuntu-latest
-    steps:
-    - name: Execute commands over SSH
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          docker pull ${{ secrets.REPOSITORY }}:frontend-latest
-  
-  restart-frontend:
+    uses: ./.github/workflows/reusable-deploy.yml
+    with:
+      service_name: frontend
+      context_path: frontend
+    secrets: inherit
+
+  release-frontend:
+    uses: ./.github/workflows/reusable-release.yml
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      packages: write
     needs: deploy-frontend
-    runs-on: ubuntu-latest
-    steps:
-    - name: Execute commands over SSH
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        debug: true
-        script: |
-          docker service update ${{ secrets.BASE_SERVICE_NAME }}_frontend --force
+    if: needs.deploy-frontend.result == 'success'
+    with:
+      working-directory: frontend
+      name: Frontend
+    secrets:
+      SEMANTIC_RELEASE_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}

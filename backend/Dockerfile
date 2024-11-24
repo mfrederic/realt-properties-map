@@ -1,4 +1,4 @@
-ARG NODE_IMAGE=node:21-alpine
+ARG NODE_IMAGE=node:23-alpine
 ARG CORS_ORIGIN
 
 FROM $NODE_IMAGE AS base

@@ -1,0 +1,40 @@
+name: Reusable Release
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        required: true
+        type: string
+      name:
+        required: true
+        type: string
+    secrets:
+      SEMANTIC_RELEASE_TOKEN:
+        required: true
+
+jobs:
+  release:
+    name: Release ${{ inputs.name }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ${{ inputs.working-directory }}
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+          GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+        run: npx semantic-release
+        working-directory: ${{ inputs.working-directory }} 

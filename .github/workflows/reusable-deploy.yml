@@ -1,0 +1,102 @@
+name: Reusable Deploy Workflow
+on:
+  workflow_call:
+    inputs:
+      service_name:
+        required: true
+        type: string
+      context_path:
+        required: true
+        type: string
+    secrets:
+      DOCKER_USERNAME:
+        required: true
+      DOCKER_TOKEN:
+        required: true
+      REPOSITORY:
+        required: true
+      HOST:
+        required: true
+      USERNAME:
+        required: true
+      SSH_KEY:
+        required: true
+      BASE_SERVICE_NAME:
+        required: true
+
+jobs:
+  check-commit:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - id: check
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          if echo "$COMMIT_MSG" | grep -qiE '^(ci|chore|docs|style|test)'; then
+            echo "should_run=false" >> $GITHUB_OUTPUT
+          else
+            echo "should_run=true" >> $GITHUB_OUTPUT
+          fi
+
+  build:
+    needs: check-commit
+    if: needs.check-commit.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Install jq
+      run: sudo apt-get install jq
+    - name: Read JSON file
+      id: json
+      run: |
+        VALUE=$(jq -r '.version' ./${{ inputs.context_path }}/package.json)
+        echo "version=$VALUE" >> $GITHUB_OUTPUT
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        push: true
+        context: "{{defaultContext}}:${{ inputs.context_path }}"
+        tags: ${{ secrets.REPOSITORY }}:${{ inputs.service_name }}-latest,${{ secrets.REPOSITORY }}:${{ inputs.service_name }}-${{ steps.json.outputs.version }}
+        labels: ${{ secrets.REPOSITORY }}:${{ inputs.service_name }}-latest,${{ secrets.REPOSITORY }}:${{ inputs.service_name }}-${{ steps.json.outputs.version }}
+
+  deploy:
+    needs: [check-commit, build]
+    if: needs.check-commit.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Execute commands over SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          docker pull ${{ secrets.REPOSITORY }}:${{ inputs.service_name }}-latest
+
+  restart:
+    needs: [check-commit, deploy]
+    if: needs.check-commit.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Execute commands over SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          docker service update ${{ secrets.BASE_SERVICE_NAME }}_${{ inputs.service_name }} --force 
