@@ -1,6 +1,6 @@
 {
   "name": "realt-properties-map-frontend",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "license": "Apache-2.0",
   "scripts": {
     "dev": "PORT=3010 vite",
