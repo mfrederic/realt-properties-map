@@ -38,8 +38,14 @@ jobs:
           COMMIT_MSG=$(git log -1 --pretty=%B)
           if echo "$COMMIT_MSG" | grep -qiE '^(ci|chore|docs|style|test)'; then
             echo "should_run=false" >> $GITHUB_OUTPUT
-          else
+            exit 0
+          fi
+          
+          CHANGED_FILES=$(git diff --name-only HEAD HEAD~1)
+          if echo "$CHANGED_FILES" | grep -q "^${{ inputs.context_path }}/"; then
             echo "should_run=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_run=false" >> $GITHUB_OUTPUT
           fi
 
   build:

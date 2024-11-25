@@ -1,9 +1,7 @@
-name: Main Frontend
+name: Main
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - frontend/**
   workflow_dispatch:
 
 jobs:
@@ -14,8 +12,14 @@ jobs:
       context_path: frontend
     secrets: inherit
 
-  release-frontend:
-    concurrency: release
+  deploy-backend:
+    uses: ./.github/workflows/reusable-deploy.yml
+    with:
+      service_name: backend
+      context_path: backend
+    secrets: inherit
+
+  release:
     uses: ./.github/workflows/reusable-release.yml
     permissions:
       contents: write
@@ -23,7 +27,6 @@ jobs:
       pull-requests: write
       packages: write
     with:
-      working-directory: frontend
-      name: Frontend
+      name: Monorepo
     secrets:
       SEMANTIC_RELEASE_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
