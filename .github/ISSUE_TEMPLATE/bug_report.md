@@ -1,38 +1,42 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Create a report to help us improve RealT Properties Map
 title: "[BUG] "
 labels: bug
 assignees: ''
 
 ---
 
-**Describe the bug**
+### Bug Description
 A clear and concise description of what the bug is.
 
-**To Reproduce**
-Steps to reproduce the behavior:
+### Environment
+- **App Version**: [e.g. 1.7.0]
+- **Device**: [Desktop/Mobile]
+- **OS**: [e.g. Windows 11, iOS 17]
+- **Browser**: [e.g. Chrome 120, Safari 17]
+- **Screen Resolution**: [e.g. 1920x1080]
+
+### Steps to Reproduce
 1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+2. Click on '...'
+3. Scroll to '...'
+4. Observe error
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+### Expected Behavior
+A clear description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+### Actual Behavior
+A clear description of what actually happened.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+### Wallet Information (if applicable)
+- Network: [e.g. Gnosis, ETH]
+- Connected wallet: [Yes/No]
+- Wallet type: [e.g. MetaMask, WalletConnect]
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+### Screenshots/Videos
+If applicable, add screenshots or videos to help explain your problem.
+<!-- Drag and drop images here or provide links -->
 
-**Additional context**
-Add any other context about the problem here.
+### Console Errors
+If applicable, please copy and paste any relevant console errors:

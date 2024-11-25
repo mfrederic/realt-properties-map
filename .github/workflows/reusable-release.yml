@@ -2,9 +2,6 @@ name: Reusable Release
 on:
   workflow_call:
     inputs:
-      working-directory:
-        required: true
-        type: string
       name:
         required: true
         type: string
@@ -28,13 +25,11 @@ jobs:
           token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
-      - name: Install dependencies
+          node-version: 22
+      - name: Install root dependencies
         run: npm ci
-        working-directory: ${{ inputs.working-directory }}
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
           GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-        run: npx semantic-release
-        working-directory: ${{ inputs.working-directory }} 
+        run: npx semantic-release 
