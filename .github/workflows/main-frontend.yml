@@ -15,14 +15,13 @@ jobs:
     secrets: inherit
 
   release-frontend:
+    concurrency: release
     uses: ./.github/workflows/reusable-release.yml
     permissions:
       contents: write
       issues: write
       pull-requests: write
       packages: write
-    needs: deploy-frontend
-    if: needs.deploy-frontend.result == 'success'
     with:
       working-directory: frontend
       name: Frontend

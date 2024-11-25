@@ -15,14 +15,13 @@ jobs:
     secrets: inherit
 
   release-backend:
+    concurrency: release
+    uses: ./.github/workflows/reusable-release.yml
     permissions:
       contents: write
       issues: write
       pull-requests: write
       packages: write
-    uses: ./.github/workflows/reusable-release.yml
-    needs: deploy-backend
-    if: needs.deploy-backend.result == 'success'
     with:
       working-directory: backend
       name: Backend
