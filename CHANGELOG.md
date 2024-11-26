@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/mfrederic/realt-properties-map/compare/v1.0.0...v1.1.0) (2024-11-26)
+
+
+### Features
+
+* update frontend to v1.7.1 ([082cccf](https://github.com/mfrederic/realt-properties-map/commit/082cccf2355b2a9b8db7a5cbb3d69da55a79dc86))
+
 # 1.0.0 (2024-11-26)
 
 
