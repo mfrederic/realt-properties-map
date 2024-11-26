@@ -1,8 +1,8 @@
-import packageJson from '../../../package.json';
+import rootPackageJson from '../../../../package.json';
 
 const Version = () => {
   return (
-    <h2>Version: {packageJson.version}</h2>
+    <h2>Version: {rootPackageJson.version}</h2>
   );
 };
 

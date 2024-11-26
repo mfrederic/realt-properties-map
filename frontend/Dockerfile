@@ -21,11 +21,13 @@ ENV VITE_REALT_THEGRAPH_GNOSIS=$VITE_REALT_THEGRAPH_GNOSIS
 ENV VITE_REALT_THEGRAPH_RMM=$VITE_REALT_THEGRAPH_RMM
 ENV VITE_REALT_THEGRAPH_ETH=$VITE_REALT_THEGRAPH_ETH
 ENV GENERATE_SOURCEMAP=false
+COPY ../package.json ../
 RUN npm run build
 
 FROM nginx:1.25.4-alpine as serve
 ENV NODE_ENV production
 RUN apk update && apk add bash nodejs npm
+COPY ../package.json /usr/share/
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/nginx/*.sh /usr/share/nginx/
