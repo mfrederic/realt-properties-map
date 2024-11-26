@@ -39,7 +39,7 @@ export function SettingsPanelContent({
               {t('reportIssue')}
             </Button>
           </Box>
-          <Flex>
+          <Flex gap="md">
             <Version />
             <MadeBy extra />
           </Flex>
