@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/mfrederic/realt-properties-map/compare/v1.1.0...v1.1.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* version and logo importing ([dc28c9c](https://github.com/mfrederic/realt-properties-map/commit/dc28c9c3b7ae33bbbfd8f94545f98d37c8f41a88))
+
 # [1.1.0](https://github.com/mfrederic/realt-properties-map/compare/v1.0.0...v1.1.0) (2024-11-26)
 
 
