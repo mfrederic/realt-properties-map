@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/mfrederic/realt-properties-map/compare/v1.1.1...v1.2.0) (2024-12-21)
+
+
+### Bug Fixes
+
+* fix owned amount computation ([8ee2b38](https://github.com/mfrederic/realt-properties-map/commit/8ee2b38d446e5d21860a80244a558991803e161b))
+
+
+### Features
+
+* rework the pins design and options ([abc0709](https://github.com/mfrederic/realt-properties-map/commit/abc07095724d4b43089b9a798171f6751d6f5426))
+
 ## [1.1.1](https://github.com/mfrederic/realt-properties-map/compare/v1.1.0...v1.1.1) (2024-11-26)
 
 
