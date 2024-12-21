@@ -6,7 +6,8 @@ import { selectedLanguage } from "../../store/settings/settingsSelector";
 import { useCurrencyValue } from "../../hooks/useCurrencyValue";
 import date from "../../utils/date";
 import { Divider, Grid } from "@mantine/core";
-
+import { getPropertyTypeName } from "../../services/realtokens";
+import './propertyPanelContent.scss';
 function toFixedStr(value: number, precision: number = 2) {
   return value.toFixed(precision).toLowerCase();
 }
@@ -49,6 +50,7 @@ export function PropertyPanelContent({
         label: 'propertyPanel.propertyType',
         value: t(`propertyType.${property.propertyType}`),
       },
+      iconClass: `${getPropertyTypeName(property.propertyType)}-icon`,
     },
     {
       ownedOnly: true,
@@ -78,6 +80,7 @@ export function PropertyPanelContent({
     {
       ownedOnly: false,
       entry: { label: 'propertyPanel.rentedUnit', value: `${rentedUnits} / ${totalUnits} (${toFixedStr(rentedUnitsPercent)}%)` },
+      rentClass: `${property.iconColorClass}-property`,
     },
     {
       ownedOnly: false,
@@ -107,7 +110,7 @@ export function PropertyPanelContent({
           </Grid.Col>
         </Grid>
       }
-      {entries.map(({ ownedOnly, notOwnedOnly, entry, icon }) => {
+      {entries.map(({ ownedOnly, notOwnedOnly, entry, icon, rentClass, iconClass }) => {
         if (
           (ownedOnly && ownedAmount <= 0) ||
           (ownedOnly && !differentiateOwned) ||
@@ -121,7 +124,7 @@ export function PropertyPanelContent({
               <h2>{t(entry.label)}</h2>
             </Grid.Col>
             <Grid.Col span={6} className="flex items-center justify-end">
-              <p className="flex items-center">
+              <p className={`flex items-center ${rentClass ? rentClass : ''} ${iconClass ? iconClass : ''}`}>
                 {
                   icon &&
                   <i className="material-icons max-w-[40px] mr-2">{icon}</i>

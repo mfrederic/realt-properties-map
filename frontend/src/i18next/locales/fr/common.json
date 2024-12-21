@@ -108,7 +108,8 @@
     "displayRmm": "Afficher RMM",
     "displayGnosis": "Afficher Gnosis/ETH",
     "displayAll": "Inclure non possédé",
-    "differentiateOwned": "Différencier les marqueurs possédés"
+    "differentiateOwned": "Différencier les marqueurs possédés",
+    "showIcon": "Afficher les icônes"
   },
   "notifications": {
     "pleaseWait": "Veuillez patienter...",

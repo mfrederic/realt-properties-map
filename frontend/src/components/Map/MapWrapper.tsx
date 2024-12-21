@@ -1,4 +1,4 @@
-import './MapWrapper.css';
+import './MapWrapper.scss';
 import { useAppSelector } from '../../hooks/useInitStore';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
@@ -7,6 +7,7 @@ import { MapMarkers } from './MapMarkers';
 import { MapEvents } from './MapEvents';
 import { selectedLatLng, selectedZoom } from '../../store/urlQuery/urlQuery.selector';
 import { useProperties } from '../../hooks/useProperties';
+import { ShowIcon } from './ShowIcon';
 
 export function MapWrapper() {
   const center = useAppSelector(selectedLatLng);
@@ -15,6 +16,7 @@ export function MapWrapper() {
 
   return (
     <>
+      <ShowIcon />
       <MapContainer
         className="map"
         center={center}

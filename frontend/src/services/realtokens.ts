@@ -41,6 +41,33 @@ export function mapPropertiesList(
     }, new Map<string, Property>());
 }
 
+export function getPropertyTypeName(propertyType: number): string {
+  switch (propertyType) {
+    case 1:
+      return 'singleFamily';
+    case 2:
+      return 'multiFamily';
+    case 3:
+      return 'duplex';
+    case 4:
+      return 'condominium';
+    case 6:
+      return 'mixedUse';
+    case 8:
+      return 'quadplex';
+    case 9:
+      return 'commercial';
+    case 10:
+      return 'sfrPortfolio';
+    case 11:
+      return 'mfrPortfolio';
+    case 12:
+      return 'loan';
+    default:
+      return 'stack';
+  }
+}
+
 function setIcon(propertyType: number): string {
   switch (propertyType) {
     case 1: // Single Family

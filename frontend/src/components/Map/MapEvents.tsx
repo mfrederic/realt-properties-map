@@ -4,7 +4,7 @@ import { useLeafletContext } from '@react-leaflet/core';
 import { useAppSelector } from '../../hooks/useInitStore';
 import { selectedLatLng } from '../../store/marker/markerSelector';
 import { selectDifferentiateOwned, selectMarkerOpacity } from '../../store/mapOptions/mapOptionsSelector';
-import { CSSCLASSES, OWNED_SELECTOR } from './MapMarkers';
+import { CSSCLASSES, OWNED_SELECTOR } from './map.utils';
 
 let previousLatLng: Pick<LatLng, 'lat' | 'lng'> | undefined;
 export function MapEvents() {

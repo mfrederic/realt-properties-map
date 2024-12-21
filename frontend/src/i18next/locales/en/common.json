@@ -108,7 +108,8 @@
     "displayRmm": "Display RMM",
     "displayGnosis": "Display Gnosis/ETH",
     "displayAll": "Include not owned",
-    "differentiateOwned": "Differentiate owned markers"
+    "differentiateOwned": "Differentiate owned markers",
+    "showIcon": "Show icons"
   },
   "notifications": {
     "pleaseWait": "Please wait...",

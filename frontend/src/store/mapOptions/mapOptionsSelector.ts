@@ -7,3 +7,5 @@ export const selectMarkerOpacity = (state: RootState) => state.mapOptions.marker
 export const selectDifferentiateOwned = (state: RootState) => state.mapOptions.differentiateOwned;
 
 export const selectMarkerClustering = (state: RootState) => state.mapOptions.markerClustering;
+
+export const selectShowIcon = (state: RootState) => state.mapOptions.showIcon;

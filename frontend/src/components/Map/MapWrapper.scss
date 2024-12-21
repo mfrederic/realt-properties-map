@@ -1,0 +1,165 @@
+@use '../../theme/variables.scss' as *;
+
+.map {
+  height: 100vh;
+  width: 100vw;
+  color: black;
+  
+  .leaflet-pane {
+    z-index: 1;
+  }
+
+  .leaflet-top,
+  .leaflet-bottom {
+    z-index: 2;
+  }
+
+  .leaflet-tile-pane {
+    z-index: 3;
+  }
+
+  .leaflet-overlay-pane {
+    z-index: 4;
+  }
+
+  .leaflet-shadow-pane {
+    z-index: 5;
+  }
+
+  .leaflet-marker-pane {
+    z-index: 6;
+  }
+
+  .leaflet-tooltip-pane {
+    z-index: 7;
+  }
+
+  .leaflet-popup-pane {
+    z-index: 8;
+  }
+}
+
+.leaflet-popup {
+  background-color: white;
+  padding: 0;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+
+  .leaflet-popup-content-wrapper {
+    padding: 0 0 1px 0;
+    border-radius: 0;
+  }
+
+  .leaflet-popup-content {
+    padding: 0;
+    border-radius: 0;
+    min-width: 300px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .leaflet-popup-close-button {
+    display: none;
+  }
+}
+
+.leaflet-marker-icon {
+  background: none;
+  border: none;
+}
+
+svg {
+  stroke-width: 1;
+
+  &.owned {
+    stroke-width: 4;
+
+    &.selected {
+      stroke: #f59e0b;
+
+      path {
+        stroke: #f59e0b;
+      }
+    }
+  }
+
+  &:not(.owned) {
+    &.selected {
+      stroke-width: 4;
+      stroke: #000;
+
+      path {
+        stroke: #000;
+      }
+    }
+  }
+
+  path {
+
+    &.red-pin {
+      fill: $red;
+    }
+
+    &.green-pin {
+      fill: $green;
+    }
+    
+    &.yellow-pin {
+      fill: $yellow;
+    }
+    
+    &.singleFamily-pin {
+      fill: $singleFamily;
+    }
+    
+    &.multiFamily-pin {
+      fill: $multiFamily;
+      background-image: linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.1) 50%);
+      background-size: 10px 10px;
+    }
+    
+    &.duplex-pin {
+      fill: $duplex;
+    }
+    
+    &.condominium-pin {
+      fill: $condominium;
+    }
+    
+    &.mixedUse-pin {
+      fill: $mixedUse;
+      background-image: linear-gradient(-45deg, transparent 50%, rgba(0,0,0,0.1) 50%);
+      background-size: 10px 10px;
+    }
+    
+    &.quadplex-pin {
+      fill: $quadplex;
+    }
+    
+    &.commercial-pin {
+      fill: $commercial;
+    }
+    
+    &.sfrPortfolio-pin {
+      fill: $sfrPortfolio;
+      background-image: linear-gradient(90deg, transparent 50%, rgba(0,0,0,0.1) 50%);
+      background-size: 10px 10px;
+    }
+    
+    &.mfrPortfolio-pin {
+      fill: $mfrPortfolio;
+      background-image: linear-gradient(0deg, transparent 50%, rgba(0,0,0,0.1) 50%);
+      background-size: 10px 10px;
+    }
+    
+    &.loan-pin {
+      fill: $loan;
+    }
+    
+    &.stack-pin {
+      fill: $stack;
+    }
+  }
+}
+
+
+

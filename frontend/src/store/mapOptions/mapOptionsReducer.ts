@@ -10,6 +10,7 @@ interface MapOptionsState {
   differentiateOwned: boolean;
   markerOpacity: number;
   markerClustering: number;
+  showIcon: boolean;
 }
 
 const initialState: MapOptionsState = getItem<MapOptionsState>(LOCAL_STORAGE_NAME, {
@@ -19,6 +20,7 @@ const initialState: MapOptionsState = getItem<MapOptionsState>(LOCAL_STORAGE_NAM
   differentiateOwned: true,
   markerOpacity: .8,
   markerClustering: 14,
+  showIcon: false,
 });
 
 export const mapOptionsSlice = createSlice({
@@ -33,6 +35,7 @@ export const mapOptionsSlice = createSlice({
         differentiateOwned: action.payload.differentiateOwned,
         markerOpacity: action.payload.markerOpacity,
         markerClustering: action.payload.markerClustering,
+        showIcon: action.payload.showIcon,
       };
       setItem<MapOptionsState>(LOCAL_STORAGE_NAME, newState);
       return newState;
@@ -63,6 +66,10 @@ export const mapOptionsSlice = createSlice({
     setMarkerClustering: (state, action: PayloadAction<number>) => {
       state.markerClustering = action.payload;
       setItem<MapOptionsState>(LOCAL_STORAGE_NAME, state);
+    },
+    setShowIcon: (state, action: PayloadAction<boolean>) => {
+      state.showIcon = action.payload;
+      setItem<MapOptionsState>(LOCAL_STORAGE_NAME, state);
     }
   }
 });
@@ -75,6 +82,7 @@ export const {
   setDifferentiateOwned,
   setMarkerOpacity,
   setMarkerClustering,
+  setShowIcon,
 } = mapOptionsSlice.actions;
 
 export default mapOptionsSlice.reducer;

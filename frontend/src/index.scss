@@ -1,3 +1,5 @@
+@use './theme/variables.scss' as *;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

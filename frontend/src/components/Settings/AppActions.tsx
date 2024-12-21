@@ -1,5 +1,5 @@
 import { useDisclosure } from '@mantine/hooks';
-import { Flex } from '@mantine/core';
+import { Flex, Grid, SimpleGrid } from '@mantine/core';
 import { AppActionsButton } from './AppActionsButton';
 import { StartTooltip } from './StartTooltip';
 import { AffixBtn } from '../Common/AffixBtn';
@@ -59,23 +59,27 @@ export function AppActions() {
         <AffixBtn>
           <Flex align="end" className="ml-2 sm:ml-0">
             <SearchBar />
-            <AppActionsButton opened={false} open={onCopyUrl} label={t('actions.copyUrl')} color={copied ? 'teal' : ''}>
+            <SimpleGrid cols={{ base: 2, sm: 4 }} spacing="xs">
+              <AppActionsButton opened={false} open={onCopyUrl} label={t('actions.copyUrl')} color={copied ? 'teal' : ''}>
               {
                 !copied
                   ? <LinkIcon fontSize="large" />
                   : <CheckIcon fontSize="large" />
               }
-            </AppActionsButton>
-            <StartTooltip />
-            <AppActionsButton opened={false} open={onOpenWallets} label={t('actions.openWalletsPanel')}>
-              <WalletIcon fontSize="large" />
-            </AppActionsButton>
-            <AppActionsButton opened={false} open={onOpenMapOptions} label={t('actions.openSettingsPanel')}>
-              <SettingsIcon fontSize="large" />
-            </AppActionsButton>
-            <AppActionsButton opened={false} open={onOpenHelp} label={t('actions.openHelpPanel')} color="lime">
-              <RecommendIcon fontSize="large" />
-            </AppActionsButton>
+              </AppActionsButton>
+              <Flex direction="column">
+                <StartTooltip />
+                <AppActionsButton opened={false} open={onOpenWallets} label={t('actions.openWalletsPanel')}>
+                <WalletIcon fontSize="large" />
+                </AppActionsButton>
+              </Flex> 
+              <AppActionsButton opened={false} open={onOpenMapOptions} label={t('actions.openSettingsPanel')}>
+                <SettingsIcon fontSize="large" />
+              </AppActionsButton>
+              <AppActionsButton opened={false} open={onOpenHelp} label={t('actions.openHelpPanel')} color="lime">
+                <RecommendIcon fontSize="large" />
+              </AppActionsButton>
+            </SimpleGrid>
           </Flex>
         </AffixBtn>
       }

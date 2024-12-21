@@ -1,0 +1,65 @@
+@use '../../theme/variables' as *;
+
+.red-property {
+  color: $red;
+}
+
+.green-property {
+  color: $green;
+}
+
+.yellow-property {
+  color: $yellow;
+}
+
+.singleFamily-icon {
+  color: $singleFamily;
+}
+
+.multiFamily-icon {
+  color: $multiFamily;
+  background-image: linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.1) 50%);
+  background-size: 10px 10px;
+}
+
+.duplex-icon {
+  color: $duplex;
+}
+
+.condominium-icon {
+  color: $condominium;
+}
+
+.mixedUse-icon {
+  color: $mixedUse;
+  background-image: linear-gradient(-45deg, transparent 50%, rgba(0,0,0,0.1) 50%);
+  background-size: 10px 10px;
+}
+
+.quadplex-icon {
+  color: $quadplex;
+}
+
+.commercial-icon {
+  color: $commercial;
+}
+
+.sfrPortfolio-icon {
+  color: $sfrPortfolio;
+  background-image: linear-gradient(90deg, transparent 50%, rgba(0,0,0,0.1) 50%);
+  background-size: 10px 10px;
+}
+
+.mfrPortfolio-icon {
+  color: $mfrPortfolio;
+  background-image: linear-gradient(0deg, transparent 50%, rgba(0,0,0,0.1) 50%);
+  background-size: 10px 10px;
+}
+
+.loan-icon {
+  color: $loan;
+}
+
+.stack-icon {
+  color: $stack;
+}

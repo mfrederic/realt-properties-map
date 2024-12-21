@@ -20,7 +20,7 @@ export function AppActionsButton({
       {
         !opened &&
         <Tooltip label={label}>
-          <ActionIcon size="xl" aria-label={label} onClick={open} className={`p-4 mb-2 mr-2 ${cssClass}`} color={color}>
+          <ActionIcon size="xl" aria-label={label} onClick={open} className={`p-4 mb-2 ${cssClass}`} color={color}>
             {children}
           </ActionIcon>
         </Tooltip>

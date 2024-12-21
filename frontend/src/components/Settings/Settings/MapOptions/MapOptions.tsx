@@ -4,7 +4,7 @@ import MapIcon from '@mui/icons-material/Map';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import { useAppDispatch, useAppSelector } from "../../../../hooks/useInitStore";
 import { Option } from "../Option";
-import { setDifferentiateOwned, setDisplayAll, setDisplayGnosis, setDisplayRmm } from "../../../../store/mapOptions/mapOptionsReducer";
+import { setDifferentiateOwned, setDisplayAll, setDisplayGnosis, setDisplayRmm, setShowIcon } from "../../../../store/mapOptions/mapOptionsReducer";
 import { SettingsPanelSection } from "../../SettingsPanelSection";
 import { selectWalletAddresses } from "../../../../store/settings/settingsSelector";
 import { MapMarkerOpacity } from "./MapMarkerOpacity";
@@ -67,6 +67,15 @@ export function MapOptions() {
     dispatch(setDifferentiateOwned(toggle));
   }
 
+  function onShowIcon(toggle: boolean) {
+    analyticsEvent({
+      category: 'Settings',
+      action: 'Show Icon',
+      label: toggle ? 'On' : 'Off',
+    });
+    dispatch(setShowIcon(toggle));
+  }
+
   const ExpectedFeature: CheckboxProps['icon'] = ({ ...props }) => <EngineeringIcon {...props} />;
 
   return (
@@ -96,6 +105,12 @@ export function MapOptions() {
         checked={mapOptions.differentiateOwned}
         disabled={walletAddresses.length === 0}
         onChange={(e) => onDifferentiateOwned(e)} />
+      <Option
+        id="showIcon"
+        label={t('showIcon')}
+        checked={mapOptions.showIcon}
+        disabled={walletAddresses.length === 0}
+        onChange={(e) => onShowIcon(e)} />
       <MapMarkerOpacity />
       <MapMarkerClustering />
     </SettingsPanelSection>
