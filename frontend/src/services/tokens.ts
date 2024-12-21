@@ -21,9 +21,12 @@ export function getOwnedProperties(
     if (!asset) {
       return;
     }
-    asset.ownedAmount = asset?.ownedAmount ? asset.ownedAmount + amount : amount;
+    asset.ownedAmount = asset?.ownedAmount
+      ? parseFloat(asset.ownedAmount.toString()) + parseFloat(amount.toString())
+      : parseFloat(amount.toString());
     asset.ownerWallets.push(owner.toLowerCase());
     asset.source = source;
+    console.log(asset.ownedAmount);
   }
 
   wallets.forEach((wallet) => {
