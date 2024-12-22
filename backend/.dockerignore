@@ -9,3 +9,4 @@ docker-compose*
 .git
 .gitignore
 node_modules
+src/services/pin/pins
