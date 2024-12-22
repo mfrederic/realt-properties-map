@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/mfrederic/realt-properties-map/compare/v1.2.0...v1.3.0) (2024-12-22)
+
+
+### Features
+
+* create pin icon generator ([327759c](https://github.com/mfrederic/realt-properties-map/commit/327759c5084693b28edd79b3f120234ebb5dfa3b))
+* use new icons in frontend ([4ad5c62](https://github.com/mfrederic/realt-properties-map/commit/4ad5c62c19ecf3cc09efd5c4150171a10dbbb5cb))
+
 # [1.2.0](https://github.com/mfrederic/realt-properties-map/compare/v1.1.1...v1.2.0) (2024-12-21)
 
 
