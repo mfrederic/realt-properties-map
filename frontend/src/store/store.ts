@@ -6,6 +6,7 @@ import settingsReducer from './settings/settingsReducer';
 import markerReducer from './marker/markerReducer';
 import currenciesReducer from './currencies/currenciesReducer';
 import urlQueryReducer from './urlQuery/urlQuery.reducer';
+import filteringReducer from './filtering/filteringReducer';
 
 const rootReducer = combineReducers({
   settings: settingsReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   marker: markerReducer,
   currencies: currenciesReducer,
   urlQuery: urlQueryReducer,
+  filtering: filteringReducer,
 });
 
 const store = configureStore({

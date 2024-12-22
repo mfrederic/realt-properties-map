@@ -48,6 +48,10 @@
     "openSettingsPanel": "Ouvrir les paramètres",
     "openHelpPanel": "Aider RPM"
   },
+  "filtering": {
+    "filtering": "Filtres",
+    "filteringOptions": "Options de filtres"
+  },
   "settings": {
     "language": "Langue",
     "currency": "Devise",

@@ -5,8 +5,10 @@ import { setMarkerClustering } from "../../../../store/mapOptions/mapOptionsRedu
 import { selectMarkerClustering } from "../../../../store/mapOptions/mapOptionsSelector";
 import { useTranslation } from "react-i18next";
 import { analyticsEvent } from "../../../../services/analytics";
+import { useMediaQuery } from "@mantine/hooks";
 
 export function MapMarkerClustering() {
+  const mediaQuerySize = useMediaQuery('(max-width: 768px)') ? 'xl' : 'md';
   const { t } = useTranslation('common');
   const dispatch = useAppDispatch();
   const markerClustering = useAppSelector(selectMarkerClustering);
@@ -37,6 +39,7 @@ export function MapMarkerClustering() {
           defaultValue={markerClustering}
           thumbLabel={t('settings.mapMarkersClustering')}
           onChangeEnd={onClusteringChange}
+          size={mediaQuerySize}
           marks={[
             { value: 10, label: '10' },
             { value: 14, label: `14 (${t('extra.default')})` },

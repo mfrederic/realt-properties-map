@@ -1,4 +1,7 @@
-import { markerClusterGroup } from "leaflet";
+import { Icon, IconOptions, markerClusterGroup } from "leaflet";
+import { Property } from "../../types/property";
+import Env from "../../utils/env";
+import { getPropertyTypeName } from "../../services/realtokens";
 
 export const zoomMapOffsets: Record<number, number> = {
   0: 500,
@@ -37,5 +40,37 @@ export function getCleanMarkerCluster(clustering: number = 14) {
     chunkInterval: 100,
     chunkDelay: 50,
     singleMarkerMode: false,
+  });
+}
+
+export function generateSimpleIcon(
+  property: Property,
+  markerOpacity: number,
+  selected: boolean,
+  differentiateOwned: boolean,
+  showIcon: boolean,
+): Icon<IconOptions> {
+  let iconUrl = `${Env.VITE_REALT_PROPERTIES_BACKEND_URL}properties/pin?occupation=${property.iconColorClass}&propertyType=${getPropertyTypeName(property.propertyType)}`;
+  if (property.ownedAmount > 0 && differentiateOwned) {
+    iconUrl += `&owned`;
+  }
+  if (showIcon) {
+    iconUrl += `&icon`;
+  }
+  let classNames = `marker-svg ${property.ownedAmount > 0 ? 'marker-owned' : 'marker-not-owned'} marker-${property.address}`;
+  if (!differentiateOwned || property.ownedAmount <= 0) {
+    classNames += ` opacity-${markerOpacity * 100}`;
+  }
+  if (selected) {
+    classNames += ' selected';
+  }
+  if (differentiateOwned && property.ownedAmount > 0) {
+    classNames += ' drop-shadow-md';
+  }
+  return new Icon({
+    iconUrl,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    className: classNames,
   });
 }

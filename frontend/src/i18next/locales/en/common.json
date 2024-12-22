@@ -48,6 +48,10 @@
     "openSettingsPanel": "Open Settings Panel",
     "openHelpPanel": "Help RPM"
   },
+  "filtering": {
+    "filtering": "Filtering",
+    "filteringOptions": "Filtering Options"
+  },
   "settings": {
     "language": "Language",
     "currency": "Currency",

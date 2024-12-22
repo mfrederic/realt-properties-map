@@ -5,8 +5,10 @@ import { setMarkerOpacity } from "../../../../store/mapOptions/mapOptionsReducer
 import { selectMarkerOpacity } from "../../../../store/mapOptions/mapOptionsSelector";
 import { useTranslation } from "react-i18next";
 import { analyticsEvent } from "../../../../services/analytics";
+import { useMediaQuery } from "@mantine/hooks";
 
 export function MapMarkerOpacity() {
+  const mediaQuerySize = useMediaQuery('(max-width: 768px)') ? 'xl' : 'md';
   const { t } = useTranslation('common');
   const dispatch = useAppDispatch();
   const markerOpacity = useAppSelector(selectMarkerOpacity);
@@ -36,7 +38,8 @@ export function MapMarkerOpacity() {
           max={1}
           defaultValue={markerOpacity}
           thumbLabel={t('settings.mapMarkersOpacity')}
-          onChangeEnd={onOpacityChange} />
+          onChangeEnd={onOpacityChange}
+          size={mediaQuerySize} />
       </Grid.Col>
     </Grid>
   )

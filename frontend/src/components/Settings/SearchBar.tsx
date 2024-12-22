@@ -7,6 +7,7 @@ import { setSelected } from "../../store/marker/markerReducer";
 import { setSelectedProperty } from "../../store/urlQuery/urlQuery.reducer";
 import { filterProperties } from "../../utils/properties";
 import { useViewportSize } from "@mantine/hooks";
+import { selectFiltering } from "../../store/filtering/filteringSelector";
 
 export function SearchBar() {
   const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ export function SearchBar() {
     displayAll,
     displayGnosis,
     displayRmm,
-  } = useAppSelector((state) => state.mapOptions);
+  } = useAppSelector(selectFiltering);
   const properties = useProperties();
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');

@@ -1,4 +1,5 @@
 import { Checkbox, CheckboxProps, Grid, Tooltip } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 
 export function Option({
   id,
@@ -7,6 +8,7 @@ export function Option({
   icon,
   disabled = false,
   onChange,
+  size,
 }: {
   id: string,
   label: string,
@@ -14,13 +16,17 @@ export function Option({
   icon?: CheckboxProps['icon'],
   disabled?: boolean,
   onChange: (event: boolean) => void,
+  size?: CheckboxProps['size'],
 }) {
+  const mediaQuerySize = useMediaQuery('(max-width: 768px)') ? 'xl' : 'md';
+  const consolidatedSize = size || mediaQuerySize;
+
   return (
     <Grid className="py-4">
       <Grid.Col>
         <Tooltip label={`Toggle ${label}`}>
           <Checkbox
-            size="md"
+            size={consolidatedSize}
             label={label}
             checked={checked}
             disabled={disabled}

@@ -4,12 +4,12 @@ import { Button, Grid, Modal, Space, Text } from "@mantine/core";
 import WalletIcon from '@mui/icons-material/Wallet';
 import { SettingsPanelSection } from "../SettingsPanelSection";
 import { useAppDispatch, useAppSelector } from "../../../hooks/useInitStore";
-import { setDisplayAll } from "../../../store/mapOptions/mapOptionsReducer";
 import { Maybe } from "../../../types/global";
 import { selectWalletAddresses } from "../../../store/settings/settingsSelector";
 import { addAddress, removeAddress, updateAddress } from "../../../store/settings/settingsReducer";
 import { Wallet, validateWallet } from "./Wallet";
 import { analyticsEvent } from "../../../services/analytics";
+import { setDisplayAll } from "../../../store/filtering/filteringReducer";
 
 export function Wallets() {
   const { t } = useTranslation('common');
