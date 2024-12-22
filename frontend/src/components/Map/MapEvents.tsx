@@ -29,7 +29,8 @@ export function MapEvents() {
     document
       .querySelectorAll('.marker-svg')
       .forEach((el) => {
-        el.setAttribute('style', `opacity: ${markerOpacity}`);
+        el.className = el.className.replace(/opacity-\d+/, '');
+        el.classList.add(`opacity-${markerOpacity * 100}`);
       });
   }, [markerOpacity]);
 

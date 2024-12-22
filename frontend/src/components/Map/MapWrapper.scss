@@ -70,3 +70,9 @@
 img.selected {
   filter: drop-shadow(0 6px 6px #000);
 }
+
+@for $i from 0 through 20 {
+  .opacity-#{$i * 5} {
+    opacity: #{$i * 0.05};
+  }
+}
