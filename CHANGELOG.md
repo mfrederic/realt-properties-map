@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/mfrederic/realt-properties-map/compare/v1.3.0...v1.3.1) (2024-12-22)
+
+
+### Bug Fixes
+
+* update dockerignore for backend ([71354aa](https://github.com/mfrederic/realt-properties-map/commit/71354aa81e4913d5c46de4a56c8e76d046d25cb4))
+
 # [1.3.0](https://github.com/mfrederic/realt-properties-map/compare/v1.2.0...v1.3.0) (2024-12-22)
 
 
