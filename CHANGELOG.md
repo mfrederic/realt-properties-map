@@ -4,6 +4,14 @@
 ### Bug Fixes
 
 * deployed pin generator ([04d0f3c](https://github.com/mfrederic/realt-properties-map/commit/04d0f3c2caee276a1b449d8dd34634ca4d42a8b4))
+* marker opacity feature ([785b16d](https://github.com/mfrederic/realt-properties-map/commit/785b16de0c48727d753cabd0989225f6ea6ad668))
+
+## [1.3.2](https://github.com/mfrederic/realt-properties-map/compare/v1.3.1...v1.3.2) (2024-12-22)
+
+
+### Bug Fixes
+
+* deployed pin generator ([04d0f3c](https://github.com/mfrederic/realt-properties-map/commit/04d0f3c2caee276a1b449d8dd34634ca4d42a8b4))
 
 ## [1.3.1](https://github.com/mfrederic/realt-properties-map/compare/v1.3.0...v1.3.1) (2024-12-22)
 
