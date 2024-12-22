@@ -26,7 +26,6 @@ export function getOwnedProperties(
       : parseFloat(amount.toString());
     asset.ownerWallets.push(owner.toLowerCase());
     asset.source = source;
-    console.log(asset.ownedAmount);
   }
 
   wallets.forEach((wallet) => {
