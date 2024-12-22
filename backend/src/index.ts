@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import CacheService from './services/cache.service';
 import PropertiesRouter from './routes/properties.route';
 import compression from 'compression';
+import { initPinService } from './services/pin/pin.service';
 
 dotEnv.config();
 
@@ -43,7 +44,16 @@ app.get('/', (req, res) => {
 
 app.use('/properties', PropertiesRouter);
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+initPinService()
+  .then(() => {
+    console.log('Pin service initialized');
+  })
+  .catch(error => {
+    console.error('Error initializing pin service, pins will not be generated', error);
+  })
+  .finally(() => {
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  });

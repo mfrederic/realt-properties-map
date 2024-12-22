@@ -1,4 +1,5 @@
-import { access, readFile, writeFile } from "fs/promises";
+import { access, mkdir, readFile, writeFile } from "fs/promises";
+import path from "path";
 
 function getOccupationColor(occupation: string) {
   switch (occupation) {
@@ -67,7 +68,7 @@ export async function getPinSvg(
   const strokeWidth = owned ? '4' : '1';
   const occupationColor = getOccupationColor(occupation);
   const propertyTypeColor = getPropertyTypeColor(propertyType);
-  const iconPath = icon ? await readFile(`${__dirname}/icons/${propertyType}.svg`, 'utf-8') : '';
+  const iconPath = icon ? await readFile(path.resolve(__dirname, 'icons', `${propertyType}.svg`), 'utf-8') : '';
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 78">
@@ -102,7 +103,14 @@ export async function writePinSvgToCache(
   icon: boolean,
   svg: string,
 ) {
-  await writeFile(`${__dirname}/pins/${getPinCacheKey(occupation, propertyType, owned, icon)}.svg`, svg);
+  await writeFile(
+    path.resolve(
+      __dirname,
+      'pins',
+      `${getPinCacheKey(occupation, propertyType, owned, icon)}.svg`,
+    ),
+    svg,
+  );
 }
 
 export async function getPinSvgFromCache(
@@ -112,7 +120,11 @@ export async function getPinSvgFromCache(
   icon: boolean,
 ) {
   try {
-    const filePath = `${__dirname}/pins/${getPinCacheKey(occupation, propertyType, owned, icon)}.svg`;
+    const filePath = path.resolve(
+      __dirname,
+      'pins',
+      `${getPinCacheKey(occupation, propertyType, owned, icon)}.svg`,
+    );
     const exists = await access(filePath).then(() => true).catch(() => false);
     if (!exists) {
       return undefined;
@@ -120,5 +132,12 @@ export async function getPinSvgFromCache(
     return readFile(filePath, 'utf-8');
   } catch (error) {
     return undefined;
+  }
+}
+
+export async function initPinService() {
+  const exists = await access(path.resolve(__dirname, 'pins')).then(() => true).catch(() => false);
+  if (!exists) {
+    await mkdir(path.resolve(__dirname, 'pins'), { recursive: true });
   }
 }
