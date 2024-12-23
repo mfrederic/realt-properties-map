@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/mfrederic/realt-properties-map/compare/v1.3.2...v1.3.3) (2024-12-23)
+
+
+### Bug Fixes
+
+* use more correct icon for resorts ([4bfa6db](https://github.com/mfrederic/realt-properties-map/commit/4bfa6db85be814d0214aaec8bee5a94426ed83a7))
+
 ## [1.3.2](https://github.com/mfrederic/realt-properties-map/compare/v1.3.1...v1.3.2) (2024-12-22)
 
 
