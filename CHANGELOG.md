@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/mfrederic/realt-properties-map/compare/v1.5.0...v1.5.1) (2024-12-23)
+
+
+### Bug Fixes
+
+* correct clustering option not applying ([5d3444c](https://github.com/mfrederic/realt-properties-map/commit/5d3444c5a9bf462c5185c69330d3272e131ab9a1))
+
 # [1.5.0](https://github.com/mfrederic/realt-properties-map/compare/v1.4.0...v1.5.0) (2024-12-23)
 
 
