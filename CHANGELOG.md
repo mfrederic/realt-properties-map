@@ -1,3 +1,15 @@
+# [1.5.0](https://github.com/mfrederic/realt-properties-map/compare/v1.4.0...v1.5.0) (2024-12-23)
+
+
+### Bug Fixes
+
+* building warnings ([ec5f4b9](https://github.com/mfrederic/realt-properties-map/commit/ec5f4b906326c08060aa54561357d759879a2f3f))
+
+
+### Features
+
+* handle offline properties API ([48cd7e7](https://github.com/mfrederic/realt-properties-map/commit/48cd7e78028d8c3fb9d35480cb726ef5e4d217f8))
+
 # [1.4.0](https://github.com/mfrederic/realt-properties-map/compare/v1.3.3...v1.4.0) (2024-12-23)
 
 
