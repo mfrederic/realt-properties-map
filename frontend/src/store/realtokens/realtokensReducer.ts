@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "../store";
-import { showError, showLoading, showSuccess } from "../../utils/notifications";
+import { showError, showLoading, showSuccess, showWarning } from "../../utils/notifications";
 import { TFunction } from "i18next";
 import { RealToken } from "../../types/realtProperty";
 import { getRealTokens } from "../../services/realtokens";
@@ -28,12 +28,19 @@ export function fetchRealtokens(t: TFunction<'common', 'notifications'>) {
     })
 
     try {
-      const { realtokens } = await getRealTokens();
+      const { realtokens, error } = await getRealTokens();
       dispatch(setRealtokens(realtokens));
-      showSuccess({
-        title: t('realtokens.successLoadingTitle'),
-        message: t('realtokens.successLoadingMessage'),
-      });
+      if (error) {
+        showWarning({
+          title: t('realtokens.warningLoadingTitle'),
+          message: t('realtokens.warningLoadingMessage'),
+        });
+      } else {
+        showSuccess({
+          title: t('realtokens.successLoadingTitle'),
+          message: t('realtokens.successLoadingMessage'),
+        });
+      }
     } catch (error) {
       dispatch(setRealtokens([]));
       showError({

@@ -2,18 +2,29 @@ import Env from "../utils/env";
 import { httpRequester } from "./http";
 import { Property } from "../types/property";
 import { RealToken } from "../types/realtProperty";
+import { Cache } from '../utils/cache';
+
+const CACHE_KEY = 'realtokens_cache';
 
 export async function getRealTokens(): Promise<{
   error?: boolean,
   realtokens: Array<RealToken>,
 }> {
-  const http = httpRequester();
-  const response = await http.get<Array<RealToken>>(`${Env.VITE_REALT_PROPERTIES_BACKEND_URL}properties`);
-  if (!Array.isArray(response.data)) {
-    throw new Error('Invalid response');
-  }
+  const result = await Cache.fetch<Array<RealToken>>(
+    CACHE_KEY,
+    async () => {
+      const http = httpRequester();
+      const response = await http.get<Array<RealToken>>(`${Env.VITE_REALT_PROPERTIES_BACKEND_URL}properties`);
+      if (!Array.isArray(response.data)) {
+        throw new Error('Invalid response');
+      }
+      return response.data;
+    },
+  );
+
   return {
-    realtokens: response.data,
+    error: result.error,
+    realtokens: result.data,
   };
 }
 

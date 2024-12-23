@@ -28,6 +28,13 @@ export function showSuccess(notification: NotificationData, store?: Notification
   }, store);
 }
 
+export function showWarning(notification: NotificationData, store?: NotificationsStore | undefined) {
+  return show({
+    color: 'yellow',
+    ...notification
+  }, store);
+}
+
 export function showError(notification: NotificationData, store?: NotificationsStore | undefined) {
   return show({
     color: 'red',

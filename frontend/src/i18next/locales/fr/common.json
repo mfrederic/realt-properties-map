@@ -131,7 +131,9 @@
       "loadingTitle": "Chargement des RealTokens",
       "successLoadingTitle": "RealTokens chargés",
       "successLoadingMessage": "RealTokens chargés avec succès",
-      "errorLoadingTitle": "Erreur lors du chargement des RealTokens"
+      "errorLoadingTitle": "Erreur lors du chargement des RealTokens",
+      "warningLoadingTitle": "Avertissement lors du chargement des RealTokens",
+      "warningLoadingMessage": "Le service de RealTokens n'est pas disponible, utilisation des données en cache"
     },
     "wallets": {
       "loadingTitle": "Chargement des portefeuilles",

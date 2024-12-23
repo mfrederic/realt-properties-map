@@ -131,7 +131,9 @@
       "loadingTitle": "Loading RealTokens",
       "successLoadingTitle": "RealTokens loaded",
       "successLoadingMessage": "RealTokens loaded successfully",
-      "errorLoadingTitle": "Error while loading RealTokens"
+      "errorLoadingTitle": "Error while loading RealTokens",
+      "warningLoadingTitle": "Warning while loading RealTokens",
+      "warningLoadingMessage": "RealTokens service is not available, using cached data"
     },
     "wallets": {
       "loadingTitle": "Loading Wallets",
