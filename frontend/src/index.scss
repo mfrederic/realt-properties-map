@@ -1,4 +1,4 @@
-@use './theme/variables.scss' as *;
+@forward './theme/variables';
 
 @tailwind base;
 @tailwind components;

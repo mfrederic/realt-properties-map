@@ -1,4 +1,4 @@
-@use '../../theme/variables.scss' as *;
+@forward '../../theme/variables';
 
 .map {
   height: 100vh;

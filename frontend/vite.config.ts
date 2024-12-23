@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import * as sass from 'sass-embedded'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -14,6 +14,15 @@ export default defineConfig({
     global: 'window',
   },
   css: {
-    postcss: './postcss.config.cjs'
+    preprocessorOptions: {
+      scss: {
+        implementation: sass,
+        sassOptions: {
+          style: 'expanded',
+          sourceMap: true,
+        }
+      }
+    },
+    postcss: './postcss.config.js'
   }
 })
