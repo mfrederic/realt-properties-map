@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/mfrederic/realt-properties-map/compare/v1.3.3...v1.4.0) (2024-12-23)
+
+
+### Features
+
+* add new property filters ([04779be](https://github.com/mfrederic/realt-properties-map/commit/04779be48bc5fde5e820c358df851513390e2622))
+
 ## [1.3.3](https://github.com/mfrederic/realt-properties-map/compare/v1.3.2...v1.3.3) (2024-12-23)
 
 
