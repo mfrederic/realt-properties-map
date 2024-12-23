@@ -8,12 +8,29 @@ interface FilteringState {
   displayAll: boolean;
   displayGnosis: boolean;
   displayRmm: boolean;
+  propertyTypes: string[];
+  propertyOccupations: {
+    min: number;
+    max: number;
+  };
+  propertyYields: {
+    min: number;
+    max?: number;
+  };
 }
 
 const initialState: FilteringState = {
   displayAll: true,
   displayGnosis: true,
   displayRmm: true,
+  propertyTypes: [],
+  propertyOccupations: {
+    min: 0,
+    max: 100,
+  },
+  propertyYields: {
+    min: 0,
+  },
 };
 
 export const filteringSlice = createSlice({
@@ -32,6 +49,18 @@ export const filteringSlice = createSlice({
       state.displayRmm = action.payload;
       setItem<FilteringState>(LOCAL_STORAGE_NAME, state);
     },
+    setPropertyTypes: (state, action: PayloadAction<string[]>) => {
+      state.propertyTypes = action.payload;
+      setItem<FilteringState>(LOCAL_STORAGE_NAME, state);
+    },
+    setPropertyOccupations: (state, action: PayloadAction<{ min: number; max: number }>) => {
+      state.propertyOccupations = action.payload;
+      setItem<FilteringState>(LOCAL_STORAGE_NAME, state);
+    },
+    setPropertyYields: (state, action: PayloadAction<{ min: number; max?: number }>) => {
+      state.propertyYields = action.payload;
+      setItem<FilteringState>(LOCAL_STORAGE_NAME, state);
+    },
   }
 });
 
@@ -39,6 +68,9 @@ export const {
   setDisplayAll,
   setDisplayGnosis,
   setDisplayRmm,
+  setPropertyTypes,
+  setPropertyOccupations,
+  setPropertyYields,
 } = filteringSlice.actions;
 
 export default filteringSlice.reducer;

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { setDisplayGnosis, setDisplayRmm } from "../../store/filtering/filteringReducer";
+import { setDisplayGnosis, setDisplayRmm, setPropertyTypes } from "../../store/filtering/filteringReducer";
 import { useTranslation } from "react-i18next";
 import { CheckboxProps } from "@mantine/core";
 import MapIcon from '@mui/icons-material/Map';
@@ -12,7 +12,9 @@ import { analyticsEvent } from "../../services/analytics";
 import { SettingsPanelSection } from "../Settings/SettingsPanelSection";
 import { Option } from "../Settings/Settings/Option";
 import { selectFiltering } from "../../store/filtering/filteringSelector";
-import { useMediaQuery } from "@mantine/hooks";
+import { PropertyType } from "./PropertyType";
+import { PropertyOccupations } from "./PropertyOccupations";
+import { PropertyYields } from "./PropertyYields";
 
 export function FilteringOptions() {
   const { t: tMapOptions } = useTranslation('common', { keyPrefix: 'mapOptions' });
@@ -84,6 +86,9 @@ export function FilteringOptions() {
           checked={filteringOptions.displayAll}
           disabled={walletAddresses.length === 0}
           onChange={(e) => onDisplayAll(e)} />
+        <PropertyType />
+        <PropertyOccupations />
+        <PropertyYields />
       </SettingsPanelSection>
     </>
   )

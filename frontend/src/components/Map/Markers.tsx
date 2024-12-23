@@ -7,11 +7,11 @@ import { selectedMarker } from '../../store/marker/markerSelector';
 import { selectedProperty } from '../../store/urlQuery/urlQuery.selector';
 import { useTranslation } from 'react-i18next';
 import { LeafletMouseEvent } from 'leaflet';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { setSelected } from '../../store/marker/markerReducer';
 import { setSelectedProperty } from '../../store/urlQuery/urlQuery.reducer';
 import { filterProperties } from '../../utils/properties';
-import { selectFiltering } from '../../store/filtering/filteringSelector';
+import { selectFiltering, selectPropertyTypes, selectPropertyOccupations, selectPropertyYields } from '../../store/filtering/filteringSelector';
 
 export function Markers(props: { properties: Property[] }) {
   const { t } = useTranslation('common');
@@ -29,6 +29,12 @@ export function Markers(props: { properties: Property[] }) {
   } = useAppSelector(selectFiltering);
   const selectedMarkerProperty = useAppSelector(selectedMarker);
   const selectedUrlParam = useAppSelector(selectedProperty);
+  const propertyTypes = useAppSelector(selectPropertyTypes);
+  const propertyOccupations = useAppSelector(selectPropertyOccupations);
+  const propertyYields = useAppSelector(selectPropertyYields);
+
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [debouncedFilterTimeout, setDebouncedFilterTimeout] = useState<NodeJS.Timeout>();
 
   const onMarkerClicked = useCallback((event: LeafletMouseEvent, property: Property) => {
     dispatch(setSelected({
@@ -73,13 +79,31 @@ export function Markers(props: { properties: Property[] }) {
     });
   }, [selectedMarkerProperty, map]);
   
-  const filteredProperties = useMemo(() => {
-    return filterProperties(props.properties, displayAll, displayGnosis, displayRmm, selectedUrlParam);
-  }, [props.properties, displayAll, displayGnosis, displayRmm, selectedUrlParam]);
+  useEffect(() => {
+    clearTimeout(debouncedFilterTimeout);
+    
+    const timeoutId = setTimeout(() => {
+      const filtered = filterProperties(
+        props.properties,
+        displayAll,
+        displayGnosis, 
+        displayRmm,
+        selectedUrlParam,
+        propertyTypes,
+        propertyOccupations,
+        propertyYields,
+      );
+      setProperties(filtered);
+    }, 300);
+
+    setDebouncedFilterTimeout(timeoutId);
+
+    return () => clearTimeout(timeoutId);
+  }, [props.properties, displayAll, displayGnosis, displayRmm, selectedUrlParam, propertyTypes, propertyOccupations, propertyYields]);
 
   return (
     <>
-      {filteredProperties.map((property) => (
+      {properties.map((property) => (
         <Marker
           key={property.address}
           position={property.coordinates}

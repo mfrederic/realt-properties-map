@@ -22,7 +22,7 @@ export function SearchBar() {
   const [searchValue, setSearchValue] = useState<string>('');
 
   useEffect(() => {
-    setFilteredProperties(filterProperties(properties, displayAll, displayGnosis, displayRmm, null));
+    setFilteredProperties(filterProperties(properties, displayAll, displayGnosis, displayRmm));
   }, [properties, displayAll, displayGnosis, displayRmm]);
 
   let timeout: NodeJS.Timeout;

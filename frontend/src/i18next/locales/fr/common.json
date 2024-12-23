@@ -50,7 +50,16 @@
   },
   "filtering": {
     "filtering": "Filtres",
-    "filteringOptions": "Options de filtres"
+    "filteringOptions": "Options de filtres",
+    "propertyTypes": "Types de propriétés",
+    "propertyOccupations": {
+      "min": "Min Occupations",
+      "max": "Max Occupations"
+    },
+    "propertyYields": {
+      "min": "Min Yield",
+      "max": "Max Yield"
+    }
   },
   "settings": {
     "language": "Langue",
