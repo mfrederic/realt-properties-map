@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/mfrederic/realt-properties-map/compare/v1.5.1...v1.6.0) (2024-12-25)
+
+
+### Features
+
+* add logger service to backend ([8ed046f](https://github.com/mfrederic/realt-properties-map/commit/8ed046f6c3a61ffe9bc8afe08ae793fd05a65e1a))
+
 ## [1.5.1](https://github.com/mfrederic/realt-properties-map/compare/v1.5.0...v1.5.1) (2024-12-23)
 
 
