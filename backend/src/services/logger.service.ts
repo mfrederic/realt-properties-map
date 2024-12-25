@@ -115,7 +115,14 @@ export class LoggerService {
 
   public async read(age: number = 0): Promise<LogEntry[]> {
     const files = await fs.readdir(this.logDir);
+    if (files.length === 0) {
+      return [];
+    }
+
     const logFiles = files.filter(file => file.startsWith('app.log'));
+    if (logFiles.length === 0) {
+      return [];
+    }
 
     if (age === 0) {
       const currentLogContent = await fs.readFile(this.currentLogFile, 'utf-8');
