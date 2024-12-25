@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/mfrederic/realt-properties-map/compare/v1.6.1...v1.7.0) (2024-12-25)
+
+
+### Features
+
+* add logger reader ([8051f71](https://github.com/mfrederic/realt-properties-map/commit/8051f71c5db58aa6f421d15942d6c35f2466413c))
+
 ## [1.6.1](https://github.com/mfrederic/realt-properties-map/compare/v1.6.0...v1.6.1) (2024-12-25)
 
 
