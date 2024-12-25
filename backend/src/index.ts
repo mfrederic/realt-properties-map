@@ -2,9 +2,10 @@ import express from 'express';
 import dotEnv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import compression from 'compression';
 import CacheService from './services/cache.service';
 import PropertiesRouter from './routes/properties.route';
-import compression from 'compression';
+import LoggerRouter from './routes/logger.route';
 import { initPinService } from './services/pin/pin.service';
 
 dotEnv.config();
@@ -43,6 +44,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/properties', PropertiesRouter);
+app.use('/log', LoggerRouter);
 
 initPinService()
   .then(() => {

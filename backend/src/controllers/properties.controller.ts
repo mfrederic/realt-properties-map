@@ -1,11 +1,13 @@
+import { NextFunction, Request, Response } from "express";
 import axios from "axios";
 import CacheService from "../services/cache.service";
-import { NextFunction, Request, Response } from "express";
 
-const PropertiesCacheKey = 'properties'
+const PropertiesCacheKey = 'properties';
+
+const DEFAULT_PROPERTIES_CACHE_TTL = 60;
 
 // TTL is in seconds, 1 hour
-const cachedTime = 60 * 60
+const cachedTime = (process.env.PROPERTIES_CACHE_TTL ? parseInt(process.env.PROPERTIES_CACHE_TTL) * 60 : 60) * 60;
 
 export async function get(req: Request, res: Response, next: NextFunction): Promise<Response<any, Record<string, any>>> {
   try {
