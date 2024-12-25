@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/mfrederic/realt-properties-map/compare/v1.6.0...v1.6.1) (2024-12-25)
+
+
+### Bug Fixes
+
+* auth api token handling ([7a7c0b7](https://github.com/mfrederic/realt-properties-map/commit/7a7c0b7016d16ebbb869cdbbc6848c506dc6b73e))
+
 # [1.6.0](https://github.com/mfrederic/realt-properties-map/compare/v1.5.1...v1.6.0) (2024-12-25)
 
 
