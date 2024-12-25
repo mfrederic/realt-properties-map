@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/mfrederic/realt-properties-map/compare/v1.7.1...v1.7.2) (2024-12-25)
+
+
+### Bug Fixes
+
+* check for log file existance ([90310a3](https://github.com/mfrederic/realt-properties-map/commit/90310a3de10484fd22010047c69bc0db149e09c4))
+
 ## [1.7.1](https://github.com/mfrederic/realt-properties-map/compare/v1.7.0...v1.7.1) (2024-12-25)
 
 
