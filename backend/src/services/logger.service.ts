@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { createWriteStream, existsSync, mkdirSync, WriteStream } from 'fs';
 
-interface LogEntry {
+export interface LogEntry {
   level: string;
   message: string;
   metadata?: any;

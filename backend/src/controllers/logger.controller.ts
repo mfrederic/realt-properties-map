@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import rateLimit from 'express-rate-limit';
-import LoggerService from '../services/logger.service';
+import LoggerService, { LogEntry } from '../services/logger.service';
 
 const DEFAULT_LOG_LIMIT_WINDOW_MS = 15;
 const DEFAULT_LOG_LIMIT_MAX = 40;
