@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/mfrederic/realt-properties-map/compare/v1.7.0...v1.7.1) (2024-12-25)
+
+
+### Bug Fixes
+
+* export logEntry interface ([2c81b2b](https://github.com/mfrederic/realt-properties-map/commit/2c81b2bcfb456af4e1c862f883c7247faad2e729))
+
 # [1.7.0](https://github.com/mfrederic/realt-properties-map/compare/v1.6.1...v1.7.0) (2024-12-25)
 
 
