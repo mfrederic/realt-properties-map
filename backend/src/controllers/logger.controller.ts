@@ -30,3 +30,13 @@ export async function log(req: Request, res: Response): Promise<Response> {
     return res.status(500).json({ message: 'Error creating log entry' });
   }
 }
+
+export async function read(
+  req: Request,
+  res: Response,
+): Promise<Response<LogEntry[]>> {
+  const { age } = req.query;
+  
+  const logs = await LoggerService.read(age ? parseInt(age as string) : 0);
+  return res.status(200).json(logs);
+}

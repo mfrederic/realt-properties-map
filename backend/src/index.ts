@@ -20,6 +20,7 @@ app.use(cors({
   origin: function(origin, callback){
     if(!origin) return callback(null, true);
     if(CORS_ORIGIN.indexOf(new URL(origin).hostname) === -1){
+      console.error(`CORS policy blocked request from: ${origin}`);
       var msg = 'The CORS policy for this site does not ' +
                 'allow access from the specified Origin.';
       return callback(new Error(msg), false);

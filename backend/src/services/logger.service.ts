@@ -2,6 +2,12 @@ import fs from 'fs/promises';
 import path from 'path';
 import { createWriteStream, existsSync, mkdirSync, WriteStream } from 'fs';
 
+interface LogEntry {
+  level: string;
+  message: string;
+  metadata?: any;
+}
+
 export class LoggerService {
   private static instance: LoggerService;
   private readonly logDir: string;
@@ -81,7 +87,7 @@ export class LoggerService {
       }
 
       const timestamp = new Date().toISOString();
-      const logEntry = {
+      const logEntry: LogEntry = {
         timestamp,
         level,
         message,
@@ -105,6 +111,32 @@ export class LoggerService {
 
   public async warn(message: string, metadata?: any): Promise<void> {
     return this.log('WARN', message, metadata);
+  }
+
+  public async read(age: number = 0): Promise<LogEntry[]> {
+    const files = await fs.readdir(this.logDir);
+    const logFiles = files.filter(file => file.startsWith('app.log'));
+
+    if (age === 0) {
+      const currentLogContent = await fs.readFile(this.currentLogFile, 'utf-8');
+      return currentLogContent.trim().split('\n').map<LogEntry>(line => JSON.parse(line));
+    }
+
+    const sortedLogFiles = logFiles
+      .filter(file => file !== 'app.log')
+      .sort((a, b) => {
+        const numA = parseInt(a.split('.')[2]) || 0;
+        const numB = parseInt(b.split('.')[2]) || 0;
+        return numB - numA;
+      });
+
+    if (age > sortedLogFiles.length) {
+      return [];
+    }
+
+    const targetFile = path.join(this.logDir, sortedLogFiles[age - 1]);
+    const fileContent = await fs.readFile(targetFile, 'utf-8');
+    return fileContent.trim().split('\n').map<LogEntry>(line => JSON.parse(line));
   }
 }
 
