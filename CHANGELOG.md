@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/mfrederic/realt-properties-map/compare/v1.8.0...v1.9.0) (2024-12-29)
+
+
+### Features
+
+* update panels responsiveness ([1144a71](https://github.com/mfrederic/realt-properties-map/commit/1144a711e09c539f1b011af16d82721be3d31376))
+
 # [1.8.0](https://github.com/mfrederic/realt-properties-map/compare/v1.7.2...v1.8.0) (2024-12-29)
 
 
