@@ -46,7 +46,8 @@
     "copyUrl": "Copy URL",
     "openWalletsPanel": "Open Wallets Panel",
     "openSettingsPanel": "Open Settings Panel",
-    "openHelpPanel": "Help RPM"
+    "openHelpPanel": "Help RPM",
+    "openSearch": "Search"
   },
   "filtering": {
     "filtering": "Filtering",

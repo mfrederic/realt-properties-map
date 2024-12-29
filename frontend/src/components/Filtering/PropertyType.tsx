@@ -1,15 +1,15 @@
-import { useAppSelector } from "../../hooks/useInitStore";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { ComboboxData, MultiSelect } from "@mantine/core";
+import { useAppSelector } from "../../hooks/useInitStore";
 import { analyticsEvent } from "../../services/analytics";
 import { useAppDispatch } from "../../hooks/useInitStore";
 import { selectPropertyTypes } from "../../store/filtering/filteringSelector";
-import { ComboboxData, MultiSelect } from "@mantine/core";
 import { setPropertyTypes } from "../../store/filtering/filteringReducer";
-import { useMemo } from "react";
-import { useMediaQuery } from "@mantine/hooks";
+import { useSmallScreen } from "../../hooks/useSmallScreen";
 
 export function PropertyType() {
-  const mediaQuerySize = useMediaQuery('(max-width: 768px)') ? 'xl' : 'md';
+  const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common', { keyPrefix: 'filtering' });
   const { t: tPropertyType } = useTranslation('common', { keyPrefix: 'propertyType' });
   const dispatch = useAppDispatch();
@@ -35,7 +35,7 @@ export function PropertyType() {
       label={t('propertyTypes')}
       data={data}
       value={propertyTypes}
-      size={mediaQuerySize}
+      size={isSmallScreen ? 'md' : 'xl'}
       onChange={(e) => onPropertyTypes(e)} />
   )
 }

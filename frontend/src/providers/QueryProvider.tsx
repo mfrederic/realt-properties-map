@@ -30,9 +30,9 @@ export function QueryProvider({
 
   useEffect(() => {
     const newSearchParams = new URLSearchParams();
-    handleSearchParam(newSearchParams, "latlng", JSON.stringify(center));
-    handleSearchParam(newSearchParams, "zoom", JSON.stringify(zoom));
-    handleSearchParam(newSearchParams, "selected", selected);
+    handleSearchParam(newSearchParams, "ll", center ? center.join('x') : null);
+    handleSearchParam(newSearchParams, "z", zoom ? zoom.toString() : null);
+    handleSearchParam(newSearchParams, "s", selected);
     setSearchParams(newSearchParams);
   }, [center, zoom, selected, setSearchParams]);
 

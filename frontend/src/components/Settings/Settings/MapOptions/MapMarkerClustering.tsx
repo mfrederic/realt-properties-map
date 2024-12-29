@@ -1,14 +1,15 @@
+import { useTranslation } from "react-i18next";
 import { Grid, Slider } from "@mantine/core";
 import OpacityIcon from '@mui/icons-material/Opacity';
 import { useAppDispatch, useAppSelector } from "../../../../hooks/useInitStore";
 import { setMarkerClustering } from "../../../../store/mapOptions/mapOptionsReducer";
 import { selectMarkerClustering } from "../../../../store/mapOptions/mapOptionsSelector";
-import { useTranslation } from "react-i18next";
 import { analyticsEvent } from "../../../../services/analytics";
-import { useMediaQuery } from "@mantine/hooks";
+import { useSmallScreen } from "../../../../hooks/useSmallScreen";
 
 export function MapMarkerClustering() {
-  const mediaQuerySize = useMediaQuery('(max-width: 768px)') ? 'xl' : 'md';
+  const isSmallScreen = useSmallScreen();
+  const mediaQuerySize = isSmallScreen ? 'xl' : 'md';
   const { t } = useTranslation('common');
   const dispatch = useAppDispatch();
   const markerClustering = useAppSelector(selectMarkerClustering);

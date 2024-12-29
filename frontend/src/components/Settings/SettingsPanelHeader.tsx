@@ -1,8 +1,8 @@
 import { Button, Drawer, Grid } from "@mantine/core";
-import { RealtLogo } from "../Common/RealtLogo";
-import { AffixBtn } from "../Common/AffixBtn";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useTranslation } from "react-i18next";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { RealtLogo } from "../Common/RealtLogo";
+import { AffixBtn } from "../Common/AffixBtn/AffixBtn";
 
 export function SettingsPanelHeader({
   children,

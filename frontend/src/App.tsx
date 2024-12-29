@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 import './i18next/i18next';
 import store from './store/store';
 import { MapWrapper } from './components/Map/MapWrapper';
-import { AppActions } from './components/Settings/AppActions';
+import { AppActions } from './components/Settings/AppActions/AppActions';
 import { MantineProviders } from './providers/MantineProvider';
 import { HotkeysProvider } from './providers/HotkeysProvider';
 import InitStoreProvider from './providers/InitStoreProvider';

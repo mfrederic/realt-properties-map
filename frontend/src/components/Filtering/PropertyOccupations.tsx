@@ -1,12 +1,12 @@
 import { NumberInput } from "@mantine/core";
 import { useTranslation } from "react-i18next";
-import { useMediaQuery } from "@mantine/hooks";
 import { selectPropertyOccupations } from "../../store/filtering/filteringSelector";
 import { useAppDispatch, useAppSelector } from "../../hooks/useInitStore";
 import { setPropertyOccupations } from "../../store/filtering/filteringReducer";
+import { useSmallScreen } from "../../hooks/useSmallScreen";
 
 export function PropertyOccupations() {
-  const mediaQuerySize = useMediaQuery('(max-width: 768px)') ? 'xl' : 'md';
+  const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common', { keyPrefix: 'filtering' });
 
   const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ export function PropertyOccupations() {
       min={0}
       max={propertyOccupations.max}
       allowDecimal={false}
-      size={mediaQuerySize}
+      size={isSmallScreen ? 'md' : 'xl'}
       onChange={(e) => onPropertyOccupations(e as number)}
     />
     <NumberInput
@@ -38,7 +38,7 @@ export function PropertyOccupations() {
       min={propertyOccupations.min}
       max={100}
       allowDecimal={false}
-      size={mediaQuerySize}
+      size={isSmallScreen ? 'md' : 'xl'}
       onChange={(e) => onPropertyOccupations(undefined, e as number)}
     />
   </>

@@ -46,7 +46,8 @@
     "copyUrl": "Copier URL",
     "openWalletsPanel": "Ouvrir la configuration des portefeuilles",
     "openSettingsPanel": "Ouvrir les paramètres",
-    "openHelpPanel": "Aider RPM"
+    "openHelpPanel": "Aider RPM",
+    "openSearch": "Rechercher"
   },
   "filtering": {
     "filtering": "Filtres",

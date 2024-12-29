@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
-import Env from "../../utils/env";
 import { ActionIcon, Button, Flex, Grid } from "@mantine/core";
 import GoogleIcon from '@mui/icons-material/Google';
 import XIcon from '@mui/icons-material/X';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import { AffixBtn } from "../Common/AffixBtn";
+import Env from "../../utils/env";
+import { AffixBtn } from "../Common/AffixBtn/AffixBtn";
 import { useCopyUrl } from "../../hooks/useCopyUrl";
-import { useViewportSize } from "@mantine/hooks";
 import { Property } from "../../types/property";
+import { useSmallScreen } from "../../hooks/useSmallScreen";
 
 function encodeUrlUsingPercentEncoding(url: string) {
   return encodeURI(url);
@@ -24,7 +24,7 @@ export function PropertyPanelActions({
   coordinates: Property['coordinates'];
   onClose: () => void;
 }) {
-  const { width } = useViewportSize();
+  const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common');
   const { copied, onCopyUrl } = useCopyUrl();
 
@@ -115,7 +115,7 @@ export function PropertyPanelActions({
             </Button>
           }>
           <Button
-            fullWidth={width > 768}
+            fullWidth={isSmallScreen}
             onClick={onClose}>
             {t('actions.close')}
           </Button>

@@ -1,17 +1,19 @@
+import { useEffect, useState, useRef, useImperativeHandle, forwardRef } from "react";
 import { Autocomplete } from "@mantine/core";
+import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch, useAppSelector } from "../../hooks/useInitStore";
-import { useEffect, useState } from "react";
 import { useProperties } from "../../hooks/useProperties";
 import { Property } from "../../types/property";
 import { setSelected } from "../../store/marker/markerReducer";
 import { setSelectedProperty } from "../../store/urlQuery/urlQuery.reducer";
 import { filterProperties } from "../../utils/properties";
-import { useViewportSize } from "@mantine/hooks";
 import { selectFiltering } from "../../store/filtering/filteringSelector";
+import { useSmallScreen } from "../../hooks/useSmallScreen";
 
-export function SearchBar() {
+// Create the base component
+const SearchBarComponent = forwardRef<{ focus: () => void }, {}>((_props, ref) => {
+  const isSmallScreen = useSmallScreen();
   const dispatch = useAppDispatch();
-  const { width } = useViewportSize();
   const {
     displayAll,
     displayGnosis,
@@ -20,6 +22,7 @@ export function SearchBar() {
   const properties = useProperties();
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
+  const searchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setFilteredProperties(filterProperties(properties, displayAll, displayGnosis, displayRmm));
@@ -45,18 +48,35 @@ export function SearchBar() {
     }, 300);
   };
 
+  const focus = () => {
+    searchRef.current?.focus();
+  };
+
+  useImperativeHandle(ref, () => ({
+    focus,
+  }));
+
   return <Autocomplete
+    ref={searchRef}
+    leftSection={
+      isSmallScreen && <SearchIcon />
+    }
     value={searchValue}
-    className="mb-2 mr-2"
+    className="mb-0 mr-0 px-2 w-full md:mb-2 md:mr-2 md:px-auto md:w-auto"
     placeholder="Search"
     size="md"
     data={filteredProperties.map((p) => p.fullName)}
     limit={20}
-    maxDropdownHeight={width > 768 ? 250 : '50vh'}
+    maxDropdownHeight={!isSmallScreen ? 250 : '50vh'}
     comboboxProps={{
-      size: width > 768 ? 'md' : 'lg',
-      dropdownPadding: width > 768 ? 4 : 0,
-      width: width > 768 ? 'max-content' : '90vw',
+      size: !isSmallScreen ? 'md' : 'lg',
+      dropdownPadding: !isSmallScreen ? 4 : 0,
+      width: !isSmallScreen ? 'max-content' : '90vw',
     }}
+    radius={!isSmallScreen ? 'md' : 'xs'}
+    variant={!isSmallScreen ? 'default' : 'unstyled'}
     onChange={onSearch} />
-}
+});
+
+// Export the component
+export const SearchBar = SearchBarComponent;

@@ -1,5 +1,5 @@
 import { Checkbox, CheckboxProps, Grid, Tooltip } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
+import { useSmallScreen } from "../../../hooks/useSmallScreen";
 
 export function Option({
   id,
@@ -18,7 +18,8 @@ export function Option({
   onChange: (event: boolean) => void,
   size?: CheckboxProps['size'],
 }) {
-  const mediaQuerySize = useMediaQuery('(max-width: 768px)') ? 'xl' : 'md';
+  const isSmallScreen = useSmallScreen();
+  const mediaQuerySize = isSmallScreen ? 'xl' : 'md';
   const consolidatedSize = size || mediaQuerySize;
 
   return (

@@ -1,12 +1,12 @@
 import { NumberInput } from "@mantine/core";
 import { useTranslation } from "react-i18next";
-import { useMediaQuery } from "@mantine/hooks";
+import { useSmallScreen } from "../../hooks/useSmallScreen";
 import { selectPropertyYields } from "../../store/filtering/filteringSelector";
 import { useAppDispatch, useAppSelector } from "../../hooks/useInitStore";
 import { setPropertyYields } from "../../store/filtering/filteringReducer";
 
 export function PropertyYields() {
-  const mediaQuerySize = useMediaQuery('(max-width: 768px)') ? 'xl' : 'md';
+  const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common', { keyPrefix: 'filtering' });
 
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ export function PropertyYields() {
       min={0}
       max={propertyYields.max ?? undefined}
       allowDecimal={false}
-      size={mediaQuerySize}
+      size={isSmallScreen ? 'md' : 'xl'}
       onChange={(e) => onPropertyYields(e as number)}
     />
     <NumberInput
@@ -40,7 +40,7 @@ export function PropertyYields() {
       min={propertyYields.min}
       max={100}
       allowDecimal={false}
-      size={mediaQuerySize}
+      size={isSmallScreen ? 'md' : 'xl'}
       onChange={(e) => onPropertyYields(undefined, e as number)}
     />
   </>

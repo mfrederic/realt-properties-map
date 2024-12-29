@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Affix,
   MantineProvider, localStorageColorSchemeManager,
@@ -5,8 +6,7 @@ import {
 import { ModalsProvider } from '@mantine/modals'
 import { Notifications } from '@mantine/notifications'
 import { modalStyles, theme } from '../theme/theme'
-import { useViewportSize } from '@mantine/hooks';
-import { useEffect, useState } from 'react';
+import { useSmallScreen } from '../hooks/useSmallScreen';
 
 const colorSchemeManager = localStorageColorSchemeManager({
   key: 'my-app-color-scheme',
@@ -17,14 +17,14 @@ export function MantineProviders({
 }: {
   children: React.ReactNode
 }) {
-  const { width } = useViewportSize();
+  const isSmallScreen = useSmallScreen();
   const [position, setPosition] = useState(
-    width > 768 ? { bottom: 0, left: 0 } : { top: 0, right: 0 }
+    isSmallScreen ? { bottom: 0, left: 0 } : { top: 0, right: 0 }
   );
 
   useEffect(() => {
-    setPosition(width > 768 ? { bottom: 0, left: 0 } : { top: 10, right: 10 });
-  }, [width]);
+    setPosition(isSmallScreen ? { bottom: 0, left: 0 } : { top: 10, right: 10 });
+  }, [isSmallScreen]);
 
   return (
     <MantineProvider

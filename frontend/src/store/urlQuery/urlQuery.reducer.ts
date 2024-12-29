@@ -8,13 +8,13 @@ interface UrlQueryState {
 }
 
 const urlParams = new URLSearchParams(window.location.search);
-const selected = urlParams.get('selected');
-const latlng = urlParams.get('latlng');
-const zoom = urlParams.get('zoom');
+const selected = urlParams.get('s');
+const latlng = urlParams.get('ll');
+const zoom = urlParams.get('z');
 
 const initialState: UrlQueryState = {
   selected,
-  latlng: latlng ? JSON.parse(latlng) : [32, -83],
+  latlng: latlng ? latlng.split('x').map(Number) as [number, number]: [32, -83],
   zoom: zoom ? parseInt(zoom) : 4,
 };
 

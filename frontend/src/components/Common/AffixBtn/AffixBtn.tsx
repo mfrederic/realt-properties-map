@@ -1,5 +1,6 @@
-import { Affix, Flex } from "@mantine/core";
-import { useViewportSize } from "@mantine/hooks";
+import { Affix } from "@mantine/core";
+import { useSmallScreen } from "../../../hooks/useSmallScreen";
+import { SmallScreen } from "./SmallScreen";
 
 export function AffixBtn({
   children,
@@ -16,21 +17,13 @@ export function AffixBtn({
   leftSection?: React.ReactNode;
   rightSection?: React.ReactNode;
 }) {
-  const { width } = useViewportSize();
+  const isSmallScreen = useSmallScreen();
 
   return (
     <>
     {
-      width < 768
-        ? <Affix position={position}>
-          <Flex gap="sm" className="w-screen" justify={
-            position.right ? "end" : "start"
-          }>
-            { leftSection }
-            { children }
-            { rightSection }
-          </Flex>
-        </Affix>
+      isSmallScreen
+        ? <SmallScreen position={position} leftSection={leftSection} rightSection={rightSection}>{ children }</SmallScreen>
         : defaultToPlain
           ? children
           : <Affix position={widePosition}>

@@ -1,14 +1,15 @@
+import { useTranslation } from "react-i18next";
 import { Grid, Slider } from "@mantine/core";
 import OpacityIcon from '@mui/icons-material/Opacity';
 import { useAppDispatch, useAppSelector } from "../../../../hooks/useInitStore";
 import { setMarkerOpacity } from "../../../../store/mapOptions/mapOptionsReducer";
 import { selectMarkerOpacity } from "../../../../store/mapOptions/mapOptionsSelector";
-import { useTranslation } from "react-i18next";
 import { analyticsEvent } from "../../../../services/analytics";
-import { useMediaQuery } from "@mantine/hooks";
+import { useSmallScreen } from "../../../../hooks/useSmallScreen";
 
 export function MapMarkerOpacity() {
-  const mediaQuerySize = useMediaQuery('(max-width: 768px)') ? 'xl' : 'md';
+  const isSmallScreen = useSmallScreen();
+  const mediaQuerySize = isSmallScreen ? 'xl' : 'md';
   const { t } = useTranslation('common');
   const dispatch = useAppDispatch();
   const markerOpacity = useAppSelector(selectMarkerOpacity);
