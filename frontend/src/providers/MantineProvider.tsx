@@ -17,13 +17,15 @@ export function MantineProviders({
 }: {
   children: React.ReactNode
 }) {
+  function getPosition(_isSmallScreen: boolean) {
+    return !_isSmallScreen ? { bottom: 0, left: 0 } : { top: 10, right: 10 };
+  }
+
   const isSmallScreen = useSmallScreen();
-  const [position, setPosition] = useState(
-    isSmallScreen ? { bottom: 0, left: 0 } : { top: 0, right: 0 }
-  );
+  const [position, setPosition] = useState(getPosition(isSmallScreen));
 
   useEffect(() => {
-    setPosition(isSmallScreen ? { bottom: 0, left: 0 } : { top: 10, right: 10 });
+    setPosition(getPosition(isSmallScreen));
   }, [isSmallScreen]);
 
   return (

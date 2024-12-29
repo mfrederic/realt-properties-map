@@ -9,6 +9,7 @@ import { SettingsPanelHeader } from "../SettingsPanelHeader";
 import { CurrencySelect } from "./CurrencySelect";
 import { LanguageSelect } from "./LanguageSelect";
 import { GeneralOptions } from "./GeneralOptions/GeneralOptions";
+import { useSmallScreen } from "../../../hooks/useSmallScreen";
 
 export function MapOptionsPanel({
   opened,
@@ -17,21 +18,30 @@ export function MapOptionsPanel({
   opened: boolean;
   close: () => void;
 }) {
+  const isSmallScreen = useSmallScreen(); 
   const { t } = useTranslation('common', { keyPrefix: 'settings' });
   return (
     <Drawer.Root
       opened={opened}
       onClose={close}
-      position="right">
+      position="right"
+      size={isSmallScreen ? '100%' : 'md'}>
       <Drawer.Content>
-        <Drawer.Header className="flex flex-col !pb-0">
+        {
+          !isSmallScreen &&
+          <Drawer.Header className="flex flex-col !pb-0">
+            <SettingsPanelHeader close={close}>
+              <SettingsIcon className="mr-4 col-span-1" />
+              { t('settings') }
+            </SettingsPanelHeader>
+          </Drawer.Header>
+        }
+        <Drawer.Body
+          className="mb-20 sm:mb-0">
           <SettingsPanelHeader close={close}>
             <SettingsIcon className="mr-4 col-span-1" />
             { t('settings') }
           </SettingsPanelHeader>
-        </Drawer.Header>
-        <Drawer.Body
-          className="mb-20 sm:mb-0">
           <SettingsPanelContent>
             <Grid align="end">
               <Grid.Col span={12}>

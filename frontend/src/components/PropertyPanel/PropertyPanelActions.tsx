@@ -115,7 +115,7 @@ export function PropertyPanelActions({
             </Button>
           }>
           <Button
-            fullWidth={isSmallScreen}
+            fullWidth={!isSmallScreen}
             onClick={onClose}>
             {t('actions.close')}
           </Button>
