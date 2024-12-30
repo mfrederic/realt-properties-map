@@ -35,7 +35,7 @@ export function PropertyType() {
       label={t('propertyTypes')}
       data={data}
       value={propertyTypes}
-      size={isSmallScreen ? 'md' : 'xl'}
+      size={!isSmallScreen ? 'md' : 'xl'}
       onChange={(e) => onPropertyTypes(e)} />
   )
 }

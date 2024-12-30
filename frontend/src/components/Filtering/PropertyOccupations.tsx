@@ -28,7 +28,7 @@ export function PropertyOccupations() {
       min={0}
       max={propertyOccupations.max}
       allowDecimal={false}
-      size={isSmallScreen ? 'md' : 'xl'}
+      size={!isSmallScreen ? 'md' : 'xl'}
       onChange={(e) => onPropertyOccupations(e as number)}
     />
     <NumberInput
@@ -38,7 +38,7 @@ export function PropertyOccupations() {
       min={propertyOccupations.min}
       max={100}
       allowDecimal={false}
-      size={isSmallScreen ? 'md' : 'xl'}
+      size={!isSmallScreen ? 'md' : 'xl'}
       onChange={(e) => onPropertyOccupations(undefined, e as number)}
     />
   </>

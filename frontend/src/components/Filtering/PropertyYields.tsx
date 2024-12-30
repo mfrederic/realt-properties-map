@@ -30,7 +30,7 @@ export function PropertyYields() {
       min={0}
       max={propertyYields.max ?? undefined}
       allowDecimal={false}
-      size={isSmallScreen ? 'md' : 'xl'}
+      size={!isSmallScreen ? 'md' : 'xl'}
       onChange={(e) => onPropertyYields(e as number)}
     />
     <NumberInput
@@ -40,7 +40,7 @@ export function PropertyYields() {
       min={propertyYields.min}
       max={100}
       allowDecimal={false}
-      size={isSmallScreen ? 'md' : 'xl'}
+      size={!isSmallScreen ? 'md' : 'xl'}
       onChange={(e) => onPropertyYields(undefined, e as number)}
     />
   </>
