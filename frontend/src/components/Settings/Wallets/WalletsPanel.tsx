@@ -30,10 +30,13 @@ export function WalletsPanel({
         }
         <Drawer.Body
           className="mb-20 sm:mb-0">
-          <SettingsPanelHeader close={close}>
-            <WalletIcon className="mr-4 col-span-1" />
-            { t('walletSettings') }
-          </SettingsPanelHeader>
+          {
+            isSmallScreen &&
+            <SettingsPanelHeader close={close}>
+              <WalletIcon className="mr-4 col-span-1" />
+              { t('walletSettings') }
+            </SettingsPanelHeader>
+          }
           <SettingsPanelContent>
             <Grid align="end">
               <Grid.Col span={12}>

@@ -34,10 +34,13 @@ export function FilteringPanel({
         }
         <Drawer.Body
           className="mb-20 sm:mb-0">
-          <SettingsPanelHeader close={close}>
-            <FilterAltIcon className="mr-4 col-span-1" />
-            { t('filtering') }
-          </SettingsPanelHeader>
+          {
+            isSmallScreen &&
+            <SettingsPanelHeader close={close}>
+              <FilterAltIcon className="mr-4 col-span-1" />
+              { t('filtering') }
+            </SettingsPanelHeader>
+          }
           <SettingsPanelContent footer={false}>
             <Grid align="end">
               <Grid.Col span={12}>

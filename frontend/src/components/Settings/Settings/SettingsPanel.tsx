@@ -38,10 +38,13 @@ export function MapOptionsPanel({
         }
         <Drawer.Body
           className="mb-20 sm:mb-0">
-          <SettingsPanelHeader close={close}>
-            <SettingsIcon className="mr-4 col-span-1" />
-            { t('settings') }
-          </SettingsPanelHeader>
+          {
+            isSmallScreen &&
+            <SettingsPanelHeader close={close}>
+              <SettingsIcon className="mr-4 col-span-1" />
+              { t('settings') }
+            </SettingsPanelHeader>
+          }
           <SettingsPanelContent>
             <Grid align="end">
               <Grid.Col span={12}>
