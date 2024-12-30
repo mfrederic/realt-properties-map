@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/mfrederic/realt-properties-map/compare/v1.9.1...v1.10.0) (2024-12-30)
+
+
+### Features
+
+* refactor drawers code ([6ac94c0](https://github.com/mfrederic/realt-properties-map/commit/6ac94c012d1e54e475d32126fb3656cbe303b1b2))
+
 ## [1.9.1](https://github.com/mfrederic/realt-properties-map/compare/v1.9.0...v1.9.1) (2024-12-30)
 
 
