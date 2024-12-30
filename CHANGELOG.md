@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/mfrederic/realt-properties-map/compare/v1.9.0...v1.9.1) (2024-12-30)
+
+
+### Bug Fixes
+
+* duplicated headers ([eae1c1b](https://github.com/mfrederic/realt-properties-map/commit/eae1c1ba2c726378b994a6449822117743316637))
+
 # [1.9.0](https://github.com/mfrederic/realt-properties-map/compare/v1.8.0...v1.9.0) (2024-12-29)
 
 
