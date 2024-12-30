@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/mfrederic/realt-properties-map/compare/v1.10.0...v1.10.1) (2024-12-30)
+
+
+### Bug Fixes
+
+* use appdrawer for properties ([81ed206](https://github.com/mfrederic/realt-properties-map/commit/81ed2061963925fbf66cd324e43d5cd345f68bfd))
+
 # [1.10.0](https://github.com/mfrederic/realt-properties-map/compare/v1.9.1...v1.10.0) (2024-12-30)
 
 
