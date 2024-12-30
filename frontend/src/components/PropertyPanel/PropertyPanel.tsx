@@ -7,6 +7,7 @@ import { setSelectedProperty } from "../../store/urlQuery/urlQuery.reducer";
 import { PropertyPanelContent } from "./PropertyPanelContent";
 import { PropertyPanelHeader } from "./PropertyPanelHeader";
 import { useSmallScreen } from "../../hooks/useSmallScreen";
+import { AppDrawer } from "../Common/AppDrawer";
 
 export function PropertyPanel() {
   const isSmallScreen = useSmallScreen();
@@ -30,22 +31,15 @@ export function PropertyPanel() {
   return (
     <>
       {
-  property &&
-  <Drawer.Root opened={true} onClose={onClose} position="left" size={isSmallScreen ? '100%' : 'md'}>
-    <Drawer.Content>
-      {
-        !isSmallScreen && <Drawer.Header className="!p-0 !mb-4">
-          <PropertyPanelHeader property={property} onClose={onClose} />
-        </Drawer.Header>
-      }
-      <Drawer.Body className="!p-0 mb-20 sm:mb-0">
-        {
-          isSmallScreen && <PropertyPanelHeader property={property} onClose={onClose} />
-        }
-        <PropertyPanelContent property={property} />
-      </Drawer.Body>
-    </Drawer.Content>
-  </Drawer.Root>
+        property &&
+        <AppDrawer
+          opened={true}
+          close={onClose}
+          position="left"
+          header={<PropertyPanelHeader property={property} onClose={onClose} />}
+          noPadding={true}>
+          <PropertyPanelContent property={property} />
+        </AppDrawer>
       }
     </>
   )

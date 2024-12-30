@@ -7,6 +7,8 @@ export function AppDrawer(props: {
   children: React.ReactNode;
   header: React.ReactNode;
   position?: DrawerProps['position'];
+  noPadding?: boolean;
+  extraClassnames?: string;
 }) {
   const {
     opened,
@@ -14,6 +16,8 @@ export function AppDrawer(props: {
     position = 'right',
     children,
     header,
+    noPadding = false,
+    extraClassnames = '',
   } = props;
   const isSmallScreen = useSmallScreen();
 
@@ -26,12 +30,12 @@ export function AppDrawer(props: {
       <Drawer.Content>
         {
           !isSmallScreen &&
-          <Drawer.Header className="flex flex-col !pb-0">
+          <Drawer.Header className={`flex flex-col ${noPadding ? '!p-0 !mb-4' : '!pb-0'}`}>
             { header }
           </Drawer.Header>
         }
         <Drawer.Body
-          className="mb-20 sm:mb-0">
+          className={`!mb-20 !sm:mb-0 ${noPadding ? '!p-0' : ''} ${extraClassnames}`}>
           {
             isSmallScreen && header
           }
