@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { setDisplayGnosis, setDisplayRmm, setPropertyTypes } from "../../store/filtering/filteringReducer";
+import { setDisplayGnosis, setDisplayRmm } from "../../store/filtering/filteringReducer";
 import { useTranslation } from "react-i18next";
 import { CheckboxProps } from "@mantine/core";
 import MapIcon from '@mui/icons-material/Map';
@@ -15,6 +15,7 @@ import { selectFiltering } from "../../store/filtering/filteringSelector";
 import { PropertyType } from "./PropertyType";
 import { PropertyOccupations } from "./PropertyOccupations";
 import { PropertyYields } from "./PropertyYields";
+import { Grid } from "../Common/Layouts/Grid";
 
 export function FilteringOptions() {
   const { t: tMapOptions } = useTranslation('common', { keyPrefix: 'mapOptions' });
@@ -67,28 +68,42 @@ export function FilteringOptions() {
   return (
     <>
       <SettingsPanelSection icon={<MapIcon className="inline-block mr-2" />} label={tFiltering('filteringOptions')}>
-        <Option
-          id="rmm"
-          label={tMapOptions('displayRmm')}
-          icon={ExpectedFeature}
-          checked={filteringOptions.displayRmm || rmmDisabled}
-          disabled={walletAddresses.length === 0 || rmmDisabled}
-          onChange={(e) => onDisplayRmm(e)} />
-        <Option
-          id="gnosis"
-          label={tMapOptions('displayGnosis')}
-          checked={filteringOptions.displayGnosis}
-          disabled={walletAddresses.length === 0}
-          onChange={(e) => onDisplayGnosis(e)} />
-        <Option
-          id="all"
-          label={tMapOptions('displayAll')}
-          checked={filteringOptions.displayAll}
-          disabled={walletAddresses.length === 0}
-          onChange={(e) => onDisplayAll(e)} />
-        <PropertyType />
-        <PropertyOccupations />
-        <PropertyYields />
+        <Grid>
+          <Grid.Col span={12}>
+            <Option
+              id="rmm"
+              label={tMapOptions('displayRmm')}
+              icon={ExpectedFeature}
+              checked={filteringOptions.displayRmm || rmmDisabled}
+              disabled={walletAddresses.length === 0 || rmmDisabled}
+            onChange={(e) => onDisplayRmm(e)} />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <Option
+              id="gnosis"
+              label={tMapOptions('displayGnosis')}
+              checked={filteringOptions.displayGnosis}
+              disabled={walletAddresses.length === 0}
+              onChange={(e) => onDisplayGnosis(e)} />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <Option
+              id="all"
+              label={tMapOptions('displayAll')}
+              checked={filteringOptions.displayAll}
+              disabled={walletAddresses.length === 0}
+              onChange={(e) => onDisplayAll(e)} />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <PropertyType />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <PropertyOccupations />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <PropertyYields />
+          </Grid.Col>
+        </Grid>
       </SettingsPanelSection>
     </>
   )

@@ -1,10 +1,9 @@
-import { NumberInput } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { useSmallScreen } from "../../hooks/useSmallScreen";
 import { selectPropertyYields } from "../../store/filtering/filteringSelector";
 import { useAppDispatch, useAppSelector } from "../../hooks/useInitStore";
 import { setPropertyYields } from "../../store/filtering/filteringReducer";
-
+import { NumberInput } from "../Common/Inputs/NumberInput";
 export function PropertyYields() {
   const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common', { keyPrefix: 'filtering' });

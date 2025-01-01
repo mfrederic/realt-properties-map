@@ -35,7 +35,7 @@ export function AppDrawer(props: {
           </Drawer.Header>
         }
         <Drawer.Body
-          className={`!mb-20 !sm:mb-0 ${noPadding ? '!p-0' : ''} ${extraClassnames}`}>
+          className={`!mb-20 sm:!mb-0 ${noPadding ? '!p-0' : ''} ${extraClassnames}`}>
           {
             isSmallScreen && header
           }

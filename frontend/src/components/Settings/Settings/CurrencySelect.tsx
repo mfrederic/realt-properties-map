@@ -1,4 +1,3 @@
-import { Select } from "@mantine/core";
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { useAppDispatch, useAppSelector } from "../../../hooks/useInitStore";
 import { Currency } from "../../../types/currency";
@@ -6,6 +5,7 @@ import { selectedCurrency } from "../../../store/settings/settingsSelector";
 import { setCurrency } from "../../../store/settings/settingsReducer";
 import { useTranslation } from "react-i18next";
 import { analyticsEvent } from "../../../services/analytics";
+import { Select } from "../../Common/Inputs/Select";
 
 export function CurrencySelect() {
   const { t } = useTranslation('common', { keyPrefix: 'settings' });

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Env from '../../utils/env';
-import { Anchor } from '@mantine/core';
+import { Anchor, Title } from '@mantine/core';
 
 const Version = () => {
   const [version, setVersion] = useState('1.0.0');
@@ -15,12 +15,12 @@ const Version = () => {
 
 
   return (
-    <h2>
+    <Title order={5}>
       Version:&nbsp;
       <Anchor href={`https://github.com/${Env.VITE_GITHUB_REPO}/releases/tag/v${version}`} target="_blank" size="sm">
         {version}
       </Anchor>
-    </h2>
+    </Title>
   );
 };
 

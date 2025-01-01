@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { getUuid } from "../../../utils/crypto";
+import { useTranslation } from "react-i18next";
+import { ActionIcon, TextInput } from "@mantine/core";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { validate } from 'multicoin-address-validator';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { ActionIcon, Button, Grid, TextInput } from "@mantine/core";
-import { useTranslation } from "react-i18next";
+import { validate } from 'multicoin-address-validator';
+import { getUuid } from "../../../utils/crypto";
+import { Button } from "../../Common/Inputs/Button";
+import { useSmallScreen } from "../../../hooks/useSmallScreen";
+import { Grid } from "../../Common/Layouts/Grid";
 
 export function validateWallets(
   waletts: string[],
@@ -39,6 +42,7 @@ export function Wallet({
   onDelete?: () => void,
   onVisibilityChange?: (visible: boolean) => void,
 }) {
+  const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common');
   const [id, setId] = useState(`wallet-${getUuid()}`);
   const [valid, setValid] = useState(validateWallet(address));
@@ -97,6 +101,7 @@ export function Wallet({
           leftSectionWidth={40}
           placeholder="0x"
           error={!valid && wallet.length > 0 ? t('wallet.invalidAddress') : false}
+          size={isSmallScreen ? 'lg' : 'md'}
           onChange={(e) => onChange(e.currentTarget.value)}
           value={visible ? wallet : hiddenWallet}
           rightSection={

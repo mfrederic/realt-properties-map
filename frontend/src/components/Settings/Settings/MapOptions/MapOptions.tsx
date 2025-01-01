@@ -8,6 +8,7 @@ import { selectWalletAddresses } from "../../../../store/settings/settingsSelect
 import { MapMarkerOpacity } from "./MapMarkerOpacity";
 import { MapMarkerClustering } from "./MapMarkerClustering";
 import { analyticsEvent } from "../../../../services/analytics";
+import { Grid } from "../../../Common/Layouts/Grid";
 
 export function MapOptions() {
   const { t } = useTranslation('common', { keyPrefix: 'mapOptions' });
@@ -36,20 +37,30 @@ export function MapOptions() {
 
   return (
     <SettingsPanelSection icon={<MapIcon className="inline-block mr-2" />} label={t('mapOptions')}>
-      <Option
-        id="differentiateOwned"
-        label={t('differentiateOwned')}
-        checked={mapOptions.differentiateOwned}
-        disabled={walletAddresses.length === 0}
-        onChange={(e) => onDifferentiateOwned(e)} />
-      <Option
-        id="showIcon"
-        label={t('showIcon')}
-        checked={mapOptions.showIcon}
-        disabled={walletAddresses.length === 0}
-        onChange={(e) => onShowIcon(e)} />
-      <MapMarkerOpacity />
-      <MapMarkerClustering />
+      <Grid>
+        <Grid.Col span={12}>
+          <Option
+            id="differentiateOwned"
+            label={t('differentiateOwned')}
+            checked={mapOptions.differentiateOwned}
+            disabled={walletAddresses.length === 0}
+            onChange={(e) => onDifferentiateOwned(e)} />
+        </Grid.Col>
+        <Grid.Col span={12}>
+          <Option
+            id="showIcon"
+            label={t('showIcon')}
+            checked={mapOptions.showIcon}
+            disabled={walletAddresses.length === 0}
+            onChange={(e) => onShowIcon(e)} />
+        </Grid.Col>
+        <Grid.Col span={12}>
+          <MapMarkerOpacity />
+        </Grid.Col>
+        <Grid.Col span={12}>
+          <MapMarkerClustering />
+        </Grid.Col>
+      </Grid>
     </SettingsPanelSection>
   )
 }

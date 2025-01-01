@@ -8,6 +8,7 @@ import { PropertyPanelContent } from "./PropertyPanelContent";
 import { PropertyPanelHeader } from "./PropertyPanelHeader";
 import { useSmallScreen } from "../../hooks/useSmallScreen";
 import { AppDrawer } from "../Common/AppDrawer";
+import { Grid } from "../Common/Layouts/Grid";
 
 export function PropertyPanel() {
   const isSmallScreen = useSmallScreen();
@@ -38,7 +39,11 @@ export function PropertyPanel() {
           position="left"
           header={<PropertyPanelHeader property={property} onClose={onClose} />}
           noPadding={true}>
-          <PropertyPanelContent property={property} />
+          <Grid>
+            <Grid.Col span={12}>
+              <PropertyPanelContent property={property} />
+            </Grid.Col>
+          </Grid>
         </AppDrawer>
       }
     </>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Grid, Modal, Space, Text } from "@mantine/core";
+import { Modal, Space, Text } from "@mantine/core";
 import WalletIcon from '@mui/icons-material/Wallet';
 import { SettingsPanelSection } from "../SettingsPanelSection";
 import { useAppDispatch, useAppSelector } from "../../../hooks/useInitStore";
@@ -10,6 +10,8 @@ import { addAddress, removeAddress, updateAddress } from "../../../store/setting
 import { Wallet, validateWallet } from "./Wallet";
 import { analyticsEvent } from "../../../services/analytics";
 import { setDisplayAll } from "../../../store/filtering/filteringReducer";
+import { Button } from "../../Common/Inputs/Button";
+import { Grid } from "../../Common/Layouts/Grid";
 
 export function Wallets() {
   const { t } = useTranslation('common');

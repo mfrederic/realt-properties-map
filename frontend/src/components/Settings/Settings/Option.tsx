@@ -1,5 +1,7 @@
-import { Checkbox, CheckboxProps, Grid, Tooltip } from "@mantine/core";
+import { CheckboxProps, Tooltip } from "@mantine/core";
 import { useSmallScreen } from "../../../hooks/useSmallScreen";
+import { Checkbox } from "../../Common/Inputs/Checkbox";
+import { Grid } from "../../Common/Layouts/Grid";
 
 export function Option({
   id,

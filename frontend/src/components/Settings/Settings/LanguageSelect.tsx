@@ -1,4 +1,3 @@
-import { Select } from "@mantine/core";
 import LanguageIcon from '@mui/icons-material/Language';
 import { useAppDispatch, useAppSelector } from "../../../hooks/useInitStore";
 import { selectedLanguage } from "../../../store/settings/settingsSelector";
@@ -6,6 +5,7 @@ import { setLanguage } from "../../../store/settings/settingsReducer";
 import { useTranslation } from "react-i18next";
 import { Language } from "../../../types/language";
 import { analyticsEvent } from "../../../services/analytics";
+import { Select } from "../../Common/Inputs/Select";
 
 export function LanguageSelect() {
   const { i18n, t } = useTranslation('common', { keyPrefix: 'settings' });

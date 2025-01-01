@@ -1,8 +1,10 @@
-import { Button, Drawer, Grid } from "@mantine/core";
+import { Drawer, Title } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { RealtLogo } from "../Common/RealtLogo";
 import { AffixBtn } from "../Common/AffixBtn/AffixBtn";
+import { Button } from "../Common/Inputs/Button";
+import { Grid } from "../Common/Layouts/Grid";
 
 export function SettingsPanelHeader({
   children,
@@ -18,7 +20,7 @@ export function SettingsPanelHeader({
       <Grid.Col span={12} className="mb-4 flex text-center items-center justify-center">
         <RealtLogo className="w-1/5" />
         <div className="inline-block flex flex-col">
-          <h1 className="font-bold text-[1.375rem]">RealT Properties Map</h1>
+          <Title order={3} className="font-bold text-[1.375rem]">RealT Properties Map</Title>
           <p className="text-xs">
             {t('extra.disclaimer')}
           </p>
@@ -26,7 +28,7 @@ export function SettingsPanelHeader({
       </Grid.Col>
       <Grid.Col span={6} className="text-base font-semibold leading-6">
         <Drawer.Title className="col-span-6 items-center flex">
-          { children }
+          <Title order={4}>{ children }</Title>
         </Drawer.Title>
       </Grid.Col>
       <Grid.Col span={6} className="text-right">

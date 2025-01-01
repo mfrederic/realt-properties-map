@@ -1,4 +1,5 @@
-import { Drawer, Flex, Grid, Divider } from '@mantine/core';
+import { Drawer, Flex, Divider } from '@mantine/core';
+import { Grid } from "../Common/Layouts/Grid";
 import { PropertyPanelActions } from './PropertyPanelActions';
 import { Property } from '../../types/property';
 import { PropertyCarousel } from './PropertyCarousel';

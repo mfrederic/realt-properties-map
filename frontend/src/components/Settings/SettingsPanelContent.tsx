@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
 import InfoIcon from '@mui/icons-material/Info';
 import Version from "../Common/Version";
-import { Box, Button, Flex, Text } from "@mantine/core";
+import { Box, Flex, Text } from "@mantine/core";
 import MadeBy from "../Common/MadeBy";
+import { Button } from "../Common/Inputs/Button";
 
 export function SettingsPanelContent({
   className,

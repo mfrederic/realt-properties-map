@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { Grid, Space } from "@mantine/core";
+import { Space } from "@mantine/core";
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Grid } from "../../Common/Layouts/Grid";
 import { SettingsPanelContent } from "../SettingsPanelContent";
 import { MapOptions } from "./MapOptions/MapOptions";
 import { ColorSchemeOption } from "./ColorSchemeOption";
@@ -26,7 +27,7 @@ export function MapOptionsPanel({
       close={close}
       header={
         <SettingsPanelHeader close={close}>
-          <SettingsIcon className="mr-4 col-span-1" />
+          <SettingsIcon className="mr-2 col-span-1" />
           { t('settings') }
         </SettingsPanelHeader>
       }

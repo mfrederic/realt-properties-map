@@ -1,13 +1,15 @@
 import { useTranslation } from "react-i18next";
+import { Divider, Title } from "@mantine/core";
 import { useAppSelector } from "../../hooks/useInitStore";
 import { selectDifferentiateOwned } from "../../store/mapOptions/mapOptionsSelector";
 import { Property } from "../../types/property";
 import { selectedLanguage } from "../../store/settings/settingsSelector";
 import { useCurrencyValue } from "../../hooks/useCurrencyValue";
 import date from "../../utils/date";
-import { Divider, Grid } from "@mantine/core";
 import { getPropertyTypeName } from "../../services/realtokens";
 import './propertyPanelContent.scss';
+import { Grid } from "../Common/Layouts/Grid";
+
 function toFixedStr(value: number, precision: number = 2) {
   return value.toFixed(precision).toLowerCase();
 }
@@ -101,27 +103,22 @@ export function PropertyPanelContent({
   ];
 
   return (
-    <>
+    <Grid className="px-4 py-2">
       {
         (ownedAmount === 0 || !differentiateOwned) &&
-        <Grid className="px-4 py-2 bg-gray-500 text-white">
-          <Grid.Col span={12} className="font-semibold">
-            <h2>{t('propertyPanel.notOwned')}</h2>
-          </Grid.Col>
-        </Grid>
+        <Grid.Col span={12} className="font-semibold bg-gray-500 text-white">
+          <Title order={5}>{t('propertyPanel.notOwned')}</Title>
+        </Grid.Col>
       }
-      {entries.map(({ ownedOnly, notOwnedOnly, entry, icon, rentClass, iconClass }) => {
-        if (
-          (ownedOnly && ownedAmount <= 0) ||
-          (ownedOnly && !differentiateOwned) ||
-          (notOwnedOnly && ownedAmount > 0)
-        ) {
-          return null;
-        }
+      {entries
+      .filter(( entry ) => !((entry.ownedOnly && ownedAmount <= 0) ||
+          (entry.ownedOnly && !differentiateOwned) ||
+          (entry.notOwnedOnly && ownedAmount > 0)))
+      .map(({ entry, icon, rentClass, iconClass }) => {
         return (
-          <Grid key={entry.label} className="px-4 py-2">
+          <>
             <Grid.Col span={6} className="font-semibold">
-              <h2>{t(entry.label)}</h2>
+              <Title order={5}>{t(entry.label)}</Title>
             </Grid.Col>
             <Grid.Col span={6} className="flex items-center justify-end">
               <p className={`flex items-center ${rentClass ? rentClass : ''} ${iconClass ? iconClass : ''}`}>
@@ -133,9 +130,9 @@ export function PropertyPanelContent({
               </p>
             </Grid.Col>
             <Divider />
-          </Grid>
+          </>
         );
       })}
-    </>
+    </Grid>
   )
 }

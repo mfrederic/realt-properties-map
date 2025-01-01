@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { Grid } from "@mantine/core";
 import WalletIcon from '@mui/icons-material/Wallet';
 import { SettingsPanelContent } from "../SettingsPanelContent";
 import { Wallets } from "./Wallets";
 import { SettingsPanelHeader } from "../SettingsPanelHeader";
 import { AppDrawer } from "../../Common/AppDrawer";
+import { Grid } from "../../Common/Layouts/Grid";
 
 export function WalletsPanel({
   opened,
@@ -21,7 +21,7 @@ export function WalletsPanel({
       close={close}
       header={
         <SettingsPanelHeader close={close}>
-          <WalletIcon className="mr-4 col-span-1" />
+          <WalletIcon className="mr-2 col-span-1" />
           { t('walletSettings') }
         </SettingsPanelHeader>
       }

@@ -1,8 +1,9 @@
-import { Box, Button } from "@mantine/core"
+import { Box } from "@mantine/core"
 import { useTranslation } from "react-i18next";
 import { analyticsEvent } from "../../../services/analytics";
 import { getLastCacheClear, purgeCache } from "../../../services/apollo.client";
 import dayjs from "../../../utils/date";
+import { Button } from "../../Common/Inputs/Button";
 
 export function RefreshDataButton() {
   const { t } = useTranslation('common', { keyPrefix: 'settings' });
@@ -22,7 +23,6 @@ export function RefreshDataButton() {
       <Button
         fullWidth
         onClick={refresh}
-        size="md"
         title={`${t('refreshDataTooltip')}. ${t('cachedFrom')} ${cachedFrom}`}
         variant="subtle">
         {t('refreshData')}

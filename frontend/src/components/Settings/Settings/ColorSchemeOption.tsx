@@ -2,8 +2,10 @@ import { Box, Center, SegmentedControl, useMantineColorScheme } from "@mantine/c
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useTranslation } from "react-i18next";
+import { useSmallScreen } from "../../../hooks/useSmallScreen";
 
 export function ColorSchemeOption() {
+  const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common', { keyPrefix: 'settings' });
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
@@ -14,6 +16,7 @@ export function ColorSchemeOption() {
       fullWidth={true}
       value={colorScheme}
       onChange={() => toggleColorScheme()}
+      size={isSmallScreen ? 'lg' : 'md'}
       data={[
         {
           value: 'light',

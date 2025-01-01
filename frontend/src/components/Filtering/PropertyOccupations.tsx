@@ -1,10 +1,9 @@
-import { NumberInput } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { selectPropertyOccupations } from "../../store/filtering/filteringSelector";
 import { useAppDispatch, useAppSelector } from "../../hooks/useInitStore";
 import { setPropertyOccupations } from "../../store/filtering/filteringReducer";
 import { useSmallScreen } from "../../hooks/useSmallScreen";
-
+import { NumberInput } from "../Common/Inputs/NumberInput";
 export function PropertyOccupations() {
   const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common', { keyPrefix: 'filtering' });

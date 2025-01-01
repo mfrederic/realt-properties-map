@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { ActionIcon, Button, Flex, Grid } from "@mantine/core";
+import { Flex } from "@mantine/core";
 import GoogleIcon from '@mui/icons-material/Google';
 import XIcon from '@mui/icons-material/X';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
@@ -8,7 +8,9 @@ import { AffixBtn } from "../Common/AffixBtn/AffixBtn";
 import { useCopyUrl } from "../../hooks/useCopyUrl";
 import { Property } from "../../types/property";
 import { useSmallScreen } from "../../hooks/useSmallScreen";
-
+import { Button } from "../Common/Inputs/Button";
+import { Grid } from "../Common/Layouts/Grid";
+import { ActionIcon } from "../Common/Inputs/ActionIcon";
 function encodeUrlUsingPercentEncoding(url: string) {
   return encodeURI(url);
 }
@@ -72,7 +74,6 @@ export function PropertyPanelActions({
             component="a"
             title={t('settings.googleMaps.viewOnGoogleMaps')}
             target="_blank"
-            size="lg"
             referrerPolicy="no-referrer"
             href={`https://maps.google.com/?q=${coordinates.lat},${coordinates.lng}`}>
             <GoogleIcon fontSize="medium" />
@@ -82,7 +83,6 @@ export function PropertyPanelActions({
             component="a"
             title={t('settings.x.shareOnX')}
             target="_blank"
-            size="lg"
             referrerPolicy="no-referrer"
             href={encodeUrlUsingPercentEncoding(twitterIntent)}>
             <XIcon fontSize="medium" />
@@ -92,7 +92,6 @@ export function PropertyPanelActions({
             component="a"
             title={t('settings.threads.shareOnThreads')}
             target="_blank"
-            size="lg"
             referrerPolicy="no-referrer"
             href={encodeUrlUsingPercentEncoding(threadsIntent)}>
             <AlternateEmailIcon fontSize="medium" />

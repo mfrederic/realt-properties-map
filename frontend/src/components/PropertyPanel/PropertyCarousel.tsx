@@ -1,6 +1,7 @@
 import { Carousel } from "@mantine/carousel";
-import { Grid, Image } from "@mantine/core";
+import { Image } from "@mantine/core";
 import { useElementSize } from "@mantine/hooks";
+import { Grid } from "../Common/Layouts/Grid";
 
 export function PropertyCarousel({
   imageLink,

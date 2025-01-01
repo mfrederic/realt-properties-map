@@ -1,11 +1,13 @@
 import { useTranslation } from "react-i18next";
-import { Grid, Slider } from "@mantine/core";
+import { Title } from "@mantine/core";
 import OpacityIcon from '@mui/icons-material/Opacity';
 import { useAppDispatch, useAppSelector } from "../../../../hooks/useInitStore";
 import { setMarkerClustering } from "../../../../store/mapOptions/mapOptionsReducer";
 import { selectMarkerClustering } from "../../../../store/mapOptions/mapOptionsSelector";
 import { analyticsEvent } from "../../../../services/analytics";
 import { useSmallScreen } from "../../../../hooks/useSmallScreen";
+import { Slider } from "../../../Common/Inputs/Slider";
+import { Grid } from "../../../Common/Layouts/Grid";
 
 export function MapMarkerClustering() {
   const isSmallScreen = useSmallScreen();
@@ -26,10 +28,10 @@ export function MapMarkerClustering() {
   return (
     <Grid className="mt-2">
       <Grid.Col span={12}>
-        <h3 className="text-base font-semibold leading-7">
+        <Title order={5} className="text-base font-semibold leading-7">
           <OpacityIcon className="inline-block mr-2" />
           { t('settings.markersClustering') }
-        </h3>
+        </Title>
       </Grid.Col>
       <Grid.Col span={12} className="mt-4">
         <Slider
