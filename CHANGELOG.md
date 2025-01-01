@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/mfrederic/realt-properties-map/compare/v1.10.1...v1.11.0) (2025-01-01)
+
+
+### Features
+
+* upgrade reponsiveness design for smaller screens ([cb40766](https://github.com/mfrederic/realt-properties-map/commit/cb4076610308badf7b6d84796283f965a3324fc5))
+
 ## [1.10.1](https://github.com/mfrederic/realt-properties-map/compare/v1.10.0...v1.10.1) (2024-12-30)
 
 
