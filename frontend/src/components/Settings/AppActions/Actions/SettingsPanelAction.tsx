@@ -1,16 +1,21 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import SettingsIcon from '@mui/icons-material/Settings';
 import { AppActionsButton } from "../AppActionsButton";
+import { MapOptionsPanel } from "../../Settings/SettingsPanel";
 
-export function SettingsPanelAction(props: {
-  onOpenMapOptions: () => void;
+export function SettingsPanelAction(props: React.HTMLAttributes<HTMLDivElement> & {
+  isOpened?: boolean;
 }) {
-  const { onOpenMapOptions } = props;
+  const [mapOptionsOpened, setMapOptionsOpened] = useState(props.isOpened || false);
   const { t } = useTranslation('common');
 
   return (
-    <AppActionsButton opened={false} open={onOpenMapOptions} label={t('actions.openSettingsPanel')}>
-      <SettingsIcon fontSize="large" />
-    </AppActionsButton>
+    <>
+      <MapOptionsPanel opened={mapOptionsOpened} close={() => setMapOptionsOpened(false)} />
+      <AppActionsButton opened={false} open={() => setMapOptionsOpened(true)} label={t('actions.openSettingsPanel')}>
+        <SettingsIcon fontSize="large" />
+      </AppActionsButton>
+    </>
   )
 }

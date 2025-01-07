@@ -1,7 +1,7 @@
-import { Anchor, Button, CopyButton, Flex, Mark, Modal, Text } from "@mantine/core";
+import { Anchor, CopyButton, Flex, Mark, Modal, Text } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import MadeBy from "../../Common/MadeBy";
-import { useSmallScreen } from "../../../hooks/useSmallScreen";
+import { Button } from "../../Common/Inputs/Button";
 
 export default function HelpPanel({
   opened,
@@ -10,7 +10,6 @@ export default function HelpPanel({
   opened: boolean;
   close: () => void;
 }) {
-  const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common', { keyPrefix: 'help' });
 
   return (
@@ -32,7 +31,7 @@ export default function HelpPanel({
         </Text>
         <CopyButton value="0x544f04Db543F1Be6A5B59C59a20cEEcb7E9B152C">
           {({ copied, copy }) => (
-            <Button color={copied ? 'teal' : 'blue'} onClick={copy} size={isSmallScreen ? 'lg' : 'md'}>
+            <Button color={copied ? 'teal' : 'blue'} onClick={copy} className="!w-full md:!w-auto">
               {copied ? 'Copied wallet address' : 'Copy wallet address'}
             </Button>
           )}

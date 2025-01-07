@@ -5,22 +5,17 @@ import { Box, Flex, Text } from "@mantine/core";
 import MadeBy from "../Common/MadeBy";
 import { Button } from "../Common/Inputs/Button";
 
-export function SettingsPanelContent({
-  className,
-  children,
-  footer = true,
-}: {
+export function SettingsPanelContent(props: {
   className?: string
-  children: React.ReactNode
   footer?: boolean
-}) {
+} & React.ComponentPropsWithoutRef<'div'>) {
   const { t } = useTranslation('common', { keyPrefix: 'extra' });
   return (
-    <Flex direction="column" className={"h-full relative mt-6 flex-1 " + className}>
+    <Flex direction="column" className={"h-full relative mt-6 flex-1 " + props.className}>
       <div className="flex-1 mb-6">
-        {children}
+        {props.children}
       </div>
-      { footer &&
+      { props.footer &&
         <footer className="flex justify-between justify-self-end text-center text-xs mb-1 px-2">
           <Flex
             gap="md"

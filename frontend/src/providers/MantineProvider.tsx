@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import {
   Affix,
   MantineProvider, localStorageColorSchemeManager,
@@ -6,43 +5,24 @@ import {
 import { ModalsProvider } from '@mantine/modals'
 import { Notifications } from '@mantine/notifications'
 import { modalStyles, theme } from '../theme/theme'
-import { useSmallScreen } from '../hooks/useSmallScreen';
 
 const colorSchemeManager = localStorageColorSchemeManager({
   key: 'my-app-color-scheme',
 });
 
-export function MantineProviders({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  function getPosition(_isSmallScreen: boolean) {
-    return !_isSmallScreen ? { bottom: 0, left: 0 } : { top: 10, right: 10 };
-  }
-
-  const isSmallScreen = useSmallScreen();
-  const [position, setPosition] = useState(getPosition(isSmallScreen));
-
-  useEffect(() => {
-    setPosition(getPosition(isSmallScreen));
-  }, [isSmallScreen]);
-
+export function MantineProviders(props: React.ComponentPropsWithoutRef<'div'>) {
   return (
     <MantineProvider
       theme={theme}
       defaultColorScheme='dark'
       colorSchemeManager={colorSchemeManager}
     >
-      <Affix
-        className="p-1 sm:p-4"
-        zIndex={1010}
-        position={position}>
+      <div className="absolute left-[10px] bottom-[70px] md:bottom-[10px] p-1 md:p-4 z-[1010]">
         <Notifications
           withinPortal={false}
           limit={5}
           autoClose={6000} />
-      </Affix>
+      </div>
       <ModalsProvider
         modalProps={{
           centered: true,
@@ -50,7 +30,7 @@ export function MantineProviders({
           styles: modalStyles,
         }}
       >
-        {children}
+        {props.children}
       </ModalsProvider>
     </MantineProvider>
   )

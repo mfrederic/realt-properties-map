@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import MadeBy from "./MadeBy";
 
 export default function SplashScreen({
-  onVisibleChange,
+  onVisibleChange = () => {},
 }: {
-  onVisibleChange: (visible: boolean) => void;
+  onVisibleChange?: (visible: boolean) => void;
 }) {
   const [visible, setVisible] = useState(true);
   const [opacity, setOpacity] = useState(1);
@@ -38,6 +38,7 @@ export default function SplashScreen({
         opacity,
         transition: 'opacity 500ms ease-out'
       }}
+      zIndex={1000}
     >
       <RealtLogo className="w-64 mb-12" />
       <Title order={1} size="2rem">RealT Properties Map</Title>

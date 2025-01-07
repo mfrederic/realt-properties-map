@@ -1,27 +1,18 @@
 import { ActionIcon, Tooltip } from '@mantine/core';
 
-export function AppActionsButton({
-  label,
-  children,
-  opened,
-  cssClass = '',
-  color = '',
-  open,
-}: {
+export function AppActionsButton(props: {
   label: string;
-  children: React.ReactNode;
   opened: boolean;
-  cssClass?: string;
   color?: string;
   open: () => void;
-}) {
+} & React.ComponentPropsWithoutRef<'div'>) {
   return (
     <>
       {
-        !opened &&
-        <Tooltip label={label}>
-          <ActionIcon size="xl" aria-label={label} onClick={open} className={`p-4 mb-2 ${cssClass}`} color={color}>
-            {children}
+        !props.opened &&
+        <Tooltip label={props.label}>
+            <ActionIcon size="xl" aria-label={props.label} onClick={props.open} className={`p-4 mb-2 ${props.className}`} color={props.color}>
+            {props.children}
           </ActionIcon>
         </Tooltip>
       }

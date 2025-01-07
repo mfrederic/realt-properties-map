@@ -11,7 +11,6 @@ import { AppDrawer } from "../Common/AppDrawer";
 import { Grid } from "../Common/Layouts/Grid";
 
 export function PropertyPanel() {
-  const isSmallScreen = useSmallScreen();
   const dispatch = useAppDispatch();
   const property = useAppSelector(selectedMarker);
 

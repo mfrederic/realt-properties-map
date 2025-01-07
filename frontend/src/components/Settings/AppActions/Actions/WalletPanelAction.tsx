@@ -1,23 +1,24 @@
-import { Flex } from "@mantine/core";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import WalletIcon from '@mui/icons-material/Wallet';
 import { StartTooltip } from "../../StartTooltip";
 import { AppActionsButton } from "../AppActionsButton";
-import { useSmallScreen } from "../../../../hooks/useSmallScreen";
+import { WalletsPanel } from "../../Wallets/WalletsPanel";
 
-export function WalletPanelAction(props: {
-  onOpenWallets: () => void;
+export function WalletPanelAction(props: React.HTMLAttributes<HTMLDivElement> & {
+  isOpened?: boolean;
 }) {
-  const isSmallScreen = useSmallScreen();
-  const { onOpenWallets } = props;
   const { t } = useTranslation('common');
-
+  const [toggleWalletsPanel, setToggleWalletsPanel] = useState(props.isOpened || false);
   return (
-    <Flex direction="row" align="end" justify="end">
-      { !isSmallScreen && <StartTooltip onClick={onOpenWallets} /> }
-      <AppActionsButton opened={false} open={onOpenWallets} label={t('actions.openWalletsPanel')}>
-        <WalletIcon fontSize="large" />
-      </AppActionsButton>
-    </Flex>
+    <>
+      <WalletsPanel opened={toggleWalletsPanel} close={() => setToggleWalletsPanel(false)} />
+      <div className={`flex flex-row align-end justify-end ${props.className}`}>
+        <StartTooltip className="!hidden md:!block" onClick={() => setToggleWalletsPanel(true)} />
+        <AppActionsButton opened={false} open={() => setToggleWalletsPanel(true)} label={t('actions.openWalletsPanel')}>
+          <WalletIcon fontSize="large" />
+        </AppActionsButton>
+      </div>
+    </>
   )
 }

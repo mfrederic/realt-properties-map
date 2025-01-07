@@ -14,7 +14,6 @@ import SplashScreen from './components/Common/SplashScreen';
 initAnalytics();
 
 function App() {
-  const [display, setDisplay] = useState(true);
   return (
     <div className="min-w-[20rem] min-h-[20rem]">
       <Provider store={store}>
@@ -22,9 +21,9 @@ function App() {
           <QueryProvider>
             <MantineProviders>
               <HotkeysProvider>
-                <SplashScreen onVisibleChange={setDisplay} />
                 <MapWrapper />
-                {!display && <AppActions />}
+                <SplashScreen />
+                <AppActions />
               </HotkeysProvider>
             </MantineProviders>
           </QueryProvider>

@@ -97,8 +97,8 @@ export function Wallet({
         <TextInput
           id={id}
           label={exists ? t('wallet.wallet') : t('wallet.addWallet')}
-          leftSection="xDai"
-          leftSectionWidth={40}
+          leftSection="Gnosis"
+          leftSectionWidth={60}
           placeholder="0x"
           error={!valid && wallet.length > 0 ? t('wallet.invalidAddress') : false}
           size={isSmallScreen ? 'lg' : 'md'}

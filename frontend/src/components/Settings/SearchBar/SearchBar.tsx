@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef, useImperativeHandle, forwardRef } from "react";
 import { Autocomplete } from "@mantine/core";
 import SearchIcon from '@mui/icons-material/Search';
-import { useAppDispatch, useAppSelector } from "../../hooks/useInitStore";
-import { useProperties } from "../../hooks/useProperties";
-import { Property } from "../../types/property";
-import { setSelected } from "../../store/marker/markerReducer";
-import { setSelectedProperty } from "../../store/urlQuery/urlQuery.reducer";
-import { filterProperties } from "../../utils/properties";
-import { selectFiltering } from "../../store/filtering/filteringSelector";
-import { useSmallScreen } from "../../hooks/useSmallScreen";
+import { useAppDispatch, useAppSelector } from "../../../hooks/useInitStore";
+import { useProperties } from "../../../hooks/useProperties";
+import { Property } from "../../../types/property";
+import { setSelected } from "../../../store/marker/markerReducer";
+import { setSelectedProperty } from "../../../store/urlQuery/urlQuery.reducer";
+import { filterProperties } from "../../../utils/properties";
+import { selectFiltering } from "../../../store/filtering/filteringSelector";
+import { useSmallScreen } from "../../../hooks/useSmallScreen";
 
 // Create the base component
 const SearchBarComponent = forwardRef<{ focus: () => void }, {}>((_props, ref) => {
