@@ -1,3 +1,11 @@
+# [1.12.0](https://github.com/mfrederic/realt-properties-map/compare/v1.11.0...v1.12.0) (2025-01-07)
+
+
+### Features
+
+* add number and range slider input ([b496f8d](https://github.com/mfrederic/realt-properties-map/commit/b496f8d91b19e93eee2f00daed16132cc0aec0dc))
+* simplify templates and components using tailwind ([1bf2ac0](https://github.com/mfrederic/realt-properties-map/commit/1bf2ac0ca8061f8cbaca5621535cafec0432b298))
+
 # [1.11.0](https://github.com/mfrederic/realt-properties-map/compare/v1.10.1...v1.11.0) (2025-01-01)
 
 
