@@ -28,7 +28,7 @@ export function SettingsPanelHeader({
       </Grid.Col>
       <Grid.Col span={6} className="text-base font-semibold leading-6">
         <Drawer.Title className="col-span-6 items-center flex">
-          <Title order={4}>{ children }</Title>
+          { children }
         </Drawer.Title>
       </Grid.Col>
       <Grid.Col span={6} className="text-right">

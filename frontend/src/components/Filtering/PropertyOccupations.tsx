@@ -28,7 +28,7 @@ export function PropertyOccupations() {
 
   return <>
     <RangeSlider
-      textLabel={t('propertyOccupations.range') + ' (%)'}
+      textlabel={t('propertyOccupations.range') + ' (%)'}
       value={[propertyOccupations.min, propertyOccupations.max]}
       min={0}
       max={100}

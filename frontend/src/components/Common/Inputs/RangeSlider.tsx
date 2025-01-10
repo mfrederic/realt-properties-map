@@ -2,13 +2,13 @@ import { RangeSliderProps, RangeSlider as MantineRangeSlider, Text } from "@mant
 import { useSmallScreen } from "../../../hooks/useSmallScreen";
 
 export function RangeSlider(props: RangeSliderProps & {
-  textLabel?: string;
+  textlabel?: string;
 }) {
   const isSmallScreen = useSmallScreen();
   return <>
-    { props.textLabel &&
+    { props.textlabel &&
       <Text size={!isSmallScreen ? 'md' : 'xl'} className="!mb-2">
-        { props.textLabel }
+        { props.textlabel }
       </Text>
     }
     <MantineRangeSlider {...props} size={isSmallScreen ? 'xl' : 'md'} />

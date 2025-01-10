@@ -1,4 +1,4 @@
-import { CheckboxProps, Tooltip } from "@mantine/core";
+import { CheckboxProps } from "@mantine/core";
 import { useSmallScreen } from "../../../hooks/useSmallScreen";
 import { Checkbox } from "../../Common/Inputs/Checkbox";
 import { Grid } from "../../Common/Layouts/Grid";
@@ -27,18 +27,16 @@ export function Option({
   return (
     <Grid className="py-4">
       <Grid.Col>
-        <Tooltip label={`Toggle ${label}`}>
-          <Checkbox
-            size={consolidatedSize}
-            label={label}
-            checked={checked}
-            disabled={disabled}
-            onChange={() => onChange(!checked)}
-            icon={icon}
-            id={id}
-            name={id}
-          />
-        </Tooltip>
+        <Checkbox
+          size={consolidatedSize}
+          label={label}
+          checked={checked}
+          disabled={disabled}
+          onChange={() => onChange(!checked)}
+          icon={icon}
+          id={id}
+          name={id}
+        />
       </Grid.Col>
     </Grid>
   )

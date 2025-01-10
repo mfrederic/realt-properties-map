@@ -30,7 +30,7 @@ export function PropertyYields() {
 
   return <>
     <RangeSlider
-      textLabel={t('propertyYields.range') + ' (%)'}
+      textlabel={t('propertyYields.range') + ' (%)'}
       value={[propertyYields.min ?? 0, propertyYields.max ?? 100]}
       min={0}
       max={100}
