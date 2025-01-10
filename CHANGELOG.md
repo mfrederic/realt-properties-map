@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/mfrederic/realt-properties-map/compare/v1.15.0...v1.15.1) (2025-01-10)
+
+
+### Bug Fixes
+
+* codebase to correct components console errors ([185dc30](https://github.com/mfrederic/realt-properties-map/commit/185dc30f54584e995f279bb80ff833fcd990d98c))
+
 # [1.15.0](https://github.com/mfrederic/realt-properties-map/compare/v1.14.0...v1.15.0) (2025-01-10)
 
 
