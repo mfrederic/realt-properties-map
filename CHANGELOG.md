@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/mfrederic/realt-properties-map/compare/v1.12.0...v1.13.0) (2025-01-10)
+
+
+### Features
+
+* add rent start filter and use range slider ([d564ca3](https://github.com/mfrederic/realt-properties-map/commit/d564ca31e2a7aaf7becc1dec3298c6fdb7b467c5))
+
 # [1.12.0](https://github.com/mfrederic/realt-properties-map/compare/v1.11.0...v1.12.0) (2025-01-07)
 
 
