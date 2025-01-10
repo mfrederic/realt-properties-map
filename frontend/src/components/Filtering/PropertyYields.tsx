@@ -3,7 +3,8 @@ import { useSmallScreen } from "../../hooks/useSmallScreen";
 import { selectPropertyYields } from "../../store/filtering/filteringSelector";
 import { useAppDispatch, useAppSelector } from "../../hooks/useInitStore";
 import { setPropertyYields } from "../../store/filtering/filteringReducer";
-import { NumberInput } from "../Common/Inputs/NumberInput";
+import { RangeSlider } from "../Common/Inputs/RangeSlider";
+
 export function PropertyYields() {
   const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common', { keyPrefix: 'filtering' });
@@ -22,25 +23,14 @@ export function PropertyYields() {
   }
 
   return <>
-    <NumberInput
-      id="propertyYields.min"
-      label={t('propertyYields.min') + ' (%)'}
-      value={propertyYields.min}
+    <RangeSlider
+      textLabel={t('propertyYields.range') + ' (%)'}
+      value={[propertyYields.min ?? 0, propertyYields.max ?? 100]}
       min={0}
-      max={propertyYields.max ?? undefined}
-      allowDecimal={false}
-      size={!isSmallScreen ? 'md' : 'xl'}
-      onChange={(e) => onPropertyYields(e as number)}
-    />
-    <NumberInput
-      id="propertyYields.max"
-      label={t('propertyYields.max') + ' (%)'}
-      value={propertyYields.max ?? undefined}
-      min={propertyYields.min}
       max={100}
-      allowDecimal={false}
+      minRange={0}
       size={!isSmallScreen ? 'md' : 'xl'}
-      onChange={(e) => onPropertyYields(undefined, e as number)}
+      onChange={(e) => onPropertyYields(e[0] as number, e[1] as number)}
     />
   </>
 }

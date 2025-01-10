@@ -116,21 +116,23 @@ export function PropertyPanelContent({
           (entry.notOwnedOnly && ownedAmount > 0)))
       .map(({ entry, icon, rentClass, iconClass }) => {
         return (
-          <>
-            <Grid.Col span={6} className="font-semibold">
-              <Title order={5}>{t(entry.label)}</Title>
-            </Grid.Col>
-            <Grid.Col span={6} className="flex items-center justify-end">
-              <p className={`flex items-center ${rentClass ? rentClass : ''} ${iconClass ? iconClass : ''}`}>
-                {
-                  icon &&
-                  <i className="material-icons max-w-[40px] mr-2">{icon}</i>
-                }
-                {entry.value}
-              </p>
-            </Grid.Col>
-            <Divider />
-          </>
+          <Grid.Col key={entry.label} span={12}>
+            <Grid>
+              <Grid.Col span={6} className="font-semibold">
+                <Title order={5}>{t(entry.label)}</Title>
+              </Grid.Col>
+              <Grid.Col span={6} className="flex items-center justify-end">
+                <p className={`flex items-center ${rentClass ? rentClass : ''} ${iconClass ? iconClass : ''}`}>
+                  {
+                    icon &&
+                    <i className="material-icons max-w-[40px] mr-2">{icon}</i>
+                  }
+                  {entry.value}
+                </p>
+              </Grid.Col>
+              <Divider />
+            </Grid>
+          </Grid.Col>
         );
       })}
     </Grid>

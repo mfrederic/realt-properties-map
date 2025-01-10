@@ -11,7 +11,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { setSelected } from '../../store/marker/markerReducer';
 import { setSelectedProperty } from '../../store/urlQuery/urlQuery.reducer';
 import { filterProperties } from '../../utils/properties';
-import { selectFiltering, selectPropertyTypes, selectPropertyOccupations, selectPropertyYields } from '../../store/filtering/filteringSelector';
+import { selectFiltering, selectPropertyTypes, selectPropertyOccupations, selectPropertyYields, selectRentStart } from '../../store/filtering/filteringSelector';
 
 export function Markers(props: { properties: Property[] }) {
   const { t } = useTranslation('common');
@@ -32,6 +32,7 @@ export function Markers(props: { properties: Property[] }) {
   const propertyTypes = useAppSelector(selectPropertyTypes);
   const propertyOccupations = useAppSelector(selectPropertyOccupations);
   const propertyYields = useAppSelector(selectPropertyYields);
+  const rentStart = useAppSelector(selectRentStart);
 
   const [properties, setProperties] = useState<Property[]>([]);
   const [debouncedFilterTimeout, setDebouncedFilterTimeout] = useState<NodeJS.Timeout>();
@@ -92,6 +93,7 @@ export function Markers(props: { properties: Property[] }) {
         propertyTypes,
         propertyOccupations,
         propertyYields,
+        rentStart,
       );
       setProperties(filtered);
     }, 300);
@@ -99,7 +101,7 @@ export function Markers(props: { properties: Property[] }) {
     setDebouncedFilterTimeout(timeoutId);
 
     return () => clearTimeout(timeoutId);
-  }, [props.properties, displayAll, displayGnosis, displayRmm, selectedUrlParam, propertyTypes, propertyOccupations, propertyYields]);
+  }, [props.properties, displayAll, displayGnosis, displayRmm, selectedUrlParam, propertyTypes, propertyOccupations, propertyYields, rentStart]);
 
   return (
     <>

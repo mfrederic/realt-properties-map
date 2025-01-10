@@ -55,11 +55,19 @@
     "propertyTypes": "Property Types",
     "propertyOccupations": {
       "min": "Min Occupations",
-      "max": "Max Occupations"
+      "max": "Max Occupations",
+      "range": "Occupations Range"
     },
     "propertyYields": {
       "min": "Min Yield",
-      "max": "Max Yield"
+      "max": "Max Yield",
+      "range": "Yield Range"
+    },
+    "rentStart": "Rent Start",
+    "rentStartOptions": {
+      "past": "Past",
+      "all": "All",
+      "future": "Future"
     }
   },
   "settings": {

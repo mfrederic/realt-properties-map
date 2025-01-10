@@ -1,3 +1,5 @@
+import dayjsWrapper from "./date";
+import { RentStart } from "../store/filtering/filteringReducer";
 import { Property } from "../types/property";
 
 export function filterProperties(
@@ -9,6 +11,7 @@ export function filterProperties(
   propertyTypes: string[] = [],
   propertyOccupations: { min: number; max: number } = { min: 0, max: 100 },
   propertyYields: { min: number; max?: number } = { min: 0 },
+  rentStart: RentStart = 'all',
 ) {
   return properties
     .filter((property) => {
@@ -40,6 +43,18 @@ export function filterProperties(
       }
       if (propertyYields.max && property.annualPercentageYield > propertyYields.max) {
         return false;
+      }
+      if (rentStart !== 'all') {
+        if (!property.rentStartDate) {
+          return false;
+        }
+        const rentStartDate = dayjsWrapper.utc(property.rentStartDate.date, 'YYYY-MM-DD HH:mm:ss.SSSSSS');
+        if (rentStart === 'past' && rentStartDate.isAfter(dayjsWrapper())) {
+          return false;
+        }
+        if (rentStart === 'future' && rentStartDate.isBefore(dayjsWrapper())) {
+          return false;
+        }
       }
       return toInclude;
     })

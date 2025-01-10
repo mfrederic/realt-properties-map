@@ -13,3 +13,5 @@ export const selectPropertyTypes = (state: RootState) => state.filtering.propert
 export const selectPropertyOccupations = (state: RootState) => state.filtering.propertyOccupations;
 
 export const selectPropertyYields = (state: RootState) => state.filtering.propertyYields;
+
+export const selectRentStart = (state: RootState) => state.filtering.rentStart;

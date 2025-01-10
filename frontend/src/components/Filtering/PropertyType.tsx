@@ -33,9 +33,11 @@ export function PropertyType() {
     <MultiSelect
       id="propertyTypes"
       label={t('propertyTypes')}
+      placeholder={t('propertyTypes')}
       data={data}
       value={propertyTypes}
       size={!isSmallScreen ? 'md' : 'xl'}
+      clearable
       onChange={(e) => onPropertyTypes(e)} />
   )
 }

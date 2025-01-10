@@ -3,7 +3,8 @@ import { selectPropertyOccupations } from "../../store/filtering/filteringSelect
 import { useAppDispatch, useAppSelector } from "../../hooks/useInitStore";
 import { setPropertyOccupations } from "../../store/filtering/filteringReducer";
 import { useSmallScreen } from "../../hooks/useSmallScreen";
-import { NumberInput } from "../Common/Inputs/NumberInput";
+import { RangeSlider } from "../Common/Inputs/RangeSlider";
+
 export function PropertyOccupations() {
   const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common', { keyPrefix: 'filtering' });
@@ -20,25 +21,14 @@ export function PropertyOccupations() {
   }
 
   return <>
-    <NumberInput
-      id="propertyOccupations.min"
-      label={t('propertyOccupations.min') + ' (%)'}
-      value={propertyOccupations.min}
+    <RangeSlider
+      textLabel={t('propertyOccupations.range') + ' (%)'}
+      value={[propertyOccupations.min, propertyOccupations.max]}
       min={0}
-      max={propertyOccupations.max}
-      allowDecimal={false}
-      size={!isSmallScreen ? 'md' : 'xl'}
-      onChange={(e) => onPropertyOccupations(e as number)}
-    />
-    <NumberInput
-      id="propertyOccupations.max"
-      label={t('propertyOccupations.max') + ' (%)'}
-      value={propertyOccupations.max}
-      min={propertyOccupations.min}
       max={100}
-      allowDecimal={false}
-      size={!isSmallScreen ? 'md' : 'xl'}
-      onChange={(e) => onPropertyOccupations(undefined, e as number)}
+      minRange={0}
+      size={isSmallScreen ? 'xl' : 'md'}
+      onChange={(e) => onPropertyOccupations(e[0] as number, e[1] as number)}
     />
   </>
 }

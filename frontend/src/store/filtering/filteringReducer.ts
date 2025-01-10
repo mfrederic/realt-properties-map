@@ -4,6 +4,8 @@ import { setItem } from "../../services/localStorage";
 
 const LOCAL_STORAGE_NAME = 'FILTERING';
 
+export type RentStart = 'past' | 'all' | 'future';
+
 interface FilteringState {
   displayAll: boolean;
   displayGnosis: boolean;
@@ -17,6 +19,7 @@ interface FilteringState {
     min: number;
     max?: number;
   };
+  rentStart: RentStart;
 }
 
 const initialState: FilteringState = {
@@ -31,6 +34,7 @@ const initialState: FilteringState = {
   propertyYields: {
     min: 0,
   },
+  rentStart: 'all',
 };
 
 export const filteringSlice = createSlice({
@@ -61,6 +65,10 @@ export const filteringSlice = createSlice({
       state.propertyYields = action.payload;
       setItem<FilteringState>(LOCAL_STORAGE_NAME, state);
     },
+    setRentStart: (state, action: PayloadAction<RentStart>) => {
+      state.rentStart = action.payload;
+      setItem<FilteringState>(LOCAL_STORAGE_NAME, state);
+    },
   }
 });
 
@@ -71,6 +79,7 @@ export const {
   setPropertyTypes,
   setPropertyOccupations,
   setPropertyYields,
+  setRentStart,
 } = filteringSlice.actions;
 
 export default filteringSlice.reducer;

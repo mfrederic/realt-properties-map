@@ -16,6 +16,7 @@ import { PropertyType } from "./PropertyType";
 import { PropertyOccupations } from "./PropertyOccupations";
 import { PropertyYields } from "./PropertyYields";
 import { Grid } from "../Common/Layouts/Grid";
+import { RentStart } from "./RentStart";
 
 export function FilteringOptions() {
   const { t: tMapOptions } = useTranslation('common', { keyPrefix: 'mapOptions' });
@@ -93,6 +94,9 @@ export function FilteringOptions() {
               checked={filteringOptions.displayAll}
               disabled={walletAddresses.length === 0}
               onChange={(e) => onDisplayAll(e)} />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <RentStart />
           </Grid.Col>
           <Grid.Col span={12}>
             <PropertyType />

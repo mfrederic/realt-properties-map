@@ -55,11 +55,19 @@
     "propertyTypes": "Tipos de propiedades",
     "propertyOccupations": {
       "min": "Mínimo de ocupaciones",
-      "max": "Máximo de ocupaciones"
+      "max": "Máximo de ocupaciones",
+      "range": "Rango de ocupaciones"
     },
     "propertyYields": {
       "min": "Mínimo de rendimiento",
-      "max": "Máximo de rendimiento"
+      "max": "Máximo de rendimiento",
+      "range": "Rango de rendimiento"
+    },
+    "rentStart": "Inicio de la renta",
+    "rentStartOptions": {
+      "past": "Pasado",
+      "all": "Todos",
+      "future": "Futuro"
     }
   },
   "settings": {
