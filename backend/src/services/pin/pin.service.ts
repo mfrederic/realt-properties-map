@@ -1,7 +1,10 @@
 import { access, mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
 
-function getOccupationColor(occupation: string) {
+export type Occupation = 'red' | 'green' | 'yellow';
+export type PropertyType = 'singleFamily' | 'multiFamily' | 'duplex' | 'condominium' | 'mixedUse' | 'quadplex' | 'commercial' | 'sfrPortfolio' | 'mfrPortfolio' | 'loan' | 'stack';
+
+function getOccupationColor(occupation: Occupation) {
   switch (occupation) {
     case 'red':
       return '#f44336';
@@ -14,7 +17,7 @@ function getOccupationColor(occupation: string) {
   }
 }
 
-function getPropertyTypeColor(propertyType: string) {
+function getPropertyTypeColor(propertyType: PropertyType) {
   switch (propertyType) {
     case 'singleFamily':
       return '#1e88e5';
@@ -44,8 +47,8 @@ function getPropertyTypeColor(propertyType: string) {
 }
 
 export function getPinCacheKey(
-  occupation: string,
-  propertyType: string,
+  occupation: Occupation,
+  propertyType: PropertyType,
   owned?: boolean,
   icon?: boolean,
 ) {
@@ -60,8 +63,8 @@ export function getPinCacheKey(
 }
 
 export async function getPinSvg(
-  occupation: string,
-  propertyType: string,
+  occupation: Occupation,
+  propertyType: PropertyType,
   owned: boolean,
   icon: boolean,
 ) {
@@ -97,8 +100,8 @@ export async function getPinSvg(
 }
 
 export async function writePinSvgToCache(
-  occupation: string,
-  propertyType: string,
+  occupation: Occupation,
+  propertyType: PropertyType,
   owned: boolean,
   icon: boolean,
   svg: string,
@@ -114,8 +117,8 @@ export async function writePinSvgToCache(
 }
 
 export async function getPinSvgFromCache(
-  occupation: string,
-  propertyType: string,
+  occupation: Occupation,
+  propertyType: PropertyType,
   owned: boolean,
   icon: boolean,
 ) {
