@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/mfrederic/realt-properties-map/compare/v1.13.0...v1.14.0) (2025-01-10)
+
+
+### Features
+
+* extend analytics for feature usage check ([42c6486](https://github.com/mfrederic/realt-properties-map/commit/42c6486a9a8e49d5078869e14167d442db8ff202))
+
 # [1.13.0](https://github.com/mfrederic/realt-properties-map/compare/v1.12.0...v1.13.0) (2025-01-10)
 
 
