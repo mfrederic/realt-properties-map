@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/mfrederic/realt-properties-map/compare/v1.14.0...v1.15.0) (2025-01-10)
+
+
+### Features
+
+* refactor pin controller ([306f5df](https://github.com/mfrederic/realt-properties-map/commit/306f5dfd8cb0a6d2f0ebb7dbfc19d780c24c37d5))
+
 # [1.14.0](https://github.com/mfrederic/realt-properties-map/compare/v1.13.0...v1.14.0) (2025-01-10)
 
 
