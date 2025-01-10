@@ -22,7 +22,7 @@ export function PropertyType() {
 
   function onPropertyTypes(value: string[]) {
     analyticsEvent({
-      category: 'Settings',
+      category: 'Filtering',
       action: 'Property Types',
       label: value.join(', '),
     });

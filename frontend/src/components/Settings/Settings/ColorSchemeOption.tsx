@@ -3,11 +3,21 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useTranslation } from "react-i18next";
 import { useSmallScreen } from "../../../hooks/useSmallScreen";
+import { analyticsEvent } from "../../../services/analytics";
 
 export function ColorSchemeOption() {
   const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common', { keyPrefix: 'settings' });
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+
+  function onToggleColorScheme() {
+    analyticsEvent({
+      category: 'Settings',
+      action: 'Color Scheme',
+      label: colorScheme,
+    });
+    toggleColorScheme();
+  }
 
   return (
     <SegmentedControl
@@ -15,7 +25,7 @@ export function ColorSchemeOption() {
       color={'brand'}
       fullWidth={true}
       value={colorScheme}
-      onChange={() => toggleColorScheme()}
+      onChange={onToggleColorScheme}
       size={isSmallScreen ? 'lg' : 'md'}
       data={[
         {

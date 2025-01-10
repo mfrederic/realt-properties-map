@@ -9,6 +9,7 @@ import { setSelectedProperty } from "../../../store/urlQuery/urlQuery.reducer";
 import { filterProperties } from "../../../utils/properties";
 import { selectFiltering } from "../../../store/filtering/filteringSelector";
 import { useSmallScreen } from "../../../hooks/useSmallScreen";
+import { analyticsEvent } from "../../../services/analytics";
 
 // Create the base component
 const SearchBarComponent = forwardRef<{ focus: () => void }, {}>((_props, ref) => {
@@ -35,6 +36,11 @@ const SearchBarComponent = forwardRef<{ focus: () => void }, {}>((_props, ref) =
     timeout = setTimeout(() => {
       const property = filteredProperties.find((p) => p.fullName === value);
       if (property) {
+        analyticsEvent({
+          category: 'Search',
+          action: 'Search',
+          label: value,
+        });
         dispatch(setSelected({
           property: property,
           latlng: {

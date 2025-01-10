@@ -5,6 +5,7 @@ import { Option } from "../Option";
 import { SettingsPanelSection } from "../../SettingsPanelSection";
 import { selectedStartTooltip } from "../../../../store/settings/settingsSelector";
 import { setStartTooltip } from "../../../../store/settings/settingsReducer";
+import { analyticsEvent } from "../../../../services/analytics";
 
 export function GeneralOptions() {
   const { t } = useTranslation('common', { keyPrefix: 'settings.generalOptions' });
@@ -12,6 +13,11 @@ export function GeneralOptions() {
   const showStartTooltip = useAppSelector(selectedStartTooltip);
 
   function onToggleStartTooltip(toggle: boolean) {
+    analyticsEvent({
+      category: 'Settings',
+      action: 'Start Tooltip',
+      label: toggle ? 'On' : 'Off',
+    });
     dispatch(setStartTooltip(toggle));
   }
 

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/useInitStore";
 import { setPropertyOccupations } from "../../store/filtering/filteringReducer";
 import { useSmallScreen } from "../../hooks/useSmallScreen";
 import { RangeSlider } from "../Common/Inputs/RangeSlider";
+import { analyticsEvent } from "../../services/analytics";
 
 export function PropertyOccupations() {
   const isSmallScreen = useSmallScreen();
@@ -13,6 +14,11 @@ export function PropertyOccupations() {
   const propertyOccupations = useAppSelector(selectPropertyOccupations);
 
   function onPropertyOccupations(min?: number, max?: number) {
+    analyticsEvent({
+      category: 'Filtering',
+      action: 'Property Occupations',
+      label: `${min} - ${max}`,
+    });
     const newOccupations = {
       min: min ?? propertyOccupations.min,
       max: max ?? propertyOccupations.max,

@@ -4,6 +4,7 @@ import { selectPropertyYields } from "../../store/filtering/filteringSelector";
 import { useAppDispatch, useAppSelector } from "../../hooks/useInitStore";
 import { setPropertyYields } from "../../store/filtering/filteringReducer";
 import { RangeSlider } from "../Common/Inputs/RangeSlider";
+import { analyticsEvent } from "../../services/analytics";
 
 export function PropertyYields() {
   const isSmallScreen = useSmallScreen();
@@ -13,6 +14,11 @@ export function PropertyYields() {
   const propertyYields = useAppSelector(selectPropertyYields);
 
   function onPropertyYields(min?: number, max?: number) {
+    analyticsEvent({
+      category: 'Filtering',
+      action: 'Property Yields',
+      label: `${min} - ${max}`,
+    });
     const newYields = {
       min: min ?? propertyYields.min ?? 0,
       max: max as unknown as string === ''

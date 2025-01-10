@@ -21,7 +21,7 @@ export function RentStart() {
 
   function onRentStart(value: string) {
     analyticsEvent({
-      category: 'Settings',
+      category: 'Filtering',
       action: 'Rent Start',
       label: value,
     });

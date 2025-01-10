@@ -12,6 +12,7 @@ import { setSelected } from '../../store/marker/markerReducer';
 import { setSelectedProperty } from '../../store/urlQuery/urlQuery.reducer';
 import { filterProperties } from '../../utils/properties';
 import { selectFiltering, selectPropertyTypes, selectPropertyOccupations, selectPropertyYields, selectRentStart } from '../../store/filtering/filteringSelector';
+import { analyticsEvent } from '../../services/analytics';
 
 export function Markers(props: { properties: Property[] }) {
   const { t } = useTranslation('common');
@@ -38,6 +39,11 @@ export function Markers(props: { properties: Property[] }) {
   const [debouncedFilterTimeout, setDebouncedFilterTimeout] = useState<NodeJS.Timeout>();
 
   const onMarkerClicked = useCallback((event: LeafletMouseEvent, property: Property) => {
+    analyticsEvent({
+      category: 'Map',
+      action: 'Marker Clicked',
+      label: property.address,
+    });
     dispatch(setSelected({
       property,
       latlng: {

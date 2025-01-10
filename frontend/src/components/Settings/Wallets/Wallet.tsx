@@ -11,6 +11,7 @@ import { getUuid } from "../../../utils/crypto";
 import { Button } from "../../Common/Inputs/Button";
 import { useSmallScreen } from "../../../hooks/useSmallScreen";
 import { Grid } from "../../Common/Layouts/Grid";
+import { analyticsEvent } from "../../../services/analytics";
 
 export function validateWallets(
   waletts: string[],
@@ -78,6 +79,11 @@ export function Wallet({
     if (!valid) {
       return
     }
+    analyticsEvent({
+      category: 'Settings',
+      action: 'Save Wallet',
+      label: exists ? 'Edit' : 'Add',
+    });
     onSave && onSave(wallet, originalWallet);
     if (!exists) {
       setValid(true);
