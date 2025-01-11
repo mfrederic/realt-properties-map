@@ -7,7 +7,7 @@ export function RangeSlider(props: RangeSliderProps & {
   const isSmallScreen = useSmallScreen();
   return <>
     { props.textlabel &&
-      <Text size={!isSmallScreen ? 'md' : 'xl'} className="!mb-2">
+      <Text size={!isSmallScreen ? 'md' : 'xl'} className={`!mb-2 ${props.labelAlwaysOn ? '!mb-8' : ''}`}>
         { props.textlabel }
       </Text>
     }

@@ -30,6 +30,12 @@ export function PropertyOccupations() {
     <RangeSlider
       textlabel={t('propertyOccupations.range') + ' (%)'}
       value={[propertyOccupations.min, propertyOccupations.max]}
+      labelAlwaysOn
+      marks={[
+        { value: 0, label: '0%' },
+        { value: 50, label: '50%' },
+        { value: 100, label: '100%' },
+      ]}
       min={0}
       max={100}
       minRange={0}

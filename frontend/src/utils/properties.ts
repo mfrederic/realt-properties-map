@@ -41,7 +41,7 @@ export function filterProperties(
       if (propertyYields.min > 0 && property.annualPercentageYield < propertyYields.min) {
         return false;
       }
-      if (propertyYields.max && property.annualPercentageYield > propertyYields.max) {
+      if (propertyYields.max && propertyYields.max < 20 && property.annualPercentageYield > propertyYields.max) {
         return false;
       }
       if (rentStart !== 'all') {

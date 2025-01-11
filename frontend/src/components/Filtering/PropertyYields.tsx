@@ -31,9 +31,15 @@ export function PropertyYields() {
   return <>
     <RangeSlider
       textlabel={t('propertyYields.range') + ' (%)'}
-      value={[propertyYields.min ?? 0, propertyYields.max ?? 100]}
+      value={[propertyYields.min ?? 0, propertyYields.max ?? 20]}
+      labelAlwaysOn
+      marks={[
+        { value: 0, label: '0%' },
+        { value: 10, label: '10%' },
+        { value: 20, label: '20%+' },
+      ]}
       min={0}
-      max={100}
+      max={20}
       minRange={0}
       size={!isSmallScreen ? 'md' : 'xl'}
       onChange={(e) => onPropertyYields(e[0] as number, e[1] as number)}
