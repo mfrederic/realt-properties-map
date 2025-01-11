@@ -1,28 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { setItem } from "../../services/localStorage";
+import { getItem, setItem } from "../../services/localStorage";
 
 const LOCAL_STORAGE_NAME = 'FILTERING';
 
 export type RentStart = 'past' | 'all' | 'future';
+
+export type PropertyOccupations = {
+  min: number;
+  max: number;
+};
+
+export type PropertyYields = {
+  min: number;
+  max?: number;
+};
 
 interface FilteringState {
   displayAll: boolean;
   displayGnosis: boolean;
   displayRmm: boolean;
   propertyTypes: string[];
-  propertyOccupations: {
-    min: number;
-    max: number;
-  };
-  propertyYields: {
-    min: number;
-    max?: number;
-  };
+  propertyOccupations: PropertyOccupations;
+  propertyYields: PropertyYields;
   rentStart: RentStart;
 }
 
-const initialState: FilteringState = {
+const initialState: FilteringState = getItem<FilteringState>(LOCAL_STORAGE_NAME, {
   displayAll: true,
   displayGnosis: true,
   displayRmm: true,
@@ -35,7 +39,7 @@ const initialState: FilteringState = {
     min: 0,
   },
   rentStart: 'all',
-};
+});
 
 export const filteringSlice = createSlice({
   name: 'filtering',
@@ -57,11 +61,11 @@ export const filteringSlice = createSlice({
       state.propertyTypes = action.payload;
       setItem<FilteringState>(LOCAL_STORAGE_NAME, state);
     },
-    setPropertyOccupations: (state, action: PayloadAction<{ min: number; max: number }>) => {
+    setPropertyOccupations: (state, action: PayloadAction<PropertyOccupations>) => {
       state.propertyOccupations = action.payload;
       setItem<FilteringState>(LOCAL_STORAGE_NAME, state);
     },
-    setPropertyYields: (state, action: PayloadAction<{ min: number; max?: number }>) => {
+    setPropertyYields: (state, action: PayloadAction<PropertyYields>) => {
       state.propertyYields = action.payload;
       setItem<FilteringState>(LOCAL_STORAGE_NAME, state);
     },
