@@ -105,7 +105,8 @@
     "threads": {
       "title": "Threads",
       "shareOnThreads": "Share on Threads"
-    }
+    },
+    "downloadGpx": "Download GPX"
   },
   "help": {
     "title": "Help RealT Property Map",

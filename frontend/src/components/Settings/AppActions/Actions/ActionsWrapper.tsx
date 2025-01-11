@@ -7,6 +7,7 @@ import { WalletPanelAction } from "./WalletPanelAction";
 import { StartTooltip } from "../../StartTooltip";
 import { SearchAction } from "./SearchAction";
 import { SearchBarWrapper } from "../../SearchBar/SearchBarWrapper";
+import { DownloadGpxAction } from "./DownloadGpxAction";
 
 export function ActionsWrapper() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);

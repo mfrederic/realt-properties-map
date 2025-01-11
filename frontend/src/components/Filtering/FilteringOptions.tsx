@@ -9,6 +9,7 @@ import { RentStart } from "./RentStart";
 import { DisplayRmm } from "./DisplayRmm";
 import { DisplayGnosis } from "./DisplayGnosis";
 import { DisplayAll } from "./DisplayAll";
+import { DownloadGpxAction } from "../Settings/AppActions/Actions/DownloadGpxAction";
 
 export function FilteringOptions() {
   const { t: tFiltering } = useTranslation('common', { keyPrefix: 'filtering' });
@@ -37,6 +38,9 @@ export function FilteringOptions() {
           </Grid.Col>
           <Grid.Col span={12}>
             <PropertyYields />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <DownloadGpxAction />
           </Grid.Col>
         </Grid>
       </SettingsPanelSection>

@@ -105,7 +105,8 @@
     "threads": {
       "title": "Threads",
       "share": "Compartir en Threads"
-    }
+    },
+    "downloadGpx": "Descargar GPX"
   },
   "help": {
     "title": "Ayudar RPM",

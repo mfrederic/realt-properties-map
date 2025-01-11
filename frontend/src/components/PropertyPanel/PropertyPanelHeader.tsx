@@ -25,6 +25,7 @@ export function PropertyPanelHeader(props: {
             marketplaceLink={property.marketplaceLink}
             address={property.caseSensitiveAddress}
             coordinates={property.coordinates}
+            property={property}
             onClose={onClose} />
         </Drawer.Title>
       </Grid.Col>

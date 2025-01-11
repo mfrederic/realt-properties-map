@@ -3,6 +3,7 @@ import { Flex } from "@mantine/core";
 import GoogleIcon from '@mui/icons-material/Google';
 import XIcon from '@mui/icons-material/X';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import ShareLocationIcon from '@mui/icons-material/ShareLocation';
 import Env from "../../utils/env";
 import { AffixBtn } from "../Common/AffixBtn/AffixBtn";
 import { useCopyUrl } from "../../hooks/useCopyUrl";
@@ -11,6 +12,8 @@ import { useSmallScreen } from "../../hooks/useSmallScreen";
 import { Button } from "../Common/Inputs/Button";
 import { Grid } from "../Common/Layouts/Grid";
 import { ActionIcon } from "../Common/Inputs/ActionIcon";
+import { downloadGpxFile } from "../../services/gpx";
+
 function encodeUrlUsingPercentEncoding(url: string) {
   return encodeURI(url);
 }
@@ -19,11 +22,13 @@ export function PropertyPanelActions({
   marketplaceLink,
   address,
   coordinates,
+  property,
   onClose,
 }: {
   marketplaceLink: string;
   address: string;
   coordinates: Property['coordinates'];
+  property: Property;
   onClose: () => void;
 }) {
   const isSmallScreen = useSmallScreen();
@@ -95,6 +100,12 @@ export function PropertyPanelActions({
             referrerPolicy="no-referrer"
             href={encodeUrlUsingPercentEncoding(threadsIntent)}>
             <AlternateEmailIcon fontSize="medium" />
+          </ActionIcon>
+          <ActionIcon
+            variant="default"
+            title={t('settings.downloadGpx')}
+            onClick={() => downloadGpxFile([property], property.fullName.replaceAll(' ', '_'))}>
+            <ShareLocationIcon fontSize="medium" />
           </ActionIcon>
         </Flex>
       </Grid.Col>
