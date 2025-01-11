@@ -1,3 +1,15 @@
+# [1.16.0](https://github.com/mfrederic/realt-properties-map/compare/v1.15.1...v1.16.0) (2025-01-11)
+
+
+### Bug Fixes
+
+* read filtering from storage when loading ([3fddf6b](https://github.com/mfrederic/realt-properties-map/commit/3fddf6bb8581a708307ea6193be8aacc6c9cf612))
+
+
+### Features
+
+* update rangeSlider for readability ([81b4545](https://github.com/mfrederic/realt-properties-map/commit/81b4545e5286f855dafdd69310197016bbc8603b))
+
 ## [1.15.1](https://github.com/mfrederic/realt-properties-map/compare/v1.15.0...v1.15.1) (2025-01-10)
 
 
