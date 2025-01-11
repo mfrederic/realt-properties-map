@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/mfrederic/realt-properties-map/compare/v1.16.0...v1.17.0) (2025-01-11)
+
+
+### Features
+
+* add gpx file generation and download ([eee1251](https://github.com/mfrederic/realt-properties-map/commit/eee12512123b1446ccec34ceaa252887eafba64c))
+
 # [1.16.0](https://github.com/mfrederic/realt-properties-map/compare/v1.15.1...v1.16.0) (2025-01-11)
 
 
