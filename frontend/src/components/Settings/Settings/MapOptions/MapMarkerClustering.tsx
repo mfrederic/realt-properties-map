@@ -8,6 +8,7 @@ import { analyticsEvent } from "../../../../services/analytics";
 import { useSmallScreen } from "../../../../hooks/useSmallScreen";
 import { Slider } from "../../../Common/Inputs/Slider";
 import { Grid } from "../../../Common/Layouts/Grid";
+import { useCallback } from "react";
 
 export function MapMarkerClustering() {
   const isSmallScreen = useSmallScreen();
@@ -16,14 +17,18 @@ export function MapMarkerClustering() {
   const dispatch = useAppDispatch();
   const markerClustering = useAppSelector(selectMarkerClustering);
 
-  function onClusteringChange(value: number) {
+  const onClusteringChange = useCallback((value: number) => {
     analyticsEvent({
       category: 'Settings',
       action: 'Set Marker Clustering',
       value,
     });
     dispatch(setMarkerClustering(value));
-  }
+  }, [dispatch]);
+
+  const label = useCallback((value: number) => {
+    return `zoom: ${value}`;
+  }, []);
 
   return (
     <Grid className="mt-2">
@@ -35,7 +40,7 @@ export function MapMarkerClustering() {
       </Grid.Col>
       <Grid.Col span={12} className="mt-4">
         <Slider
-          label={(value) => `zoom: ${value}`}
+          label={label}
           step={1}
           min={10}
           max={18}

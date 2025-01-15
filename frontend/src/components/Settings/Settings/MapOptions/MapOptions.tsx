@@ -44,7 +44,7 @@ export function MapOptions() {
             label={t('differentiateOwned')}
             checked={mapOptions.differentiateOwned}
             disabled={walletAddresses.length === 0}
-            onChange={(e) => onDifferentiateOwned(e)} />
+            onChange={onDifferentiateOwned} />
         </Grid.Col>
         <Grid.Col span={12}>
           <Option
@@ -52,7 +52,7 @@ export function MapOptions() {
             label={t('showIcon')}
             checked={mapOptions.showIcon}
             disabled={walletAddresses.length === 0}
-            onChange={(e) => onShowIcon(e)} />
+            onChange={onShowIcon} />
         </Grid.Col>
         <Grid.Col span={12}>
           <MapMarkerOpacity />

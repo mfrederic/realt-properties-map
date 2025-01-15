@@ -26,7 +26,7 @@ export function AppDrawer(props: {
       opened={opened}
       onClose={close}
       position={position}
-      size={isSmallScreen ? '100%' : 'md'}>
+      size={isSmallScreen ? '100%' : '35rem'}>
       <Drawer.Content>
         {
           !isSmallScreen &&

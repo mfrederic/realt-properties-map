@@ -37,6 +37,6 @@ export function DisplayRmm() {
       icon={ExpectedFeature}
       checked={filteringOptions.displayRmm || rmmDisabled}
       disabled={walletAddresses.length === 0 || rmmDisabled}
-      onChange={(e) => onDisplayRmm(e)} />
+      onChange={onDisplayRmm} />
   )
 }

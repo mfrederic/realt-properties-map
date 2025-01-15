@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import RecommendIcon from '@mui/icons-material/Recommend';
 import { AppActionsButton } from "../AppActionsButton";
@@ -10,10 +10,18 @@ export function HelpPanelAction(props: React.HTMLAttributes<HTMLDivElement> & {
   const [helpOpened, setHelpOpened] = useState(props.isOpened || false);
   const { t } = useTranslation('common');
 
+  const openHelpPanel = useCallback(() => {
+    setHelpOpened(true);
+  }, []);
+
+  const closeHelpPanel = useCallback(() => {
+    setHelpOpened(false);
+  }, []);
+  
   return (
     <>
-      <HelpPanel opened={helpOpened} close={() => setHelpOpened(false)} />
-      <AppActionsButton opened={false} open={() => setHelpOpened(true)} label={t('actions.openHelpPanel')} color="lime">
+      <HelpPanel opened={helpOpened} close={closeHelpPanel} />
+      <AppActionsButton opened={false} open={openHelpPanel} label={t('actions.openHelpPanel')} color="lime">
         <RecommendIcon fontSize="large" />
       </AppActionsButton>
     </>

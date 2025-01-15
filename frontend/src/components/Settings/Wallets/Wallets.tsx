@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Modal, Space, Text } from "@mantine/core";
 import WalletIcon from '@mui/icons-material/Wallet';
@@ -19,7 +19,7 @@ export function Wallets() {
   const wallets = useAppSelector(selectWalletAddresses);
   const [deleteState, setDeleteState] = useState<Maybe<string>>(null);
 
-  function onSave(address: string, oldAddress?: string) {
+  const onSave = useCallback((address: string, oldAddress?: string) => {
     analyticsEvent({
       category: 'Wallets',
       action: 'Save Wallet',
@@ -29,7 +29,7 @@ export function Wallets() {
     }
     if (oldAddress) {
       dispatch(updateAddress({
-        oldAddress: address,
+        oldAddress,
         newAddress: address,
       }));
       return;
@@ -38,14 +38,14 @@ export function Wallets() {
     if (wallets.length === 0) {
       dispatch(setDisplayAll(false));
     }
-  }
+  }, [dispatch]);
 
-  function onDelete(address: string) {
+  const onDelete = useCallback((address: string) => {
     setDeleteState(address);
-  }
+  }, [setDeleteState]);
 
-  function onRemoveWallet(address: string) {
-    if (!address) {
+  const onRemoveWallet = useCallback(() => {
+    if (!deleteState) {
       return;
     }
     analyticsEvent({
@@ -53,11 +53,16 @@ export function Wallets() {
       action: 'Delete Wallet',
     });
     setDeleteState(null);
-    dispatch(removeAddress(address));
+    dispatch(removeAddress(deleteState!));
     if (wallets.length === 1) {
       dispatch(setDisplayAll(true));
     }
-  }
+  }, [dispatch, deleteState]);
+
+
+  const onDeleteStateChange = useCallback((wallet?: string) => {
+    setDeleteState(wallet ?? null);
+  }, [setDeleteState]);
 
   return (
     <SettingsPanelSection icon={<WalletIcon className="inline-block mr-2" />} label={t('wallet.wallets')}>
@@ -72,8 +77,8 @@ export function Wallets() {
                   <Wallet
                     address={wallet}
                     exists
-                    onSave={(oldAddress, address) => onSave(address, oldAddress)}
-                    onDelete={() => onDelete(wallet)} />
+                    onSave={onSave}
+                    onDelete={onDelete} />
                   <Space h="lg" />
                 </Grid.Col>
               ))
@@ -82,13 +87,13 @@ export function Wallets() {
         }
         <Grid.Col span={12}>
           <Wallet
-            onSave={(address) => onSave(address)} />
+            onSave={onSave} />
           <Space h="lg" />
         </Grid.Col>
       </Grid>
       <Modal.Root
         opened={!!deleteState}
-        onClose={() => setDeleteState(null)}>
+        onClose={onDeleteStateChange}>
         <Modal.Overlay />
         <Modal.Content>
           <Modal.Header>
@@ -103,7 +108,7 @@ export function Wallets() {
                 <Button
                   fullWidth
                   color="gray"
-                  onClick={() => setDeleteState(null)}>
+                  onClick={onDeleteStateChange}>
                   {t('actions.cancel')}
                 </Button>
               </Grid.Col>
@@ -111,7 +116,7 @@ export function Wallets() {
                 <Button
                   fullWidth
                   color="red"
-                  onClick={() => onRemoveWallet(deleteState!)}>
+                  onClick={onRemoveWallet}>
                   {t('actions.delete')}
                 </Button>
               </Grid.Col>

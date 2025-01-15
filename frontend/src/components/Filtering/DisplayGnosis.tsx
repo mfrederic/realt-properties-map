@@ -29,6 +29,6 @@ export function DisplayGnosis() {
       label={tMapOptions('displayGnosis')}
       checked={filteringOptions.displayGnosis}
       disabled={walletAddresses.length === 0}
-      onChange={(e) => onDisplayGnosis(e)} />
+      onChange={onDisplayGnosis} />
   )
 }

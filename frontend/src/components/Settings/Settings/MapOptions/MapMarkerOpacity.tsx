@@ -8,6 +8,7 @@ import { analyticsEvent } from "../../../../services/analytics";
 import { useSmallScreen } from "../../../../hooks/useSmallScreen";
 import { Slider } from "../../../Common/Inputs/Slider";
 import { Grid } from "../../../Common/Layouts/Grid";
+import { useCallback } from "react";
 
 export function MapMarkerOpacity() {
   const isSmallScreen = useSmallScreen();
@@ -16,14 +17,18 @@ export function MapMarkerOpacity() {
   const dispatch = useAppDispatch();
   const markerOpacity = useAppSelector(selectMarkerOpacity);
 
-  function onOpacityChange(value: number) {
+  const onOpacityChange = useCallback((value: number) => {
     analyticsEvent({
       category: 'Settings',
       action: 'Set Marker Opacity',
       value,
     });
     dispatch(setMarkerOpacity(value));
-  }
+  }, [dispatch]);
+
+  const label = useCallback((value: number) => {
+    return `${value * 100}%`;
+  }, []);
 
   return (
     <Grid className="mt-2">
@@ -35,7 +40,7 @@ export function MapMarkerOpacity() {
       </Grid.Col>
       <Grid.Col span={12} className="mt-4">
         <Slider
-          label={(value) => `${value * 100}%`}
+          label={label}
           step={.2}
           min={.2}
           max={1}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { AppActionsButton } from "../AppActionsButton";
@@ -10,10 +10,18 @@ export function FilteringPanelAction(props: React.HTMLAttributes<HTMLDivElement>
   const [filteringPanelOpened, setFilteringPanelOpened] = useState(props.isOpened || false);
   const { t } = useTranslation('common');
 
+  const openFilteringPanel = useCallback(() => {
+    setFilteringPanelOpened(true);
+  }, []);
+
+  const closeFilteringPanel = useCallback(() => {
+    setFilteringPanelOpened(false);
+  }, []);
+
   return (
     <>
-      <FilteringPanel opened={filteringPanelOpened} close={() => setFilteringPanelOpened(false)} />
-      <AppActionsButton opened={false} open={() => setFilteringPanelOpened(true)} label={t('actions.openFilteringPanel')}>
+      <FilteringPanel opened={filteringPanelOpened} close={closeFilteringPanel} />
+      <AppActionsButton opened={false} open={openFilteringPanel} label={t('actions.openFilteringPanel')}>
         <FilterAltIcon fontSize="large" />
       </AppActionsButton>
     </>

@@ -38,7 +38,7 @@ export function RentStart() {
           fullWidth
           data={data}
           value={rentStart}
-          onChange={(value) => onRentStart(value)}
+          onChange={onRentStart}
         />
     </Grid.Col>
     </Grid>

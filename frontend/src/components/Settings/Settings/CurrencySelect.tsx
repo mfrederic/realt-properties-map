@@ -12,13 +12,14 @@ export function CurrencySelect() {
   const dispatch = useAppDispatch();
   const userCurrency = useAppSelector(selectedCurrency);
 
-  function setUserCurrency(currency: Currency) {
+  function setUserCurrency(currency: string | null) {
+    const currencyEnum = currency as Currency;
     analyticsEvent({
       category: 'Settings',
       action: 'Set Currency',
-      label: currency,
+      label: currencyEnum,
     });
-    dispatch(setCurrency(currency));
+    dispatch(setCurrency(currencyEnum));
   }
 
   return (
@@ -28,7 +29,7 @@ export function CurrencySelect() {
       label={t('currency')}
       p={5}
       value={userCurrency}
-      onChange={(value) => setUserCurrency(value as Currency)}
+      onChange={setUserCurrency}
       data={[
         { value: Currency.USD, label: t('usd') },
         { value: Currency.EUR, label: t('eur') },

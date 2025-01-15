@@ -27,7 +27,7 @@ export function GeneralOptions() {
         id="startTooltip"
         label={t('displayStartTooltip')}
         checked={showStartTooltip}
-        onChange={(e) => onToggleStartTooltip(e)} />
+        onChange={onToggleStartTooltip} />
     </SettingsPanelSection>
   )
 }

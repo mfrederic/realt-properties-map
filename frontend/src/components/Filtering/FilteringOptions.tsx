@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import MapIcon from '@mui/icons-material/Map';
 import { SettingsPanelSection } from "../Settings/SettingsPanelSection";
 import { PropertyType } from "./PropertyType";
@@ -10,13 +9,14 @@ import { DisplayRmm } from "./DisplayRmm";
 import { DisplayGnosis } from "./DisplayGnosis";
 import { DisplayAll } from "./DisplayAll";
 import { DownloadGpxAction } from "../Settings/AppActions/Actions/DownloadGpxAction";
+import { useTranslation } from "../../hooks/useTranslation";
 
 export function FilteringOptions() {
-  const { t: tFiltering } = useTranslation('common', { keyPrefix: 'filtering' });
+  const { t } = useTranslation('common', { keyPrefix: 'filtering' });
   
   return (
     <>
-      <SettingsPanelSection icon={<MapIcon className="inline-block mr-2" />} label={tFiltering('filteringOptions')}>
+      <SettingsPanelSection icon={<MapIcon className="inline-block mr-2" />} label={t('filteringOptions')}>
         <Grid>
           <Grid.Col span={12}>
             <DisplayRmm />

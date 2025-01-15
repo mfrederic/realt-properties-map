@@ -1,5 +1,5 @@
-import { useTranslation } from "react-i18next";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import { useTranslation } from "../../hooks/useTranslation";
 import { SettingsPanelHeader } from "../Settings/SettingsPanelHeader";
 import { FilteringOptions } from "./FilteringOptions";
 import { SettingsPanelContent } from "../Settings/SettingsPanelContent";

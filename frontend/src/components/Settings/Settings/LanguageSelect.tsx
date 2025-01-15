@@ -12,17 +12,18 @@ export function LanguageSelect() {
   const dispatch = useAppDispatch();
   const userLanguage = useAppSelector(selectedLanguage);
 
-  function setUserLanguage(lang: Language) {
-    if (i18n.language === lang) {
+  function setUserLanguage(lang: string | null) {
+    const languageEnum = lang as Language;
+    if (i18n.language === languageEnum) {
       return;
     }
     analyticsEvent({
       category: 'Settings',
       action: 'Set Language',
-      label: lang,
+      label: languageEnum,
     });
-    dispatch(setLanguage(lang));
-    i18n.changeLanguage(lang);
+    dispatch(setLanguage(languageEnum));
+    i18n.changeLanguage(languageEnum);
   }
 
   return (
@@ -32,7 +33,7 @@ export function LanguageSelect() {
       label={t('language')}
       p={5}
       value={userLanguage}
-      onChange={(value) => setUserLanguage(value as Language)}
+      onChange={setUserLanguage}
       data={[
         { value: Language.EN, label: t('english') },
         { value: Language.FR, label: t('french') },

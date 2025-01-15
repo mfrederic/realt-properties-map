@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SettingsIcon from '@mui/icons-material/Settings';
 import { AppActionsButton } from "../AppActionsButton";
@@ -10,10 +10,18 @@ export function SettingsPanelAction(props: React.HTMLAttributes<HTMLDivElement> 
   const [mapOptionsOpened, setMapOptionsOpened] = useState(props.isOpened || false);
   const { t } = useTranslation('common');
 
+  const openMapOptionsPanel = useCallback(() => {
+    setMapOptionsOpened(true);
+  }, []);
+
+  const closeMapOptionsPanel = useCallback(() => {
+    setMapOptionsOpened(false);
+  }, []);
+
   return (
     <>
-      <MapOptionsPanel opened={mapOptionsOpened} close={() => setMapOptionsOpened(false)} />
-      <AppActionsButton opened={false} open={() => setMapOptionsOpened(true)} label={t('actions.openSettingsPanel')}>
+      <MapOptionsPanel opened={mapOptionsOpened} close={closeMapOptionsPanel} />
+      <AppActionsButton opened={false} open={openMapOptionsPanel} label={t('actions.openSettingsPanel')}>
         <SettingsIcon fontSize="large" />
       </AppActionsButton>
     </>

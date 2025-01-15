@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, ChangeEventHandler, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ActionIcon, TextInput } from "@mantine/core";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -40,7 +40,7 @@ export function Wallet({
   exists?: boolean,
   className?: string,
   onSave: (address: string, oldAddress: string) => void,
-  onDelete?: () => void,
+  onDelete?: (wallet: string) => void,
   onVisibilityChange?: (visible: boolean) => void,
 }) {
   const isSmallScreen = useSmallScreen();
@@ -68,10 +68,11 @@ export function Wallet({
     return false;
   }
 
-  function onChange(address: string) {
-    setWallet(address);
-    setHiddenWallet(hideWalletAddress(address));
-    validate(address);
+  function onChange(event: ChangeEvent<HTMLInputElement>) {
+    const value = event.currentTarget.value;
+    setWallet(value);
+    setHiddenWallet(hideWalletAddress(value));
+    validate(value);
   }
 
   function save() {
@@ -94,8 +95,12 @@ export function Wallet({
   }
 
   function deleteWallet() {
-    onDelete && onDelete();
+    onDelete && onDelete(wallet);
   }
+
+  const toggleVisibility = useCallback(() => {
+    setVisible((prevVisible) => !prevVisible);
+  }, [visible]);
 
   return (
     <Grid className={className + "py-4"}>
@@ -108,13 +113,13 @@ export function Wallet({
           placeholder="0x"
           error={!valid && wallet.length > 0 ? t('wallet.invalidAddress') : false}
           size={isSmallScreen ? 'lg' : 'md'}
-          onChange={(e) => onChange(e.currentTarget.value)}
+          onChange={onChange}
           value={visible ? wallet : hiddenWallet}
           rightSection={
             exists && (
               <ActionIcon
                 variant="subtle"
-                onClick={() => setVisible(!visible)}>
+                onClick={toggleVisibility}>
                 {visible ? <VisibilityOffIcon fontSize="small" /> : <VisibilityIcon fontSize="small" />}
               </ActionIcon>
             )

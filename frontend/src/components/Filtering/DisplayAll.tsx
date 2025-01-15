@@ -36,6 +36,6 @@ export function DisplayAll() {
       label={tMapOptions('displayAll')}
       checked={filteringOptions.displayAll}
       disabled={walletAddresses.length === 0}
-      onChange={(e) => onDisplayAll(e)} />
+      onChange={onDisplayAll} />
   )
 }

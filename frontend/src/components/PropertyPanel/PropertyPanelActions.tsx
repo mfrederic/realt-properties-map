@@ -13,6 +13,7 @@ import { Button } from "../Common/Inputs/Button";
 import { Grid } from "../Common/Layouts/Grid";
 import { ActionIcon } from "../Common/Inputs/ActionIcon";
 import { downloadGpxFile } from "../../services/gpx";
+import { useCallback } from "react";
 
 function encodeUrlUsingPercentEncoding(url: string) {
   return encodeURI(url);
@@ -34,6 +35,8 @@ export function PropertyPanelActions({
   const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common');
   const { copied, onCopyUrl } = useCopyUrl();
+
+  const downloadGpxFileMemoized = useCallback(() => downloadGpxFile([property], property.fullName.replaceAll(' ', '_')), [property]);
 
   const twitterIntent = `https://twitter.com/intent/tweet?size=large&text=Check out this property on RealT Property Map.&url=${window.location.href}&hashtags=RealT,RealToken,RPM,RealtPropertyMap&related=RealTPlatform`;
   const threadsIntent = `https://www.threads.net/intent/post?url=${window.location.href}&text=Check out this property on RealT Property Map. #RealT #RealToken #RPM #RealtPropertyMap`;
@@ -104,7 +107,7 @@ export function PropertyPanelActions({
           <ActionIcon
             variant="default"
             title={t('settings.downloadGpx')}
-            onClick={() => downloadGpxFile([property], property.fullName.replaceAll(' ', '_'))}>
+            onClick={downloadGpxFileMemoized}>
             <ShareLocationIcon fontSize="medium" />
           </ActionIcon>
         </Flex>

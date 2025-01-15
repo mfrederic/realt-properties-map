@@ -2,6 +2,7 @@ import { CheckboxProps } from "@mantine/core";
 import { useSmallScreen } from "../../../hooks/useSmallScreen";
 import { Checkbox } from "../../Common/Inputs/Checkbox";
 import { Grid } from "../../Common/Layouts/Grid";
+import { useCallback } from "react";
 
 export function Option({
   id,
@@ -23,6 +24,10 @@ export function Option({
   const isSmallScreen = useSmallScreen();
   const mediaQuerySize = isSmallScreen ? 'xl' : 'md';
   const consolidatedSize = size || mediaQuerySize;
+  
+  const onChangeToggle = useCallback(() => {
+    onChange(!checked);
+  }, [onChange, checked]);
 
   return (
     <Grid className="py-4">
@@ -32,7 +37,7 @@ export function Option({
           label={label}
           checked={checked}
           disabled={disabled}
-          onChange={() => onChange(!checked)}
+          onChange={onChangeToggle}
           icon={icon}
           id={id}
           name={id}

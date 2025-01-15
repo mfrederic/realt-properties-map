@@ -38,6 +38,6 @@ export function PropertyType() {
       value={propertyTypes}
       size={!isSmallScreen ? 'md' : 'xl'}
       clearable
-      onChange={(e) => onPropertyTypes(e)} />
+      onChange={onPropertyTypes} />
   )
 }
