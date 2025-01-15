@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/mfrederic/realt-properties-map/compare/v1.17.0...v1.18.0) (2025-01-15)
+
+
+### Features
+
+* improve app performance ([d4f462f](https://github.com/mfrederic/realt-properties-map/commit/d4f462f9dc112800a532c20c9b2e7890d7e67e94))
+
 # [1.17.0](https://github.com/mfrederic/realt-properties-map/compare/v1.16.0...v1.17.0) (2025-01-11)
 
 
