@@ -26,12 +26,12 @@ export function SettingsPanelHeader({
           </p>
         </div>
       </Grid.Col>
-      <Grid.Col span={6} className="text-base font-semibold leading-6">
+      <Grid.Col span={8} className="text-base font-semibold leading-6">
         <Drawer.Title className="col-span-6 items-center flex">
           { children }
         </Drawer.Title>
       </Grid.Col>
-      <Grid.Col span={6} className="text-right">
+      <Grid.Col span={4} className="text-right">
         <AffixBtn defaultToPlain>
           <Button
             onClick={close}

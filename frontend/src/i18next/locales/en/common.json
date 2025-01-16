@@ -111,9 +111,9 @@
   "help": {
     "title": "Help RealT Property Map",
     "description": "RealT Property Map (RPM) is a tool to help you find and manage your RealT properties. It allows you to add wallets and see its properties on the map.",
-    "github": "RPM is an open source community tool, feel free to contribute to the code on ",
-    "telegram": "If you have any questions or suggestions, feel free to contact me on ",
-    "support1": "If you'd like to support the development of RPM, you can donate to the project at the following address ",
+    "github": "RPM is an open source community tool, feel free to contribute to the code on",
+    "telegram": "If you have any questions or suggestions, feel free to contact me on",
+    "support1": "If you'd like to support the development of RPM, you can donate to the project at the following address",
     "support2": "This will help me to maintain the project and add new features."
   },
   "wallet": {

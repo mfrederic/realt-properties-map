@@ -7,10 +7,12 @@ import { useAppDispatch } from "../../hooks/useInitStore";
 import { analyticsEvent } from "../../services/analytics";
 import { setDisplayAll } from "../../store/filtering/filteringReducer";
 import { useEffect } from "react";
+import { useSmallScreen } from "../../hooks/useSmallScreen";
+import { Kbds } from "../Common/Kbds";
 
 export function DisplayAll() {
   const { t: tMapOptions } = useTranslation('common', { keyPrefix: 'mapOptions' });
-
+  const isSmallScreen = useSmallScreen();
   const dispatch = useAppDispatch();
   const filteringOptions = useAppSelector(selectFiltering);
   const walletAddresses = useAppSelector(selectWalletAddresses);
@@ -36,6 +38,11 @@ export function DisplayAll() {
       label={tMapOptions('displayAll')}
       checked={filteringOptions.displayAll}
       disabled={walletAddresses.length === 0}
+      rightSection={
+        isSmallScreen ? null : (
+          <Kbds hotkey="mod+O" />
+        )
+      }
       onChange={onDisplayAll} />
   )
 }

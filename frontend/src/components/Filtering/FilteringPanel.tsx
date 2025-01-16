@@ -5,6 +5,7 @@ import { FilteringOptions } from "./FilteringOptions";
 import { SettingsPanelContent } from "../Settings/SettingsPanelContent";
 import { AppDrawer } from "../Common/AppDrawer";
 import { Grid } from "../Common/Layouts/Grid";
+import { Kbds } from '../Common/Kbds';
 
 export function FilteringPanel({
   opened,
@@ -21,8 +22,11 @@ export function FilteringPanel({
       close={close}
       header={
         <SettingsPanelHeader close={close}>
-          <FilterAltIcon className="mr-2 col-span-1" />
-          { t('filtering') }
+          <div className="flex items-center gap-4">
+            <FilterAltIcon className="mr-2 col-span-1" />
+            { t('filtering') }
+            <Kbds hotkey="mod+alt+F" />
+          </div>
         </SettingsPanelHeader>
       }
     >

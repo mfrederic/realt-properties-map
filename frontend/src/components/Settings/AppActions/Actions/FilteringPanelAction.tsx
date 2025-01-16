@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { AppActionsButton } from "../AppActionsButton";
 import { FilteringPanel } from "../../../Filtering/FilteringPanel";
+import { useHotkeys } from "@mantine/hooks";
 
 export function FilteringPanelAction(props: React.HTMLAttributes<HTMLDivElement> & {
   isOpened?: boolean;
@@ -17,6 +18,16 @@ export function FilteringPanelAction(props: React.HTMLAttributes<HTMLDivElement>
   const closeFilteringPanel = useCallback(() => {
     setFilteringPanelOpened(false);
   }, []);
+
+  function toggleFilteringPanel() {
+    if (!filteringPanelOpened) {
+      openFilteringPanel();
+    } else {
+      closeFilteringPanel();
+    }
+  }
+
+  useHotkeys([['mod+alt+F', toggleFilteringPanel]]);
 
   return (
     <>

@@ -1,7 +1,8 @@
-import { Anchor, CopyButton, Flex, Mark, Modal, Text } from "@mantine/core";
+import { Modal } from "@mantine/core";
 import { useTranslation } from "react-i18next";
-import MadeBy from "../../Common/MadeBy";
-import { Button } from "../../Common/Inputs/Button";
+import { Kbds } from "../../Common/Kbds";
+import { HelpContent } from "./HelpContent";
+import { useSmallScreen } from "../../../hooks/useSmallScreen";
 
 export default function HelpPanel({
   opened,
@@ -10,34 +11,26 @@ export default function HelpPanel({
   opened: boolean;
   close: () => void;
 }) {
+  const isSmallScreen = useSmallScreen();
   const { t } = useTranslation('common', { keyPrefix: 'help' });
 
   return (
-    <Modal opened={opened} onClose={close} title={t('title')} centered size="lg">
-      <Flex direction="column" align="center" justify="center" gap="md">
-        <Text>
-          {t('description')}
-        </Text>
-        <Text>
-          {t('github')}
-          <Anchor href="https://github.com/mfrederic/realt-properties-map/" target="_blank" rel="noreferrer">GitHub</Anchor>.
-        </Text>
-        <Text>
-          {t('telegram')}
-          <Anchor href="https://t.me/+nqFYq3GTe6lkZDI0" target="_blank" rel="noreferrer">Telegram</Anchor>.
-        </Text>
-        <Text>
-          {t('support1')} <Mark>0x544f04Db543F1Be6A5B59C59a20cEEcb7E9B152C</Mark>. {t('support2')}
-        </Text>
-        <CopyButton value="0x544f04Db543F1Be6A5B59C59a20cEEcb7E9B152C">
-          {({ copied, copy }) => (
-            <Button color={copied ? 'teal' : 'blue'} onClick={copy} className="!w-full md:!w-auto">
-              {copied ? 'Copied wallet address' : 'Copy wallet address'}
-            </Button>
-          )}
-        </CopyButton>
-        <MadeBy />
-      </Flex>
-    </Modal>
+    <Modal.Root opened={opened} onClose={close} centered size="lg" fullScreen={isSmallScreen} zIndex={10000}>
+      <Modal.Overlay blur={10} />
+      <Modal.Content>
+        <Modal.Header>
+          <Modal.Title className="w-full !text-xl !font-bold !pr-3">
+            <div className="w-full flex flex-row gap-2 items-center justify-center">
+              <span className="flex-1">{t('title')}</span>
+              <div><Kbds hotkey="mod+alt+H" /></div>
+            </div>
+          </Modal.Title>
+          <Modal.CloseButton />
+        </Modal.Header>
+        <Modal.Body className="!pt-5">
+          <HelpContent />
+        </Modal.Body>
+      </Modal.Content>
+    </Modal.Root>
   )
 }

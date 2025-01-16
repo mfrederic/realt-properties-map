@@ -5,6 +5,7 @@ import { Wallets } from "./Wallets";
 import { SettingsPanelHeader } from "../SettingsPanelHeader";
 import { AppDrawer } from "../../Common/AppDrawer";
 import { Grid } from "../../Common/Layouts/Grid";
+import { Kbds } from "../../Common/Kbds";
 
 export function WalletsPanel({
   opened,
@@ -21,8 +22,11 @@ export function WalletsPanel({
       close={close}
       header={
         <SettingsPanelHeader close={close}>
-          <WalletIcon className="mr-2 col-span-1" />
-          { t('walletSettings') }
+          <div className="flex items-center gap-4">
+            <WalletIcon className="mr-2 col-span-1" />
+            { t('walletSettings') }
+            <Kbds hotkey="mod+alt+W" />
+          </div>
         </SettingsPanelHeader>
       }
     >

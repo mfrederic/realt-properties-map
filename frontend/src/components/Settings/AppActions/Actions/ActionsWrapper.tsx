@@ -7,8 +7,10 @@ import { WalletPanelAction } from "./WalletPanelAction";
 import { StartTooltip } from "../../StartTooltip";
 import { SearchAction } from "./SearchAction";
 import { SearchBarWrapper } from "../../SearchBar/SearchBarWrapper";
+import { useSmallScreen } from "../../../../hooks/useSmallScreen";
 
 export function ActionsWrapper() {
+  const isSmallScreen = useSmallScreen();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isWalletsOpen, setIsWalletsOpen] = useState(false);
   
@@ -30,7 +32,11 @@ export function ActionsWrapper() {
         <SettingsPanelAction />
         <FilteringPanelAction />
         <HelpPanelAction />
-        <SearchAction onToggleSearch={setSearchOpen} className="!block md:!hidden"/>
+        {
+          isSmallScreen && (
+            <SearchAction onToggleSearch={setSearchOpen}/>
+          )
+        }
       </div>
     </div>
   )

@@ -6,9 +6,13 @@ import { setCurrency } from "../../../store/settings/settingsReducer";
 import { useTranslation } from "react-i18next";
 import { analyticsEvent } from "../../../services/analytics";
 import { Select } from "../../Common/Inputs/Select";
+import { useSmallScreen } from '../../../hooks/useSmallScreen';
+import { Kbds } from '../../Common/Kbds';
 
 export function CurrencySelect() {
   const { t } = useTranslation('common', { keyPrefix: 'settings' });
+  const isSmallScreen = useSmallScreen();
+
   const dispatch = useAppDispatch();
   const userCurrency = useAppSelector(selectedCurrency);
 
@@ -25,7 +29,7 @@ export function CurrencySelect() {
   return (
     <Select
       allowDeselect={false}
-      className="w-full"
+      className="w-full flex-1"
       label={t('currency')}
       p={5}
       value={userCurrency}
@@ -38,6 +42,12 @@ export function CurrencySelect() {
       leftSection={
         <CurrencyExchangeIcon />
       }
+      rightSection={
+        isSmallScreen ? null : (
+          <Kbds hotkey="mod+M" />
+        )
+      }
+      rightSectionWidth={isSmallScreen ? undefined : 100}
     />
   )
 }

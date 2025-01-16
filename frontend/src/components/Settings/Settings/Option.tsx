@@ -2,7 +2,7 @@ import { CheckboxProps } from "@mantine/core";
 import { useSmallScreen } from "../../../hooks/useSmallScreen";
 import { Checkbox } from "../../Common/Inputs/Checkbox";
 import { Grid } from "../../Common/Layouts/Grid";
-import { useCallback } from "react";
+import { ReactNode, useCallback } from "react";
 
 export function Option({
   id,
@@ -12,6 +12,8 @@ export function Option({
   disabled = false,
   onChange,
   size,
+  rightSection,
+  ...props
 }: {
   id: string,
   label: string,
@@ -20,6 +22,7 @@ export function Option({
   disabled?: boolean,
   onChange: (event: boolean) => void,
   size?: CheckboxProps['size'],
+  rightSection?: ReactNode,
 }) {
   const isSmallScreen = useSmallScreen();
   const mediaQuerySize = isSmallScreen ? 'xl' : 'md';
@@ -32,16 +35,21 @@ export function Option({
   return (
     <Grid className="py-4">
       <Grid.Col>
-        <Checkbox
-          size={consolidatedSize}
-          label={label}
-          checked={checked}
-          disabled={disabled}
-          onChange={onChangeToggle}
-          icon={icon}
-          id={id}
-          name={id}
-        />
+        <div className="flex items-center">
+          <Checkbox
+            className="flex-1"
+            size={consolidatedSize}
+            label={label}
+            checked={checked}
+            disabled={disabled}
+            onChange={onChangeToggle}
+            icon={icon}
+            id={id}
+            name={id}
+            {...props}
+            />
+          {rightSection}
+        </div>
       </Grid.Col>
     </Grid>
   )

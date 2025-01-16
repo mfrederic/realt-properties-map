@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Flex } from "@mantine/core";
 import GoogleIcon from '@mui/icons-material/Google';
-import XIcon from '@mui/icons-material/X';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import ShareLocationIcon from '@mui/icons-material/ShareLocation';
 import Env from "../../utils/env";
@@ -14,6 +13,8 @@ import { Grid } from "../Common/Layouts/Grid";
 import { ActionIcon } from "../Common/Inputs/ActionIcon";
 import { downloadGpxFile } from "../../services/gpx";
 import { useCallback } from "react";
+import { TwitterIntent } from "../Common/TwitterIntent";
+import { ThreadsIntent } from "../Common/ThreadsIntent";
 
 function encodeUrlUsingPercentEncoding(url: string) {
   return encodeURI(url);
@@ -38,7 +39,6 @@ export function PropertyPanelActions({
 
   const downloadGpxFileMemoized = useCallback(() => downloadGpxFile([property], property.fullName.replaceAll(' ', '_')), [property]);
 
-  const twitterIntent = `https://twitter.com/intent/tweet?size=large&text=Check out this property on RealT Property Map.&url=${window.location.href}&hashtags=RealT,RealToken,RPM,RealtPropertyMap&related=RealTPlatform`;
   const threadsIntent = `https://www.threads.net/intent/post?url=${window.location.href}&text=Check out this property on RealT Property Map. #RealT #RealToken #RPM #RealtPropertyMap`;
   return (
     <Grid className="px-4">
@@ -86,24 +86,18 @@ export function PropertyPanelActions({
             href={`https://maps.google.com/?q=${coordinates.lat},${coordinates.lng}`}>
             <GoogleIcon fontSize="medium" />
           </ActionIcon>
-          <ActionIcon
-            variant="default"
-            component="a"
-            title={t('settings.x.shareOnX')}
-            target="_blank"
-            referrerPolicy="no-referrer"
-            href={encodeUrlUsingPercentEncoding(twitterIntent)}>
-            <XIcon fontSize="medium" />
-          </ActionIcon>
-          <ActionIcon
-            variant="default"
-            component="a"
-            title={t('settings.threads.shareOnThreads')}
-            target="_blank"
-            referrerPolicy="no-referrer"
-            href={encodeUrlUsingPercentEncoding(threadsIntent)}>
-            <AlternateEmailIcon fontSize="medium" />
-          </ActionIcon>
+          <TwitterIntent
+            size="lg"
+            text="Check out this property on RealT Property Map."
+            url={window.location.href}
+            hashtags={['RealT', 'RealToken', 'RPM', 'RealtPropertyMap']}
+          />
+          <ThreadsIntent
+            size="lg"
+            text="Check out this property on RealT Property Map."
+            url={window.location.href}
+            hashtags={['RealT', 'RealToken', 'RPM', 'RealtPropertyMap']}
+          />
           <ActionIcon
             variant="default"
             title={t('settings.downloadGpx')}

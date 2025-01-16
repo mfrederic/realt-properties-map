@@ -6,9 +6,13 @@ import { useTranslation } from "react-i18next";
 import { Language } from "../../../types/language";
 import { analyticsEvent } from "../../../services/analytics";
 import { Select } from "../../Common/Inputs/Select";
+import { useSmallScreen } from '../../../hooks/useSmallScreen';
+import { Kbds } from '../../Common/Kbds';
 
 export function LanguageSelect() {
   const { i18n, t } = useTranslation('common', { keyPrefix: 'settings' });
+  const isSmallScreen = useSmallScreen();
+  
   const dispatch = useAppDispatch();
   const userLanguage = useAppSelector(selectedLanguage);
 
@@ -42,6 +46,12 @@ export function LanguageSelect() {
       leftSection={
         <LanguageIcon />
       }
+      rightSection={
+        isSmallScreen ? null : (
+          <Kbds hotkey="mod+L" />
+        )
+      }
+      rightSectionWidth={isSmallScreen ? undefined : 100}
     />
   )
 }

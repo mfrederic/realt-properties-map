@@ -11,6 +11,7 @@ import { CurrencySelect } from "./CurrencySelect";
 import { LanguageSelect } from "./LanguageSelect";
 import { GeneralOptions } from "./GeneralOptions/GeneralOptions";
 import { AppDrawer } from "../../Common/AppDrawer";
+import { Kbds } from "../../Common/Kbds";
 
 export function MapOptionsPanel({
   opened,
@@ -27,8 +28,11 @@ export function MapOptionsPanel({
       close={close}
       header={
         <SettingsPanelHeader close={close}>
-          <SettingsIcon className="mr-2 col-span-1" />
-          { t('settings') }
+          <div className="flex items-center gap-4">
+            <SettingsIcon className="mr-2 col-span-1" />
+            { t('settings') }
+            <Kbds hotkey="mod+alt+S" />
+          </div>
         </SettingsPanelHeader>
       }
     >
@@ -37,11 +41,11 @@ export function MapOptionsPanel({
           <Grid.Col span={12}>
             <LanguageSelect />
           </Grid.Col>
-          <Grid.Col span={{ sm: 12, md: 6 }}>
-            <CurrencySelect />
-          </Grid.Col>
-          <Grid.Col span={{ sm: 12, md: 6 }}>
+          <Grid.Col span={12}>
             <ColorSchemeOption />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <CurrencySelect />
           </Grid.Col>
           <Grid.Col span={12}>
             <MapOptions />
