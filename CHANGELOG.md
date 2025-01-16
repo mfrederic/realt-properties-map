@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/mfrederic/realt-properties-map/compare/v1.18.0...v1.19.0) (2025-01-16)
+
+
+### Features
+
+* add hotkeys ([9ac4a2e](https://github.com/mfrederic/realt-properties-map/commit/9ac4a2e793eda9b9a214aebdbb60202be286fbde))
+
 # [1.18.0](https://github.com/mfrederic/realt-properties-map/compare/v1.17.0...v1.18.0) (2025-01-15)
 
 
