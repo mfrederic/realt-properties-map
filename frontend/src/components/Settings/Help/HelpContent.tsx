@@ -5,6 +5,8 @@ import MadeBy from "../../Common/MadeBy";
 import { ThreadsIntent } from "../../Common/ThreadsIntent";
 import { TwitterIntent } from "../../Common/TwitterIntent";
 
+const URL = window.location.origin + window.location.pathname;
+
 export function HelpContent() {
   const { t } = useTranslation('common', { keyPrefix: 'help' });
 
@@ -39,13 +41,13 @@ export function HelpContent() {
           <TwitterIntent
             size="xl"
             text="Discover RealT properties like never before with this amazing interactive map!"
-            url={window.location.href}
+            url={URL}
             hashtags={['RealT', 'RealToken', 'RPM', 'RealtPropertyMap']}
           />
           <ThreadsIntent
             size="xl"
             text="Discover RealT properties like never before with this amazing interactive map!"
-            url={window.location.href}
+            url={URL}
             hashtags={['RealT', 'RealToken', 'RPM', 'RealtPropertyMap']}
           />
         </div>

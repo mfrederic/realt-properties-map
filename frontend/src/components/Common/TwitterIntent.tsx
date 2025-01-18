@@ -10,7 +10,8 @@ export function TwitterIntent(props: {
   const { t } = useTranslation('common');
   
   const { text, url, hashtags } = props;
-  const twitterIntent = encodeURI(`https://twitter.com/intent/tweet?size=large&text=${text}&url=${url}&hashtags=${hashtags.join(',')}&related=RealTPlatform`);
+  const twitterIntent = encodeURI(`https://twitter.com/intent/tweet?size=large&url=${url}`)
+    + `&text=${text}&hashtags=${hashtags.join(',')}&related=RealTPlatform`;
 
   return (
     <ActionIcon

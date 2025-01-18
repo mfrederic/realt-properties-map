@@ -9,8 +9,8 @@ export function ThreadsIntent(props: {
 } & ActionIconProps) {
   const { t } = useTranslation('common');
   
-  const { text, url, hashtags } = props;
-  const threadsIntent = encodeURI(`https://www.threads.net/intent/post?url=${url}&text=${text} ${hashtags.map((hashtag) => `#${hashtag}`).join(' ')}`);
+  const { text, url } = props;
+  const threadsIntent = encodeURI(`https://www.threads.net/intent/post?url=${url}&`) + `text=${text}`;
 
   return (
 
