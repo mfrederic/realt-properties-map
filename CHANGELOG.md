@@ -1,3 +1,10 @@
+## [1.19.1](https://github.com/mfrederic/realt-properties-map/compare/v1.19.0...v1.19.1) (2025-01-18)
+
+
+### Bug Fixes
+
+* intent components ([c0575d8](https://github.com/mfrederic/realt-properties-map/commit/c0575d8cc1dab8d096802e6902e17e620bbfa3cf))
+
 # [1.19.0](https://github.com/mfrederic/realt-properties-map/compare/v1.18.0...v1.19.0) (2025-01-16)
 
 
