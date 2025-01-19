@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/mfrederic/realt-properties-map/compare/v1.19.1...v1.20.0) (2025-01-19)
+
+
+### Features
+
+* download marker cluster lib locally ([b3a04a9](https://github.com/mfrederic/realt-properties-map/commit/b3a04a9bd1e586926b33a51257c69513f90e68c7))
+
 ## [1.19.1](https://github.com/mfrederic/realt-properties-map/compare/v1.19.0...v1.19.1) (2025-01-18)
 
 
