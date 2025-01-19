@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import MarkerClusterGroup from 'react-leaflet-cluster';
+import MarkerClusterGroup from './MarkerCluster/MarkerCluster';
 import { selectMarkerClustering } from '../../store/mapOptions/mapOptionsSelector';
 import { useProperties } from '../../hooks/useProperties';
 import { Markers } from './Markers';
