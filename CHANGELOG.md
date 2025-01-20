@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/mfrederic/realt-properties-map/compare/v1.20.0...v1.21.0) (2025-01-20)
+
+
+### Features
+
+* update package-lock.json ([93abc43](https://github.com/mfrederic/realt-properties-map/commit/93abc43051a51dd6a5b434054782b04b6fec219d))
+
 # [1.20.0](https://github.com/mfrederic/realt-properties-map/compare/v1.19.1...v1.20.0) (2025-01-19)
 
 
