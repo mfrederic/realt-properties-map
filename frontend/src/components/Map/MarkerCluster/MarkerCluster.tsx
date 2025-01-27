@@ -9,12 +9,15 @@ import L, { LeafletMouseEventHandlerFn } from 'leaflet'
 import 'leaflet.markercluster'
 import './assets/MarkerCluster.css'
 import './assets/MarkerCluster.Default.css'
+import markerIcon2X from './assets/marker-icon-2x.png'
+import markerIcon from './assets/marker-icon.png'
+import markerShadow from './assets/marker-shadow.png'
 
 delete (L.Icon.Default as any).prototype._getIconUrl
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('./assets/marker-icon-2x.png').default,
-  iconUrl: require('./assets/marker-icon.png').default,
-  shadowUrl: require('./assets/marker-shadow.png').default,
+  iconRetinaUrl: markerIcon2X,
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
 })
 
 type ClusterType = { [key in string]: any }
