@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/mfrederic/realt-properties-map/compare/v1.21.0...v1.21.1) (2025-01-27)
+
+
+### Bug Fixes
+
+* correct not found icon ([0b6954d](https://github.com/mfrederic/realt-properties-map/commit/0b6954ddb24a22447205425acd69bcc6b5f290b1))
+
 # [1.21.0](https://github.com/mfrederic/realt-properties-map/compare/v1.20.0...v1.21.0) (2025-01-20)
 
 
