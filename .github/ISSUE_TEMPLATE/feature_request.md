@@ -7,14 +7,16 @@ assignees: ''
 
 ---
 
+⚠️ Feature requests with empty or default description will be ignored
+
 ### Feature Description
-A clear and concise description of the feature you'd like to see added.
+_A clear and concise description of the feature you'd like to see added._
 
 ### Use Case
-Explain the use case or problem this feature would solve. Ex. "As a RealT property owner, I want to..."
+_Explain the use case or problem this feature would solve. Ex. "As a RealT property owner, I want to..."_
 
 ### Proposed Solution
-Describe how you envision this feature working. Be as specific as possible.
+_Describe how you envision this feature working. Be as specific as possible._
 
 ### Feature Category
 Select the relevant category (delete non-applicable ones):
@@ -28,10 +30,10 @@ Select the relevant category (delete non-applicable ones):
 - [ ] Other
 
 ### Expected Benefits
-Explain how this feature would benefit users of RPM.
+_Explain how this feature would benefit users of RPM._
 
 ### Alternative Solutions
-Describe any alternative solutions or features you've considered.
+_Describe any alternative solutions or features you've considered._
 
 ### Additional Context
 - Screenshots/mockups (if applicable)
@@ -39,7 +41,7 @@ Describe any alternative solutions or features you've considered.
 - Any other relevant information
 
 ### Technical Considerations (optional)
-Any technical details or considerations that might be relevant to implementing this feature.
+_Any technical details or considerations that might be relevant to implementing this feature._
 
 ### Would you be willing to contribute to this feature?
 - [ ] Yes, I can help with development

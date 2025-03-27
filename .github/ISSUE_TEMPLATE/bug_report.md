@@ -2,13 +2,15 @@
 name: Bug report
 about: Create a report to help us improve RealT Properties Map
 title: "[BUG] "
-labels: bug
+labels: bug, enhancement
 assignees: ''
 
 ---
 
+⚠️ Bugs with empty or default description will be ignored
+
 ### Bug Description
-A clear and concise description of what the bug is.
+_A clear and concise description of what the bug is._
 
 ### Environment
 - **App Version**: [e.g. 1.7.0]
@@ -24,10 +26,10 @@ A clear and concise description of what the bug is.
 4. Observe error
 
 ### Expected Behavior
-A clear description of what you expected to happen.
+_A clear description of what you expected to happen._
 
 ### Actual Behavior
-A clear description of what actually happened.
+_A clear description of what actually happened._
 
 ### Wallet Information (if applicable)
 - Network: [e.g. Gnosis, ETH]
@@ -35,8 +37,8 @@ A clear description of what actually happened.
 - Wallet type: [e.g. MetaMask, WalletConnect]
 
 ### Screenshots/Videos
-If applicable, add screenshots or videos to help explain your problem.
+_If applicable, add screenshots or videos to help explain your problem._
 <!-- Drag and drop images here or provide links -->
 
 ### Console Errors
-If applicable, please copy and paste any relevant console errors:
+_If applicable, please copy and paste any relevant console errors:_
